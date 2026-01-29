@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://elismulchcompany.com";
+const BASE_URL = "https://mulchcompanymn.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -11,9 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/estimate",
     "/privacy",
     "/sitemap-page",
-    "/mulch-delivery",
     "/mulch-installation",
-    "/bulk-mulch",
+    "/mulch-delivery",
   ];
 
   const cityPages = [

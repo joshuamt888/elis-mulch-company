@@ -4,9 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 const services = [
-  { name: "Mulch Delivery", href: "/services/mulch-delivery" },
   { name: "Mulch Installation", href: "/services/mulch-installation" },
-  { name: "Bulk Mulch", href: "/services/bulk-mulch" },
+  { name: "Mulch Delivery", href: "/services/mulch-delivery" },
 ];
 
 const areas = [
@@ -64,7 +63,7 @@ export default function MobileMenu() {
         <div className="fixed inset-0 z-50 bg-[#1a1208] overflow-y-auto">
           <div className="flex items-center justify-between px-4 h-16 border-b border-bark/30">
             <Link href="/" onClick={close} className="text-soil font-outfit font-semibold text-lg">
-              Eli&apos;s Mulch Company
+              Mulch Company MN
             </Link>
             <button onClick={close} className="text-soil p-2" aria-label="Close menu">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,11 +74,11 @@ export default function MobileMenu() {
 
           <nav className="px-4 py-6 space-y-1">
             <Link
-              href="/services/mulch-delivery"
+              href="/services/mulch-installation"
               onClick={close}
               className="block py-3 text-soil-dark hover:text-white transition-colors font-medium text-lg"
             >
-              Mulch Delivery
+              Mulch Installation
             </Link>
 
             {/* Services Accordion */}

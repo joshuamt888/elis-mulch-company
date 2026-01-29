@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Mulch Delivery & Installation Savage, MN",
   description:
     "Premium mulch delivery and installation in Savage, Minnesota. Bulk mulch, cedar, hardwood, playground chips. Same-day delivery available. Free estimates.",
-  alternates: { canonical: "https://elismulchcompany.com/savage-mulch-delivery" },
+  alternates: { canonical: "https://mulchcompanymn.com/savage-mulch-delivery" },
   robots: { index: true, follow: true },
 };
 
@@ -70,16 +70,7 @@ export default function SavageMulchDeliveryPage() {
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
             Our Mulch Services in Savage
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
-              <p className="text-sand/70 mb-4">
-                Savage is a growing suburb along the Minnesota River with a mix of established and brand-new neighborhoods. We deliver premium mulch across the community, from the bluffs near the river to developments along County Road 42.
-              </p>
-              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
-                Learn More →
-              </Link>
-            </div>
+          <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
               <h3 className="text-xl font-bold text-sand mb-3">Mulch Installation</h3>
               <p className="text-sand/70 mb-4">
@@ -90,11 +81,11 @@ export default function SavageMulchDeliveryPage() {
               </Link>
             </div>
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Bulk Mulch</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
               <p className="text-sand/70 mb-4">
-                Savage&apos;s growing developments and active homeowners need mulch in volume. We supply bulk quantities by the yard with straightforward pricing and reliable delivery.
+                Savage is a growing suburb along the Minnesota River with a mix of established and brand-new neighborhoods. We deliver premium mulch across the community, from the bluffs near the river to developments along County Road 42.
               </p>
-              <Link href="/services/bulk-mulch" className="text-forest font-semibold hover:text-forest-light transition-colors">
+              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
                 Learn More →
               </Link>
             </div>
@@ -105,7 +96,7 @@ export default function SavageMulchDeliveryPage() {
       <section className="bg-soil py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Why Savage Homeowners Trust Eli&apos;s Mulch
+            Why Savage Homeowners Trust Mulch Company MN
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[

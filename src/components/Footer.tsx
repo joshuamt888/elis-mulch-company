@@ -2,9 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 const services = [
-  { name: "Mulch Delivery", href: "/services/mulch-delivery" },
   { name: "Mulch Installation", href: "/services/mulch-installation" },
-  { name: "Bulk Mulch", href: "/services/bulk-mulch" },
+  { name: "Mulch Delivery", href: "/services/mulch-delivery" },
 ];
 
 export default function Footer() {
@@ -18,7 +17,7 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <h3 className="text-[#d4c5a9] font-outfit font-semibold text-lg mb-3">
-              Eli&apos;s Mulch Company
+              Mulch Company MN
             </h3>
             <p className="text-[#c4b49a] text-sm leading-relaxed">
               Premium mulch delivery and installation serving Chanhassen and the western Twin Cities metro.
@@ -52,8 +51,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@elismulch.com" className="hover:text-white transition-colors">
-                  info@elismulch.com
+                <a href="mailto:info@mulchcompanymn.com" className="hover:text-white transition-colors">
+                  info@mulchcompanymn.com
                 </a>
               </li>
               <li>Chanhassen, MN</li>
@@ -85,7 +84,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <p className="text-[#c4b49a] text-xs mb-2">
-            &copy; {year} Eli&apos;s Mulch Company. All rights reserved.{" "}
+            &copy; {year} Mulch Company MN. All rights reserved.{" "}
             &middot;{" "}
             <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy

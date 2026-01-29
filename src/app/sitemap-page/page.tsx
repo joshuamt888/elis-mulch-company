@@ -21,9 +21,8 @@ const sections = [
   {
     heading: "Services",
     links: [
-      { label: "Mulch Delivery", href: "/mulch-delivery" },
       { label: "Mulch Installation", href: "/mulch-installation" },
-      { label: "Bulk Mulch", href: "/bulk-mulch" },
+      { label: "Mulch Delivery", href: "/mulch-delivery" },
     ],
   },
   {

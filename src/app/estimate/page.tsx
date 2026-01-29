@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Get a Free Mulch Estimate | Chanhassen MN",
   description:
-    "Request a free mulch delivery or installation estimate from Eli's Mulch Company. No pressure, no obligation — just honest pricing for Chanhassen and the western Twin Cities metro.",
+    "Request a free mulch delivery or installation estimate from Mulch Company MN. No pressure, no obligation — just honest pricing for Chanhassen and the western Twin Cities metro.",
   alternates: { canonical: "/estimate" },
 };
 
@@ -99,9 +99,8 @@ export default function EstimatePage() {
                 className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
               >
                 <option value="">Select a service</option>
-                <option value="mulch-delivery">Mulch Delivery</option>
                 <option value="mulch-installation">Mulch Installation</option>
-                <option value="bulk-mulch">Bulk Mulch</option>
+                <option value="mulch-delivery">Mulch Delivery</option>
                 <option value="other">Other</option>
               </select>
             </div>
@@ -150,16 +149,15 @@ export default function EstimatePage() {
                 <div>
                   <h3 className="font-semibold text-sand">Email</h3>
                   <a
-                    href="mailto:info@elismulchcompany.com"
+                    href="mailto:info@mulchcompanymn.com"
                     className="hover:text-forest transition-colors"
                   >
-                    info@elismulchcompany.com
+                    info@mulchcompanymn.com
                   </a>
                 </div>
                 <div>
                   <h3 className="font-semibold text-sand">Hours</h3>
-                  <p>Mon – Fri: 7am – 6pm</p>
-                  <p>Sat: 8am – 4pm</p>
+                  <p>Mon – Fri: 8am – 6pm</p>
                 </div>
               </div>
             </div>

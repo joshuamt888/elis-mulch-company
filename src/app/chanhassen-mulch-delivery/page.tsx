@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Mulch Delivery & Installation Chanhassen, MN",
   description:
     "Premium mulch delivery and installation in Chanhassen, Minnesota. Bulk mulch, cedar, hardwood, playground chips. Same-day delivery available. Free estimates.",
-  alternates: { canonical: "https://elismulchcompany.com/chanhassen-mulch-delivery" },
+  alternates: { canonical: "https://mulchcompanymn.com/chanhassen-mulch-delivery" },
   robots: { index: true, follow: true },
 };
 
@@ -72,16 +72,7 @@ export default function ChannhassenMulchDeliveryPage() {
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
             Our Mulch Services in Chanhassen
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
-              <p className="text-sand/70 mb-4">
-                Fast, reliable mulch delivery right to your Chanhassen driveway. Whether you live near the Chanhassen Dinner Theatres district or in one of the family-friendly neighborhoods off Highway 5, we bring premium mulch to your door.
-              </p>
-              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
-                Learn More →
-              </Link>
-            </div>
+          <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
               <h3 className="text-xl font-bold text-sand mb-3">Mulch Installation</h3>
               <p className="text-sand/70 mb-4">
@@ -92,11 +83,11 @@ export default function ChannhassenMulchDeliveryPage() {
               </Link>
             </div>
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Bulk Mulch</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
               <p className="text-sand/70 mb-4">
-                Need mulch by the yard? We supply bulk quantities for large Chanhassen properties, HOA common areas, and commercial landscaping projects. Competitive pricing for any volume.
+                Fast, reliable mulch delivery right to your Chanhassen driveway. Whether you live near the Chanhassen Dinner Theatres district or in one of the family-friendly neighborhoods off Highway 5, we bring premium mulch to your door.
               </p>
-              <Link href="/services/bulk-mulch" className="text-forest font-semibold hover:text-forest-light transition-colors">
+              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
                 Learn More →
               </Link>
             </div>
@@ -108,7 +99,7 @@ export default function ChannhassenMulchDeliveryPage() {
       <section className="bg-soil py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Why Chanhassen Homeowners Trust Eli&apos;s Mulch
+            Why Chanhassen Homeowners Trust Mulch Company MN
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[

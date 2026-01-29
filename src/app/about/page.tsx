@@ -5,9 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "About Eli's Mulch Company | Chanhassen MN",
+  title: "About Mulch Company MN | Chanhassen MN",
   description:
-    "Eli's Mulch Company is a locally owned mulch delivery and installation company serving Chanhassen and the western Twin Cities metro. Meet the team behind your yard's best look.",
+    "Mulch Company MN is a locally owned mulch delivery and installation company serving Chanhassen and the western Twin Cities metro. Meet the team behind your yard's best look.",
   alternates: { canonical: "/about" },
 };
 
@@ -61,7 +61,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            About Eli&apos;s Mulch Company
+            About Mulch Company MN
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto text-white/90">
             Locally owned. Community driven. Mulch obsessed.
@@ -77,7 +77,7 @@ export default function AboutPage() {
               Our Story
             </h2>
             <p className="text-sand/80 leading-relaxed text-lg">
-              Eli&apos;s Mulch Company was founded by two brothers — Eli and
+              Mulch Company MN was founded by two brothers — Eli and
               Owen — right here in Chanhassen, Minnesota. What started as a side
               hustle hauling mulch for neighbors turned into a full-service mulch
               delivery and installation company serving the entire western Twin

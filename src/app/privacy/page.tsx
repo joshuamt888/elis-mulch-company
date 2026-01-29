@@ -6,8 +6,8 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Privacy policy for Eli's Mulch Company. Learn how we collect and use data with Google Analytics, Microsoft Clarity, and Google Search Console.",
-  alternates: { canonical: "https://elismulchcompany.com/privacy" },
+    "Privacy policy for Mulch Company MN. Learn how we collect and use data with Google Analytics, Microsoft Clarity, and Google Search Console.",
+  alternates: { canonical: "https://mulchcompanymn.com/privacy" },
   robots: { index: true, follow: true },
 };
 
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-2xl font-bold text-sand mb-4">Overview</h2>
               <p>
-                Eli&apos;s Mulch Company (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) respects your privacy. This
+                Mulch Company MN (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) respects your privacy. This
                 policy explains what data we collect, how we use it, and your rights regarding that data. By
                 using our website, you agree to the practices described in this policy.
               </p>
@@ -170,8 +170,8 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-bold text-sand mb-4">Contact</h2>
               <p>
                 If you have questions about this privacy policy, contact us at:{" "}
-                <a href="mailto:info@elismulchcompany.com" className="text-forest hover:underline">
-                  info@elismulchcompany.com
+                <a href="mailto:info@mulchcompanymn.com" className="text-forest hover:underline">
+                  info@mulchcompanymn.com
                 </a>{" "}
                 or call us at{" "}
                 <a href="tel:6125550100" className="text-forest hover:underline">

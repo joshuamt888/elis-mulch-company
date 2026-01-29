@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Mulch Delivery & Installation Carver, MN",
   description:
     "Premium mulch delivery and installation in Carver, Minnesota. Bulk mulch, cedar, hardwood, playground chips. Same-day delivery available. Free estimates.",
-  alternates: { canonical: "https://elismulchcompany.com/carver-mulch-delivery" },
+  alternates: { canonical: "https://mulchcompanymn.com/carver-mulch-delivery" },
   robots: { index: true, follow: true },
 };
 
@@ -70,16 +70,7 @@ export default function CarverMulchDeliveryPage() {
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
             Our Mulch Services in Carver
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
-              <p className="text-sand/70 mb-4">
-                Carver&apos;s small historic river town charm is matched by exciting new growth. We deliver premium mulch to both the original village properties and the newer developments that are shaping this community&apos;s future.
-              </p>
-              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
-                Learn More →
-              </Link>
-            </div>
+          <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
               <h3 className="text-xl font-bold text-sand mb-3">Mulch Installation</h3>
               <p className="text-sand/70 mb-4">
@@ -90,11 +81,11 @@ export default function CarverMulchDeliveryPage() {
               </Link>
             </div>
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Bulk Mulch</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
               <p className="text-sand/70 mb-4">
-                Carver&apos;s newer developments mean fresh landscaping projects that need volume. We offer bulk mulch by the cubic yard at competitive rates, perfect for builders and homeowners alike.
+                Carver&apos;s small historic river town charm is matched by exciting new growth. We deliver premium mulch to both the original village properties and the newer developments that are shaping this community&apos;s future.
               </p>
-              <Link href="/services/bulk-mulch" className="text-forest font-semibold hover:text-forest-light transition-colors">
+              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
                 Learn More →
               </Link>
             </div>
@@ -105,7 +96,7 @@ export default function CarverMulchDeliveryPage() {
       <section className="bg-soil py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Why Carver Homeowners Trust Eli&apos;s Mulch
+            Why Carver Homeowners Trust Mulch Company MN
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[

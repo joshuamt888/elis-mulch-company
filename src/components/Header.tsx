@@ -5,9 +5,8 @@ import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 
 const services = [
-  { name: "Mulch Delivery", href: "/services/mulch-delivery" },
   { name: "Mulch Installation", href: "/services/mulch-installation" },
-  { name: "Bulk Mulch", href: "/services/bulk-mulch" },
+  { name: "Mulch Delivery", href: "/services/mulch-delivery" },
 ];
 
 const areas = [
@@ -56,16 +55,16 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="text-soil font-outfit font-semibold text-lg">
-            Eli&apos;s Mulch Company
+            Mulch Company MN
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
             <Link
-              href="/services/mulch-delivery"
+              href="/services/mulch-installation"
               className="text-soil-dark hover:text-white transition-colors font-medium"
             >
-              Mulch Delivery
+              Mulch Installation
             </Link>
 
             {/* Services Dropdown */}

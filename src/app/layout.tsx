@@ -16,15 +16,15 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://elismulchcompany.com"),
+  metadataBase: new URL("https://mulchcompanymn.com"),
   title: {
-    default: "Mulch Delivery & Installation Chanhassen MN | Eli's Mulch Company",
-    template: "%s | Eli's Mulch Company",
+    default: "Mulch Installation Chanhassen MN | Mulch Company MN",
+    template: "%s | Mulch Company MN",
   },
   description:
-    "Premium mulch delivery and installation in Chanhassen & western Twin Cities metro. Bulk mulch, cedar, hardwood, playground chips. Free estimates.",
+    "Professional mulch installation and delivery in Chanhassen & western Twin Cities metro. Cedar, hardwood, playground chips. Free estimates.",
   keywords:
-    "mulch delivery Chanhassen, mulch installation Minnesota, bulk mulch MN, cedar mulch, hardwood mulch, playground mulch, landscape supply",
+    "mulch installation Chanhassen, mulch delivery Minnesota, cedar mulch, hardwood mulch, playground mulch, landscape supply",
   icons: {
     icon: [
       { url: "/images/logos/favicon.png", sizes: "32x32", type: "image/png" },
@@ -36,20 +36,20 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://elismulchcompany.com",
-    title: "Mulch Delivery & Installation Chanhassen MN | Eli's Mulch Company",
+    url: "https://mulchcompanymn.com",
+    title: "Mulch Installation Chanhassen MN | Mulch Company MN",
     description:
-      "Premium mulch delivery and installation in Chanhassen & western Twin Cities metro. Bulk mulch, cedar, hardwood, playground chips. Free estimates.",
-    siteName: "Eli's Mulch Company",
+      "Professional mulch installation and delivery in Chanhassen & western Twin Cities metro. Cedar, hardwood, playground chips. Free estimates.",
+    siteName: "Mulch Company MN",
   },
   twitter: {
     card: "summary",
-    title: "Mulch Delivery & Installation Chanhassen MN | Eli's Mulch Company",
+    title: "Mulch Installation Chanhassen MN | Mulch Company MN",
     description:
-      "Premium mulch delivery and installation in Chanhassen & western Twin Cities metro. Bulk mulch, cedar, hardwood, playground chips. Free estimates.",
+      "Professional mulch installation and delivery in Chanhassen & western Twin Cities metro. Cedar, hardwood, playground chips. Free estimates.",
   },
   alternates: {
-    canonical: "https://elismulchcompany.com",
+    canonical: "https://mulchcompanymn.com",
   },
   robots: {
     index: true,
@@ -67,31 +67,31 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://elismulchcompany.com/#organization",
-        name: "Eli's Mulch Company",
-        url: "https://elismulchcompany.com",
+        "@id": "https://mulchcompanymn.com/#organization",
+        name: "Mulch Company MN",
+        url: "https://mulchcompanymn.com",
         description:
           "Premium mulch delivery and installation serving Chanhassen and the western Twin Cities metro. Quality products, professional service.",
       },
       {
         "@type": "WebSite",
-        "@id": "https://elismulchcompany.com/#website",
-        url: "https://elismulchcompany.com",
-        name: "Eli's Mulch Company",
+        "@id": "https://mulchcompanymn.com/#website",
+        url: "https://mulchcompanymn.com",
+        name: "Mulch Company MN",
         description:
           "Premium mulch delivery, installation & landscape supply in Chanhassen, MN.",
         publisher: {
-          "@id": "https://elismulchcompany.com/#organization",
+          "@id": "https://mulchcompanymn.com/#organization",
         },
         inLanguage: "en-US",
       },
       {
         "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
-        "@id": "https://elismulchcompany.com/#localbusiness",
-        name: "Eli's Mulch Company",
+        "@id": "https://mulchcompanymn.com/#localbusiness",
+        name: "Mulch Company MN",
         description:
-          "Premium mulch delivery, installation & landscape supply serving Chanhassen and the western Twin Cities metro. Bulk mulch, cedar, hardwood, playground chips. Professional service, competitive pricing.",
-        url: "https://elismulchcompany.com",
+          "Professional mulch installation & delivery serving Chanhassen and the western Twin Cities metro. Cedar, hardwood, playground chips. Professional service, competitive pricing.",
+        url: "https://mulchcompanymn.com",
         telephone: "(612) 555-0100",
         slogan: "Your Yard, Our Mulch",
         address: {
@@ -131,20 +131,13 @@ export default function RootLayout({
           {
             "@type": "OpeningHoursSpecification",
             dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            opens: "07:00",
-            closes: "18:00",
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: "Saturday",
             opens: "08:00",
-            closes: "16:00",
+            closes: "18:00",
           },
         ],
         knowsAbout: [
-          "Mulch Delivery",
           "Mulch Installation",
-          "Bulk Mulch",
+          "Mulch Delivery",
           "Cedar Mulch",
           "Hardwood Mulch",
           "Playground Mulch",
@@ -157,15 +150,11 @@ export default function RootLayout({
           itemListElement: [
             {
               "@type": "Offer",
-              itemOffered: { "@type": "Service", name: "Mulch Delivery" },
-            },
-            {
-              "@type": "Offer",
               itemOffered: { "@type": "Service", name: "Mulch Installation" },
             },
             {
               "@type": "Offer",
-              itemOffered: { "@type": "Service", name: "Bulk Mulch Supply" },
+              itemOffered: { "@type": "Service", name: "Mulch Delivery" },
             },
           ],
         },

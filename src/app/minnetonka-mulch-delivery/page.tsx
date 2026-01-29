@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Mulch Delivery & Installation Minnetonka, MN",
   description:
     "Premium mulch delivery and installation in Minnetonka, Minnesota. Bulk mulch, cedar, hardwood, playground chips. Same-day delivery available. Free estimates.",
-  alternates: { canonical: "https://elismulchcompany.com/minnetonka-mulch-delivery" },
+  alternates: { canonical: "https://mulchcompanymn.com/minnetonka-mulch-delivery" },
   robots: { index: true, follow: true },
 };
 
@@ -70,16 +70,7 @@ export default function MinnetonkaMulchDeliveryPage() {
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
             Our Mulch Services in Minnetonka
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
-              <p className="text-sand/70 mb-4">
-                Minnetonka&apos;s upscale properties and mature landscapes demand premium materials. We deliver top-quality mulch throughout the city, from the Lake Minnetonka shoreline to neighborhoods near Ridgedale.
-              </p>
-              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
-                Learn More →
-              </Link>
-            </div>
+          <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
               <h3 className="text-xl font-bold text-sand mb-3">Mulch Installation</h3>
               <p className="text-sand/70 mb-4">
@@ -90,11 +81,11 @@ export default function MinnetonkaMulchDeliveryPage() {
               </Link>
             </div>
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Bulk Mulch</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
               <p className="text-sand/70 mb-4">
-                Minnetonka&apos;s mature lots and extensive landscaping often require significant volumes. We offer bulk pricing by the cubic yard with reliable delivery to any Minnetonka address.
+                Minnetonka&apos;s upscale properties and mature landscapes demand premium materials. We deliver top-quality mulch throughout the city, from the Lake Minnetonka shoreline to neighborhoods near Ridgedale.
               </p>
-              <Link href="/services/bulk-mulch" className="text-forest font-semibold hover:text-forest-light transition-colors">
+              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
                 Learn More →
               </Link>
             </div>
@@ -105,7 +96,7 @@ export default function MinnetonkaMulchDeliveryPage() {
       <section className="bg-soil py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Why Minnetonka Homeowners Trust Eli&apos;s Mulch
+            Why Minnetonka Homeowners Trust Mulch Company MN
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[

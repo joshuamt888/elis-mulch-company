@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Mulch Delivery & Installation Chaska, MN",
   description:
     "Premium mulch delivery and installation in Chaska, Minnesota. Bulk mulch, cedar, hardwood, playground chips. Same-day delivery available. Free estimates.",
-  alternates: { canonical: "https://elismulchcompany.com/chaska-mulch-delivery" },
+  alternates: { canonical: "https://mulchcompanymn.com/chaska-mulch-delivery" },
   robots: { index: true, follow: true },
 };
 
@@ -70,16 +70,7 @@ export default function ChaskaMulchDeliveryPage() {
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
             Our Mulch Services in Chaska
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
-              <p className="text-sand/70 mb-4">
-                From charming downtown Chaska to the growing neighborhoods along the Minnesota River, we deliver premium mulch right to your driveway. Convenient scheduling for this bustling community.
-              </p>
-              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
-                Learn More →
-              </Link>
-            </div>
+          <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
               <h3 className="text-xl font-bold text-sand mb-3">Mulch Installation</h3>
               <p className="text-sand/70 mb-4">
@@ -90,11 +81,11 @@ export default function ChaskaMulchDeliveryPage() {
               </Link>
             </div>
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Bulk Mulch</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
               <p className="text-sand/70 mb-4">
-                Chaska&apos;s growing community means more landscaping projects. We supply bulk mulch by the yard for residential and commercial properties at competitive prices.
+                From charming downtown Chaska to the growing neighborhoods along the Minnesota River, we deliver premium mulch right to your driveway. Convenient scheduling for this bustling community.
               </p>
-              <Link href="/services/bulk-mulch" className="text-forest font-semibold hover:text-forest-light transition-colors">
+              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
                 Learn More →
               </Link>
             </div>
@@ -105,7 +96,7 @@ export default function ChaskaMulchDeliveryPage() {
       <section className="bg-soil py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Why Chaska Homeowners Trust Eli&apos;s Mulch
+            Why Chaska Homeowners Trust Mulch Company MN
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[

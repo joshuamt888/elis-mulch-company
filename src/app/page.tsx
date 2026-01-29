@@ -6,14 +6,6 @@ import HeroSlideshow from "@/components/HeroSlideshow";
 
 const services = [
   {
-    title: "Mulch Delivery",
-    image: "/images/hero/hero-1.webp",
-    alt: "Bulk black mulch pile delivered to a residential driveway",
-    description:
-      "We deliver premium mulch by the cubic yard directly to your driveway or job site. Choose from hardwood, cedar, or playground chips with flexible scheduling.",
-    href: "/services/mulch-delivery",
-  },
-  {
     title: "Mulch Installation",
     image: "/images/hero/hero-3.webp",
     alt: "Professional mulch installation around tree base",
@@ -22,12 +14,12 @@ const services = [
     href: "/services/mulch-installation",
   },
   {
-    title: "Bulk Mulch",
-    image: "/images/hero/hero-4.webp",
-    alt: "Double-shredded hardwood mulch texture close-up",
+    title: "Mulch Delivery",
+    image: "/images/hero/hero-1.webp",
+    alt: "Bulk black mulch pile delivered to a residential driveway",
     description:
-      "Contractors, landscapers, and large projects welcome. We supply bulk quantities at competitive prices with reliable delivery across the metro.",
-    href: "/services/bulk-mulch",
+      "We deliver premium mulch by the cubic yard directly to your driveway or job site. Choose from hardwood, cedar, or playground chips with flexible scheduling.",
+    href: "/services/mulch-delivery",
   },
 ];
 
@@ -125,10 +117,10 @@ export default function Home() {
         </div>
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h1 className="text-white text-5xl md:text-6xl font-outfit font-bold leading-tight mb-6">
-            Premium Mulch Delivery &amp; Installation in Chanhassen, MN
+            Professional Mulch Installation in Chanhassen, MN
           </h1>
           <p className="text-white/90 text-xl mb-8 max-w-2xl mx-auto">
-            Bulk mulch, cedar, hardwood &amp; playground chips delivered to your door. Serving the western Twin Cities metro.
+            Expert mulch installation, premium products &amp; delivery across the western Twin Cities metro.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
             <Link
@@ -165,7 +157,7 @@ export default function Home() {
               From delivery to installation — we handle it all.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((service) => (
               <div
                 key={service.title}
@@ -203,7 +195,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-4xl font-outfit font-bold text-sand mb-4">
-              Why Chanhassen Trusts Eli&apos;s Mulch
+              Why Chanhassen Trusts Mulch Company MN
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
