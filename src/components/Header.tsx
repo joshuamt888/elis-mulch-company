@@ -4,11 +4,6 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 
-const services = [
-  { name: "Mulch Installation", href: "/services/mulch-installation" },
-  { name: "Mulch Delivery", href: "/services/mulch-delivery" },
-];
-
 const areas = [
   "Chanhassen",
   "Eden Prairie",
@@ -25,16 +20,11 @@ const areas = [
 ];
 
 export default function Header() {
-  const [servicesOpen, setServicesOpen] = useState(false);
   const [areasOpen, setAreasOpen] = useState(false);
-  const servicesRef = useRef<HTMLDivElement>(null);
   const areasRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
-        setServicesOpen(false);
-      }
       if (areasRef.current && !areasRef.current.contains(e.target as Node)) {
         setAreasOpen(false);
       }
@@ -67,40 +57,10 @@ export default function Header() {
               Mulch Installation
             </Link>
 
-            {/* Services Dropdown */}
-            <div ref={servicesRef} className="relative">
-              <button
-                onClick={() => {
-                  setServicesOpen(!servicesOpen);
-                  setAreasOpen(false);
-                }}
-                className="flex items-center text-soil-dark hover:text-white transition-colors font-medium"
-              >
-                Services {chevron}
-              </button>
-              {servicesOpen && (
-                <div className="absolute top-full mt-2 left-0 w-56 bg-[#1a1208] border border-bark/30 rounded-lg shadow-xl py-2">
-                  {services.map((s) => (
-                    <Link
-                      key={s.href}
-                      href={s.href}
-                      onClick={() => setServicesOpen(false)}
-                      className="block px-4 py-2.5 text-soil-dark hover:text-white hover:bg-bark/20 transition-colors text-sm font-medium"
-                    >
-                      {s.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
             {/* Areas Dropdown */}
             <div ref={areasRef} className="relative">
               <button
-                onClick={() => {
-                  setAreasOpen(!areasOpen);
-                  setServicesOpen(false);
-                }}
+                onClick={() => setAreasOpen(!areasOpen)}
                 className="flex items-center text-soil-dark hover:text-white transition-colors font-medium"
               >
                 Areas {chevron}

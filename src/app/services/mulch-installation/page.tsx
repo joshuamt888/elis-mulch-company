@@ -5,9 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Mulch Installation Chanhassen MN",
+  title: "Mulch Installation Near Me | Chanhassen MN | Subscription Plans",
   description:
-    "Professional mulch installation in Chanhassen & the western Twin Cities. Even coverage, clean edges, proper depth. Free estimates.",
+    "Professional mulch installation near you. Cedar, hardwood, black & playground mulch installed by experts. Subscription plans available. Free in-person quotes in Chanhassen & western Twin Cities.",
   alternates: {
     canonical: "/services/mulch-installation",
   },
@@ -45,7 +45,7 @@ const processSteps = [
     number: "3",
     title: "Install",
     description:
-      "Our crew spreads mulch evenly to the ideal 2–3 inch depth, keeping it pulled back from tree trunks and plant stems.",
+      "Our crew spreads mulch evenly to the ideal 2-3 inch depth, keeping it pulled back from tree trunks and plant stems.",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-forest" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -86,6 +86,11 @@ const faqs = [
     answer:
       "Not necessarily. As long as we have access to the areas that need mulching and clear instructions, we can complete the work while you're away. Many of our customers schedule installation during work hours and come home to a beautifully finished landscape.",
   },
+  {
+    question: "How does the subscription work?",
+    answer:
+      "After your initial in-person quote, you choose a subscription plan based on your property size and needs. We schedule recurring mulch installations so your yard stays fresh without you having to remember to rebook each year. You get priority scheduling, locked-in pricing, and zero hassle.",
+  },
 ];
 
 export default function MulchInstallationPage() {
@@ -108,19 +113,19 @@ export default function MulchInstallationPage() {
             Professional Mulch Installation in Minnesota
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/90 sm:text-xl">
-            We don&apos;t just deliver — we spread it perfectly for you.
+            Subscription-based mulch installation — we handle everything so you never have to think about it.
           </p>
         </div>
       </section>
 
-      {/* Why Professional Installation */}
+      {/* Subscription Intro */}
       <section className="bg-white px-4 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-outfit text-3xl font-bold text-sand sm:text-4xl text-center">
-            Why Professional Installation?
+            Mulch Installation, On Autopilot
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-sand/80">
-            Save hours of backbreaking work and get a result that looks professionally finished. Even coverage, clean edges, and proper depth every time.
+            We offer subscription-based mulch installation plans designed to keep your yard looking its best year-round. After an in-person quote, we set up a recurring schedule tailored to your property. No annual rebooking, no hassle.
           </p>
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl overflow-hidden">
@@ -137,7 +142,7 @@ export default function MulchInstallationPage() {
                   Even, Professional Coverage
                 </h3>
                 <p className="mt-2 text-sand/80">
-                  Our crews spread mulch to a consistent 2–3 inch depth across all your beds, creating a uniform appearance that enhances your entire landscape. No thin spots, no piles — just clean, level coverage.
+                  Our crews spread mulch to a consistent 2-3 inch depth across all your beds, creating a uniform appearance that enhances your entire landscape. No thin spots, no piles — just clean, level coverage.
                 </p>
               </div>
             </div>
@@ -159,6 +164,53 @@ export default function MulchInstallationPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Subscription Plans */}
+      <section className="bg-forest px-4 py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="font-outfit text-3xl font-bold text-white sm:text-4xl">
+            Subscription Plans
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-white/90">
+            Our plans are based on your property size and mulch needs, determined by a free in-person quote. We don&apos;t list prices online because every property is different — and you deserve an accurate number, not a guess.
+          </p>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: "Consistent Schedule",
+                desc: "Your mulch installation happens on a set schedule. No reminders needed.",
+              },
+              {
+                title: "Priority Service",
+                desc: "Subscribers get scheduled first during peak season. No waiting in line.",
+              },
+              {
+                title: "Locked-In Pricing",
+                desc: "Your rate stays the same for the duration of your plan. No surprise increases.",
+              },
+              {
+                title: "Zero Hassle",
+                desc: "No annual rebooking, no phone calls. We just show up and make your yard look great.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-left">
+                <h3 className="font-outfit text-lg font-semibold text-white mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-white/80 text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10">
+            <Link
+              href="/estimate"
+              className="inline-block bg-white hover:bg-soil text-forest font-semibold px-8 py-4 rounded-lg transition-colors text-lg"
+            >
+              Get Your Free In-Person Quote
+            </Link>
           </div>
         </div>
       </section>
@@ -247,11 +299,11 @@ export default function MulchInstallationPage() {
             Let Us Handle the Hard Part
           </h2>
           <p className="mt-4 text-lg text-white/90">
-            Get a free quote for professional mulch installation. We&apos;ll measure your beds, recommend the right product, and get the job done right.
+            Get a free in-person quote for subscription-based mulch installation. We&apos;ll measure your beds, recommend the right approach, and set up a plan that keeps your yard looking great.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
-              href="/contact"
+              href="/estimate"
               className="bg-white hover:bg-soil text-forest font-semibold px-6 py-3 rounded-lg transition-colors"
             >
               Get a Free Quote

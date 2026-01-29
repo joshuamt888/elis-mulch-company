@@ -5,9 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Mulch Delivery & Installation Chanhassen, MN",
+  title: "Professional Mulch Installation Chanhassen, MN",
   description:
-    "Premium mulch delivery and installation in Chanhassen, Minnesota. Bulk mulch, cedar, hardwood, playground chips. Same-day delivery available. Free estimates.",
+    "Subscription-based professional mulch installation in Chanhassen, Minnesota. Free in-person quotes. Locally owned and operated. Serving residential and commercial properties.",
   alternates: { canonical: "https://mulchcompanymn.com/chanhassen-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -35,7 +35,7 @@ export default function ChannhassenMulchDeliveryPage() {
       <section className="relative h-[60vh] min-h-[400px]">
         <Image
           src="/images/hero/hero-9.webp"
-          alt="Mulch delivery in Chanhassen, MN"
+          alt="Professional mulch installation in Chanhassen, MN"
           fill
           className="object-cover"
           priority
@@ -43,11 +43,11 @@ export default function ChannhassenMulchDeliveryPage() {
         <div className="absolute inset-0 bg-[#1a1208]/50" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
           <h1 className="text-white text-4xl md:text-5xl font-outfit font-bold max-w-4xl">
-            Mulch Delivery &amp; Installation in Chanhassen, MN
+            Professional Mulch Installation in Chanhassen, MN
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/90">
-            Premium mulch products delivered and installed across Chanhassen.
-            Locally owned, same-day delivery available.
+            Subscription-based mulch installation for Chanhassen homes and businesses.
+            Locally owned, free in-person quotes.
           </p>
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <Link
@@ -66,28 +66,19 @@ export default function ChannhassenMulchDeliveryPage() {
         </div>
       </section>
 
-      {/* Services */}
+      {/* Service */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Our Mulch Services in Chanhassen
+            Mulch Installation in Chanhassen
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="max-w-3xl mx-auto">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Installation</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Subscription-Based Mulch Installation</h3>
               <p className="text-sand/70 mb-4">
-                Let our crew handle the heavy lifting. We install mulch in garden beds, around trees, and along walkways throughout Chanhassen — our home base. No project is too big or small.
+                Chanhassen is our home base. We offer subscription plans for recurring mulch installation so your property always looks its best. We visit your property, provide an in-person quote, and set up a schedule that works for you. No heavy lifting, no hassle.
               </p>
               <Link href="/services/mulch-installation" className="text-forest font-semibold hover:text-forest-light transition-colors">
-                Learn More →
-              </Link>
-            </div>
-            <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
-              <p className="text-sand/70 mb-4">
-                Fast, reliable mulch delivery right to your Chanhassen driveway. Whether you live near the Chanhassen Dinner Theatres district or in one of the family-friendly neighborhoods off Highway 5, we bring premium mulch to your door.
-              </p>
-              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
                 Learn More →
               </Link>
             </div>
@@ -108,16 +99,16 @@ export default function ChannhassenMulchDeliveryPage() {
                 desc: "Chanhassen is our home base — we're your true local mulch company. No long drives, no delays.",
               },
               {
-                title: "Same-Day Delivery",
-                desc: "Order before noon and we can have mulch on your Chanhassen driveway the same day.",
+                title: "Free In-Person Quotes",
+                desc: "We visit your property to assess your needs and provide accurate, fair pricing. No guessing.",
               },
               {
-                title: "Premium Products",
-                desc: "Double-shredded hardwood, aromatic cedar, and playground-safe chips — all top quality.",
+                title: "Subscription Plans",
+                desc: "Set it and forget it. We install fresh mulch on a recurring schedule so your yard always looks great.",
               },
               {
-                title: "Full Installation Available",
-                desc: "We'll spread it for you. Save hours of backbreaking work and enjoy your weekend instead.",
+                title: "Professional Installation",
+                desc: "Expert crew, even coverage, clean edges, zero mess. We treat your yard like our own.",
               },
             ].map((item) => (
               <div key={item.title} className="text-center">
@@ -154,9 +145,9 @@ export default function ChannhassenMulchDeliveryPage() {
       <section className="bg-forest py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-white mb-4">
-            Ready for Fresh Mulch in Chanhassen?
+            Ready for a Hassle-Free Yard in Chanhassen?
           </h2>
-          <p className="text-white/80 text-lg mb-8">Get a free estimate today.</p>
+          <p className="text-white/80 text-lg mb-8">Schedule your free in-person quote today.</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/estimate"

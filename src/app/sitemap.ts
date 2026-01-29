@@ -11,8 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/estimate",
     "/privacy",
     "/sitemap-page",
-    "/mulch-installation",
-    "/mulch-delivery",
+    "/services/mulch-installation",
   ];
 
   const cityPages = [

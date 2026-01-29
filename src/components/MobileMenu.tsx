@@ -3,11 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const services = [
-  { name: "Mulch Installation", href: "/services/mulch-installation" },
-  { name: "Mulch Delivery", href: "/services/mulch-delivery" },
-];
-
 const areas = [
   "Chanhassen",
   "Eden Prairie",
@@ -25,12 +20,10 @@ const areas = [
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
-  const [servicesExpanded, setServicesExpanded] = useState(false);
   const [areasExpanded, setAreasExpanded] = useState(false);
 
   const close = () => {
     setOpen(false);
-    setServicesExpanded(false);
     setAreasExpanded(false);
   };
 
@@ -80,30 +73,6 @@ export default function MobileMenu() {
             >
               Mulch Installation
             </Link>
-
-            {/* Services Accordion */}
-            <div>
-              <button
-                onClick={() => setServicesExpanded(!servicesExpanded)}
-                className="flex items-center justify-between w-full py-3 text-soil-dark hover:text-white transition-colors font-medium text-lg"
-              >
-                Services {chevron(servicesExpanded)}
-              </button>
-              {servicesExpanded && (
-                <div className="pl-4 pb-2 space-y-1">
-                  {services.map((s) => (
-                    <Link
-                      key={s.href}
-                      href={s.href}
-                      onClick={close}
-                      className="block py-2.5 text-soil-dark hover:text-white transition-colors font-medium"
-                    >
-                      {s.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
 
             {/* Areas Accordion */}
             <div>

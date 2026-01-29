@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "About Mulch Company MN | Chanhassen MN",
   description:
-    "Mulch Company MN is a locally owned mulch delivery and installation company serving Chanhassen and the western Twin Cities metro. Meet the team behind your yard's best look.",
+    "Mulch Company MN is a locally owned mulch installation company serving Chanhassen and the western Twin Cities metro. Subscription-based service for hassle-free yards.",
   alternates: { canonical: "/about" },
 };
 
@@ -78,15 +78,15 @@ export default function AboutPage() {
             </h2>
             <p className="text-sand/80 leading-relaxed text-lg">
               Mulch Company MN was founded by two brothers — Eli and
-              Owen — right here in Chanhassen, Minnesota. What started as a side
-              hustle hauling mulch for neighbors turned into a full-service mulch
-              delivery and installation company serving the entire western Twin
-              Cities metro.
+              Owen — right here in Chanhassen, Minnesota. What started as
+              helping neighbors with their yards turned into a full-service
+              mulch installation company with subscription plans serving the
+              entire western Twin Cities metro.
             </p>
             <p className="text-sand/80 leading-relaxed text-lg mt-4">
               We&apos;re not a big box store. We&apos;re not a franchise.
               We&apos;re your neighbors — and we take pride in making your yard
-              look incredible.
+              look incredible, season after season.
             </p>
           </div>
           <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden">

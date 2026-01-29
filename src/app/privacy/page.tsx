@@ -90,7 +90,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-bold text-sand mb-4">How We Use Your Data</h2>
               <ul className="list-disc pl-6 space-y-2">
                 <li>To respond to your estimate requests and inquiries</li>
-                <li>To schedule and coordinate mulch delivery and installation services</li>
+                <li>To schedule and coordinate mulch installation services</li>
                 <li>To improve our website and user experience</li>
                 <li>To understand how our site is used and optimize our content</li>
                 <li>To send occasional service updates or seasonal promotions (you can opt out at any time)</li>

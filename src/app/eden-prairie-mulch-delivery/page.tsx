@@ -5,9 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Mulch Delivery & Installation Eden Prairie, MN",
+  title: "Professional Mulch Installation Eden Prairie, MN",
   description:
-    "Premium mulch delivery and installation in Eden Prairie, Minnesota. Bulk mulch, cedar, hardwood, playground chips. Same-day delivery available. Free estimates.",
+    "Subscription-based professional mulch installation in Eden Prairie, Minnesota. Free in-person quotes. Locally owned and operated.",
   alternates: { canonical: "https://mulchcompanymn.com/eden-prairie-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -31,11 +31,10 @@ export default function EdenPrairieMulchDeliveryPage() {
     <>
       <Header />
 
-      {/* Hero */}
       <section className="relative h-[60vh] min-h-[400px]">
         <Image
           src="/images/hero/hero-5.webp"
-          alt="Mulch delivery in Eden Prairie, MN"
+          alt="Professional mulch installation in Eden Prairie, MN"
           fill
           className="object-cover"
           priority
@@ -43,51 +42,35 @@ export default function EdenPrairieMulchDeliveryPage() {
         <div className="absolute inset-0 bg-[#1a1208]/50" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
           <h1 className="text-white text-4xl md:text-5xl font-outfit font-bold max-w-4xl">
-            Mulch Delivery &amp; Installation in Eden Prairie, MN
+            Professional Mulch Installation in Eden Prairie, MN
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/90">
-            Premium mulch products delivered and installed across Eden Prairie.
-            Locally owned, same-day delivery available.
+            Subscription-based mulch installation for Eden Prairie homes and businesses.
+            Locally owned, free in-person quotes.
           </p>
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/estimate"
-              className="bg-forest hover:bg-forest-light text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
+            <Link href="/estimate" className="bg-forest hover:bg-forest-light text-white font-semibold px-6 py-3 rounded-lg transition-colors">
               Get a Free Quote
             </Link>
-            <a
-              href="tel:6125550100"
-              className="border-2 border-white text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
+            <a href="tel:6125550100" className="border-2 border-white text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors">
               Call (612) 555-0100
             </a>
           </div>
         </div>
       </section>
 
-      {/* Services */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Our Mulch Services in Eden Prairie
+            Mulch Installation in Eden Prairie
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="max-w-3xl mx-auto">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Installation</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Subscription-Based Mulch Installation</h3>
               <p className="text-sand/70 mb-4">
-                Eden Prairie properties deserve top-tier landscaping. Our installation crews work across the city, handling everything from small garden beds to expansive commercial properties along Prairie Center Drive.
+                Eden Prairie properties deserve top-tier landscaping. Our installation crews work across the city, handling everything from small garden beds to expansive commercial properties along Prairie Center Drive. Subscribe for recurring service and never worry about your mulch again.
               </p>
               <Link href="/services/mulch-installation" className="text-forest font-semibold hover:text-forest-light transition-colors">
-                Learn More →
-              </Link>
-            </div>
-            <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
-              <p className="text-sand/70 mb-4">
-                Serving one of the largest western suburbs, we deliver mulch throughout Eden Prairie — from the neighborhoods around Purgatory Creek Park to the homes near Bryant Lake. Fast, dependable service every time.
-              </p>
-              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
                 Learn More →
               </Link>
             </div>
@@ -95,7 +78,6 @@ export default function EdenPrairieMulchDeliveryPage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
       <section className="bg-soil py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
@@ -103,22 +85,10 @@ export default function EdenPrairieMulchDeliveryPage() {
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              {
-                title: "Based Right Here",
-                desc: "We're based in Chanhassen, just minutes from Eden Prairie. Quick response times and local knowledge you can count on.",
-              },
-              {
-                title: "Same-Day Delivery",
-                desc: "Order before noon, get mulch today. Perfect for Eden Prairie homeowners tackling weekend landscaping projects.",
-              },
-              {
-                title: "Premium Products",
-                desc: "Double-shredded hardwood, fragrant cedar, and playground-safe chips to match Eden Prairie's beautiful landscapes.",
-              },
-              {
-                title: "Full Installation Available",
-                desc: "We'll spread it for you. Save hours of work and let our crew handle your Eden Prairie mulch project.",
-              },
+              { title: "Based Right Here", desc: "We're based in Chanhassen, just minutes from Eden Prairie. Quick response times and local knowledge you can count on." },
+              { title: "Free In-Person Quotes", desc: "We visit your property to assess your needs and provide accurate, honest pricing." },
+              { title: "Subscription Plans", desc: "Set it and forget it. Recurring mulch installation on a schedule that works for you." },
+              { title: "Professional Installation", desc: "Expert crew, even coverage, clean edges. Save hours of work and let us handle it." },
             ].map((item) => (
               <div key={item.title} className="text-center">
                 <svg className="mx-auto mb-4 h-10 w-10 text-forest" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -132,17 +102,12 @@ export default function EdenPrairieMulchDeliveryPage() {
         </div>
       </section>
 
-      {/* Nearby Areas */}
       <section className="bg-white py-16">
         <div className="mx-auto max-w-6xl px-4 text-center">
           <h2 className="text-2xl font-outfit font-bold text-sand mb-8">We Also Serve</h2>
           <div className="flex flex-wrap justify-center gap-3">
             {nearbyAreas.map((area) => (
-              <Link
-                key={area.href}
-                href={area.href}
-                className="bg-soil hover:bg-forest hover:text-white text-sand font-medium px-4 py-2 rounded-full transition-colors text-sm"
-              >
+              <Link key={area.href} href={area.href} className="bg-soil hover:bg-forest hover:text-white text-sand font-medium px-4 py-2 rounded-full transition-colors text-sm">
                 {area.name}
               </Link>
             ))}
@@ -150,24 +115,17 @@ export default function EdenPrairieMulchDeliveryPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="bg-forest py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-white mb-4">
-            Ready for Fresh Mulch in Eden Prairie?
+            Ready for a Hassle-Free Yard in Eden Prairie?
           </h2>
-          <p className="text-white/80 text-lg mb-8">Get a free estimate today.</p>
+          <p className="text-white/80 text-lg mb-8">Schedule your free in-person quote today.</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/estimate"
-              className="bg-forest hover:bg-forest-light text-white font-semibold px-6 py-3 rounded-lg border-2 border-white transition-colors"
-            >
+            <Link href="/estimate" className="bg-forest hover:bg-forest-light text-white font-semibold px-6 py-3 rounded-lg border-2 border-white transition-colors">
               Get a Free Quote
             </Link>
-            <a
-              href="tel:6125550100"
-              className="border-2 border-white text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
+            <a href="tel:6125550100" className="border-2 border-white text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors">
               Call (612) 555-0100
             </a>
           </div>

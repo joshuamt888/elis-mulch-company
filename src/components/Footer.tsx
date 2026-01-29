@@ -1,11 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const services = [
-  { name: "Mulch Installation", href: "/services/mulch-installation" },
-  { name: "Mulch Delivery", href: "/services/mulch-delivery" },
-];
-
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -20,24 +15,22 @@ export default function Footer() {
               Mulch Company MN
             </h3>
             <p className="text-[#c4b49a] text-sm leading-relaxed">
-              Premium mulch delivery and installation serving Chanhassen and the western Twin Cities metro.
+              Subscription-based mulch installation serving Chanhassen and the western Twin Cities metro. Professional service, hassle-free yards.
             </p>
           </div>
 
-          {/* Services */}
+          {/* Our Service */}
           <div>
-            <h3 className="text-[#d4c5a9] font-outfit font-semibold text-lg mb-3">Services</h3>
+            <h3 className="text-[#d4c5a9] font-outfit font-semibold text-lg mb-3">Our Service</h3>
             <ul className="space-y-2">
-              {services.map((s) => (
-                <li key={s.href}>
-                  <Link
-                    href={s.href}
-                    className="text-[#c4b49a] hover:text-white transition-colors text-sm"
-                  >
-                    {s.name}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="/services/mulch-installation"
+                  className="text-[#c4b49a] hover:text-white transition-colors text-sm"
+                >
+                  Professional Mulch Installation
+                </Link>
+              </li>
             </ul>
           </div>
 

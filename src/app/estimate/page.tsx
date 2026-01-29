@@ -4,9 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Get a Free Mulch Estimate | Chanhassen MN",
+  title: "Get a Free Mulch Installation Quote | Chanhassen MN",
   description:
-    "Request a free mulch delivery or installation estimate from Mulch Company MN. No pressure, no obligation — just honest pricing for Chanhassen and the western Twin Cities metro.",
+    "Request a free in-person mulch installation quote from Mulch Company MN. We visit your property and provide accurate pricing. Serving Chanhassen and the western Twin Cities metro.",
   alternates: { canonical: "/estimate" },
 };
 
@@ -27,10 +27,10 @@ export default function EstimatePage() {
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Get Your Free Estimate
+            Get Your Free Quote
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto text-white/90">
-            No pressure, no obligation. Just honest pricing.
+            We provide free in-person quotes for all mulch installation projects.
           </p>
         </div>
       </section>
@@ -39,95 +39,80 @@ export default function EstimatePage() {
       <section className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12">
           {/* Left — Form */}
-          <form
-            /* action="/api/estimate" method="POST" */
-            className="space-y-5"
-          >
-            <div>
-              <label htmlFor="name" className="block text-sand font-medium mb-1">
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
-                placeholder="Your full name"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="phone" className="block text-sand font-medium mb-1">
-                Phone
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                required
-                className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
-                placeholder="(612) 555-1234"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sand font-medium mb-1">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
-                placeholder="you@email.com"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="service"
-                className="block text-sand font-medium mb-1"
-              >
-                Service Needed
-              </label>
-              <select
-                id="service"
-                name="service"
-                required
-                className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
-              >
-                <option value="">Select a service</option>
-                <option value="mulch-installation">Mulch Installation</option>
-                <option value="mulch-delivery">Mulch Delivery</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="details"
-                className="block text-sand font-medium mb-1"
-              >
-                Project Details
-              </label>
-              <textarea
-                id="details"
-                name="details"
-                rows={5}
-                className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
-                placeholder="Tell us about your project — size of area, mulch type preference, timeline, etc."
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="bg-forest hover:bg-forest-light text-white font-semibold w-full py-3 rounded-lg transition-colors"
+          <div>
+            <p className="text-sand/80 text-lg mb-6 leading-relaxed">
+              Tell us about your property and we&apos;ll schedule a visit to assess your needs and provide accurate pricing. No obligation, no pressure.
+            </p>
+            <form
+              /* action="/api/estimate" method="POST" */
+              className="space-y-5"
             >
-              Submit Request
-            </button>
-          </form>
+              <div>
+                <label htmlFor="name" className="block text-sand font-medium mb-1">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
+                  placeholder="Your full name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sand font-medium mb-1">
+                  Phone
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
+                  placeholder="(612) 555-1234"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sand font-medium mb-1">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
+                  placeholder="you@email.com"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="details"
+                  className="block text-sand font-medium mb-1"
+                >
+                  Property Details
+                </label>
+                <textarea
+                  id="details"
+                  name="details"
+                  rows={5}
+                  className="w-full px-4 py-3 border border-soil-dark rounded-lg bg-white text-sand"
+                  placeholder="Tell us about your property — approximate size of area, number of beds, any preferences, etc."
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="bg-forest hover:bg-forest-light text-white font-semibold w-full py-3 rounded-lg transition-colors"
+              >
+                Request My Free Quote
+              </button>
+            </form>
+          </div>
 
           {/* Right — Contact Info */}
           <div className="space-y-8">
@@ -173,11 +158,15 @@ export default function EstimatePage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-forest font-bold mt-0.5">&#10003;</span>
-                  Free on-site assessment
+                  Free in-person property assessment
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-forest font-bold mt-0.5">&#10003;</span>
                   Detailed written estimate
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-forest font-bold mt-0.5">&#10003;</span>
+                  Subscription plan options available
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-forest font-bold mt-0.5">&#10003;</span>

@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     template: "%s | Mulch Company MN",
   },
   description:
-    "Professional mulch installation and delivery in Chanhassen & western Twin Cities metro. Cedar, hardwood, playground chips. Free estimates.",
+    "Professional mulch installation near you in Chanhassen & the western Twin Cities. Cedar, hardwood & black mulch. Subscription plans available. Free in-person quotes.",
   keywords:
-    "mulch installation Chanhassen, mulch delivery Minnesota, cedar mulch, hardwood mulch, playground mulch, landscape supply",
+    "mulch near me, mulch installation near me, mulch company near me, mulch installation Chanhassen, cedar mulch near me, black mulch near me, hardwood mulch near me, mulch for sale near me, landscape mulch near me, mulch installation cost, mulch company MN",
   icons: {
     icon: [
       { url: "/images/logos/favicon.png", sizes: "32x32", type: "image/png" },
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
     url: "https://mulchcompanymn.com",
     title: "Mulch Installation Chanhassen MN | Mulch Company MN",
     description:
-      "Professional mulch installation and delivery in Chanhassen & western Twin Cities metro. Cedar, hardwood, playground chips. Free estimates.",
+      "Subscription-based professional mulch installation in Chanhassen & western Twin Cities metro. Free in-person quotes. Locally owned.",
     siteName: "Mulch Company MN",
   },
   twitter: {
     card: "summary",
     title: "Mulch Installation Chanhassen MN | Mulch Company MN",
     description:
-      "Professional mulch installation and delivery in Chanhassen & western Twin Cities metro. Cedar, hardwood, playground chips. Free estimates.",
+      "Subscription-based professional mulch installation in Chanhassen & western Twin Cities metro. Free in-person quotes. Locally owned.",
   },
   alternates: {
     canonical: "https://mulchcompanymn.com",
@@ -71,7 +71,7 @@ export default function RootLayout({
         name: "Mulch Company MN",
         url: "https://mulchcompanymn.com",
         description:
-          "Premium mulch delivery and installation serving Chanhassen and the western Twin Cities metro. Quality products, professional service.",
+          "Subscription-based professional mulch installation serving Chanhassen and the western Twin Cities metro.",
       },
       {
         "@type": "WebSite",
@@ -79,7 +79,7 @@ export default function RootLayout({
         url: "https://mulchcompanymn.com",
         name: "Mulch Company MN",
         description:
-          "Premium mulch delivery, installation & landscape supply in Chanhassen, MN.",
+          "Professional mulch installation with subscription plans in Chanhassen, MN.",
         publisher: {
           "@id": "https://mulchcompanymn.com/#organization",
         },
@@ -90,7 +90,7 @@ export default function RootLayout({
         "@id": "https://mulchcompanymn.com/#localbusiness",
         name: "Mulch Company MN",
         description:
-          "Professional mulch installation & delivery serving Chanhassen and the western Twin Cities metro. Cedar, hardwood, playground chips. Professional service, competitive pricing.",
+          "Subscription-based professional mulch installation serving Chanhassen and the western Twin Cities metro. Free in-person quotes, recurring service plans.",
         url: "https://mulchcompanymn.com",
         telephone: "(612) 555-0100",
         slogan: "Your Yard, Our Mulch",
@@ -137,11 +137,9 @@ export default function RootLayout({
         ],
         knowsAbout: [
           "Mulch Installation",
-          "Mulch Delivery",
-          "Cedar Mulch",
-          "Hardwood Mulch",
-          "Playground Mulch",
-          "Landscape Supply",
+          "Subscription Mulch Service",
+          "Landscape Maintenance",
+          "Professional Mulching",
         ],
         priceRange: "$$",
         hasOfferCatalog: {
@@ -150,11 +148,7 @@ export default function RootLayout({
           itemListElement: [
             {
               "@type": "Offer",
-              itemOffered: { "@type": "Service", name: "Mulch Installation" },
-            },
-            {
-              "@type": "Offer",
-              itemOffered: { "@type": "Service", name: "Mulch Delivery" },
+              itemOffered: { "@type": "Service", name: "Subscription Mulch Installation" },
             },
           ],
         },

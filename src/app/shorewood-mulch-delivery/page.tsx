@@ -5,9 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Mulch Delivery & Installation Shorewood, MN",
+  title: "Professional Mulch Installation Shorewood, MN",
   description:
-    "Premium mulch delivery and installation in Shorewood, Minnesota. Bulk mulch, cedar, hardwood, playground chips. Same-day delivery available. Free estimates.",
+    "Subscription-based professional mulch installation in Shorewood, Minnesota. Free in-person quotes. Locally owned and operated.",
   alternates: { canonical: "https://mulchcompanymn.com/shorewood-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -32,62 +32,26 @@ export default function ShorewoodMulchDeliveryPage() {
       <Header />
 
       <section className="relative h-[60vh] min-h-[400px]">
-        <Image
-          src="/images/hero/hero-2.webp"
-          alt="Mulch delivery in Shorewood, MN"
-          fill
-          className="object-cover"
-          priority
-        />
+        <Image src="/images/hero/hero-2.webp" alt="Professional mulch installation in Shorewood, MN" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-[#1a1208]/50" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
-          <h1 className="text-white text-4xl md:text-5xl font-outfit font-bold max-w-4xl">
-            Mulch Delivery &amp; Installation in Shorewood, MN
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-white/90">
-            Premium mulch products delivered and installed across Shorewood.
-            Locally owned, same-day delivery available.
-          </p>
+          <h1 className="text-white text-4xl md:text-5xl font-outfit font-bold max-w-4xl">Professional Mulch Installation in Shorewood, MN</h1>
+          <p className="mt-4 max-w-2xl text-lg text-white/90">Subscription-based mulch installation for Shorewood homes and businesses. Locally owned, free in-person quotes.</p>
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/estimate"
-              className="bg-forest hover:bg-forest-light text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
-              Get a Free Quote
-            </Link>
-            <a
-              href="tel:6125550100"
-              className="border-2 border-white text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
-              Call (612) 555-0100
-            </a>
+            <Link href="/estimate" className="bg-forest hover:bg-forest-light text-white font-semibold px-6 py-3 rounded-lg transition-colors">Get a Free Quote</Link>
+            <a href="tel:6125550100" className="border-2 border-white text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors">Call (612) 555-0100</a>
           </div>
         </div>
       </section>
 
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Our Mulch Services in Shorewood
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">Mulch Installation in Shorewood</h2>
+          <div className="max-w-3xl mx-auto">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Installation</h3>
-              <p className="text-sand/70 mb-4">
-                Shorewood&apos;s natural, wooded landscapes benefit from expert mulch installation. Our crew works carefully around mature trees, native plantings, and shoreline gardens throughout the community.
-              </p>
-              <Link href="/services/mulch-installation" className="text-forest font-semibold hover:text-forest-light transition-colors">
-                Learn More →
-              </Link>
-            </div>
-            <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Mulch Delivery</h3>
-              <p className="text-sand/70 mb-4">
-                Shorewood&apos;s quiet, lakeside setting near Excelsior makes it a gem of the west metro. We deliver premium mulch to this peaceful community, reaching every wooded lot and waterfront property.
-              </p>
-              <Link href="/services/mulch-delivery" className="text-forest font-semibold hover:text-forest-light transition-colors">
-                Learn More →
-              </Link>
+              <h3 className="text-xl font-bold text-sand mb-3">Subscription-Based Mulch Installation</h3>
+              <p className="text-sand/70 mb-4">Shorewood&apos;s natural, wooded landscapes benefit from expert mulch installation. Our crew works carefully around mature trees, native plantings, and shoreline gardens. Subscribe for recurring service and enjoy a beautiful property year-round.</p>
+              <Link href="/services/mulch-installation" className="text-forest font-semibold hover:text-forest-light transition-colors">Learn More →</Link>
             </div>
           </div>
         </div>
@@ -95,32 +59,16 @@ export default function ShorewoodMulchDeliveryPage() {
 
       <section className="bg-soil py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Why Shorewood Homeowners Trust Mulch Company MN
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">Why Shorewood Homeowners Trust Mulch Company MN</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              {
-                title: "Based Right Here",
-                desc: "We're based in Chanhassen, just minutes from Shorewood. Reliable local service for this quiet lakeside community.",
-              },
-              {
-                title: "Same-Day Delivery",
-                desc: "Order before noon and we deliver the same day. Perfect for Shorewood homeowners with busy schedules.",
-              },
-              {
-                title: "Premium Products",
-                desc: "Double-shredded hardwood, cedar, and playground chips that blend naturally with Shorewood's wooded character.",
-              },
-              {
-                title: "Full Installation Available",
-                desc: "We'll spread it for you. Enjoy a peaceful afternoon in Shorewood while our crew handles the work.",
-              },
+              { title: "Based Right Here", desc: "We're based in Chanhassen, just minutes from Shorewood. Reliable local service for this quiet lakeside community." },
+              { title: "Free In-Person Quotes", desc: "We visit your property and provide accurate, fair pricing." },
+              { title: "Subscription Plans", desc: "Recurring installation for Shorewood's wooded, lakeside properties." },
+              { title: "Professional Installation", desc: "Enjoy a peaceful afternoon in Shorewood while our crew handles the work." },
             ].map((item) => (
               <div key={item.title} className="text-center">
-                <svg className="mx-auto mb-4 h-10 w-10 text-forest" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
+                <svg className="mx-auto mb-4 h-10 w-10 text-forest" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                 <h3 className="text-sand font-bold text-lg mb-2">{item.title}</h3>
                 <p className="text-sand/70">{item.desc}</p>
               </div>
@@ -129,45 +77,9 @@ export default function ShorewoodMulchDeliveryPage() {
         </div>
       </section>
 
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-6xl px-4 text-center">
-          <h2 className="text-2xl font-outfit font-bold text-sand mb-8">We Also Serve</h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            {nearbyAreas.map((area) => (
-              <Link
-                key={area.href}
-                href={area.href}
-                className="bg-soil hover:bg-forest hover:text-white text-sand font-medium px-4 py-2 rounded-full transition-colors text-sm"
-              >
-                {area.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="bg-white py-16"><div className="mx-auto max-w-6xl px-4 text-center"><h2 className="text-2xl font-outfit font-bold text-sand mb-8">We Also Serve</h2><div className="flex flex-wrap justify-center gap-3">{nearbyAreas.map((area) => (<Link key={area.href} href={area.href} className="bg-soil hover:bg-forest hover:text-white text-sand font-medium px-4 py-2 rounded-full transition-colors text-sm">{area.name}</Link>))}</div></div></section>
 
-      <section className="bg-forest py-16">
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-outfit font-bold text-white mb-4">
-            Ready for Fresh Mulch in Shorewood?
-          </h2>
-          <p className="text-white/80 text-lg mb-8">Get a free estimate today.</p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/estimate"
-              className="bg-forest hover:bg-forest-light text-white font-semibold px-6 py-3 rounded-lg border-2 border-white transition-colors"
-            >
-              Get a Free Quote
-            </Link>
-            <a
-              href="tel:6125550100"
-              className="border-2 border-white text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
-              Call (612) 555-0100
-            </a>
-          </div>
-        </div>
-      </section>
+      <section className="bg-forest py-16"><div className="mx-auto max-w-4xl px-4 text-center"><h2 className="text-3xl md:text-4xl font-outfit font-bold text-white mb-4">Ready for a Hassle-Free Yard in Shorewood?</h2><p className="text-white/80 text-lg mb-8">Schedule your free in-person quote today.</p><div className="flex flex-wrap gap-4 justify-center"><Link href="/estimate" className="bg-forest hover:bg-forest-light text-white font-semibold px-6 py-3 rounded-lg border-2 border-white transition-colors">Get a Free Quote</Link><a href="tel:6125550100" className="border-2 border-white text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors">Call (612) 555-0100</a></div></div></section>
 
       <Footer />
     </>
