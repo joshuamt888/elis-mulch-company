@@ -50,13 +50,6 @@ export default function Home() {
               Call (612) 555-0100
             </a>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/80 text-sm font-medium">
-            <span>Subscription Plans Available</span>
-            <span className="hidden sm:inline" aria-hidden="true">&middot;</span>
-            <span>Free In-Person Quotes</span>
-            <span className="hidden sm:inline" aria-hidden="true">&middot;</span>
-            <span>Locally Owned</span>
-          </div>
         </div>
       </section>
 
@@ -116,7 +109,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-4xl font-outfit font-bold text-sand mb-4">
-              Why Chanhassen Trusts Mulch Company MN
+              Why Chanhassen Trusts Mulch Company
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">

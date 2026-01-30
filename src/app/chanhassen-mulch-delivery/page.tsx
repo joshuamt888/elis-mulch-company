@@ -90,7 +90,7 @@ export default function ChannhassenMulchDeliveryPage() {
       <section className="bg-soil py-20">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">
-            Why Chanhassen Homeowners Trust Mulch Company MN
+            Why Chanhassen Homeowners Trust Mulch Company
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[

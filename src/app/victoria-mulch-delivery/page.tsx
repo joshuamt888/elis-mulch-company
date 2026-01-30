@@ -59,7 +59,7 @@ export default function VictoriaMulchDeliveryPage() {
 
       <section className="bg-soil py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">Why Victoria Homeowners Trust Mulch Company MN</h2>
+          <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">Why Victoria Homeowners Trust Mulch Company</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { title: "Based Right Here", desc: "We're based in Chanhassen, right next door to Victoria. Your neighbor is your mulch company." },

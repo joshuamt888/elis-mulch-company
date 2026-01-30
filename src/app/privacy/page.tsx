@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-2xl font-bold text-sand mb-4">Overview</h2>
               <p>
-                Mulch Company MN (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) respects your privacy. This
+                Mulch Company (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) respects your privacy. This
                 policy explains what data we collect, how we use it, and your rights regarding that data. By
                 using our website, you agree to the practices described in this policy.
               </p>

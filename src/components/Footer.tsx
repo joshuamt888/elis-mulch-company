@@ -11,9 +11,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           {/* Company Info */}
           <div>
-            <h3 className="text-[#d4c5a9] font-outfit font-semibold text-lg mb-3">
-              Mulch Company MN
-            </h3>
+            <div className="mb-3">
+              <Image src="/images/logos/main-logo.webp" alt="Mulch Company" width={80} height={80} />
+            </div>
             <p className="text-[#c4b49a] text-sm leading-relaxed">
               Subscription-based mulch installation serving Chanhassen and the western Twin Cities metro. Professional service, hassle-free yards.
             </p>
@@ -77,7 +77,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <p className="text-[#c4b49a] text-xs mb-2">
-            &copy; {year} Mulch Company MN. All rights reserved.{" "}
+            &copy; {year} Mulch Company. All rights reserved.{" "}
             &middot;{" "}
             <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const areas = [
   "Chanhassen",
@@ -55,8 +56,9 @@ export default function MobileMenu() {
       {open && (
         <div className="fixed inset-0 z-50 bg-[#1a1208] overflow-y-auto">
           <div className="flex items-center justify-between px-4 h-16 border-b border-bark/30">
-            <Link href="/" onClick={close} className="text-soil font-outfit font-semibold text-lg">
-              Mulch Company MN
+            <Link href="/" onClick={close} className="flex items-center gap-2">
+              <Image src="/images/logos/logo-icon.webp" alt="Mulch Company" width={40} height={40} />
+              <span className="text-soil font-outfit font-semibold text-lg">Mulch Company</span>
             </Link>
             <button onClick={close} className="text-soil p-2" aria-label="Close menu">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

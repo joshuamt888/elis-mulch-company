@@ -61,7 +61,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            About Mulch Company MN
+            About Mulch Company
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto text-white/90">
             Locally owned. Community driven. Mulch obsessed.
@@ -77,7 +77,7 @@ export default function AboutPage() {
               Our Story
             </h2>
             <p className="text-sand/80 leading-relaxed text-lg">
-              Mulch Company MN was founded by two brothers — Eli and
+              Mulch Company was founded by two brothers — Eli and
               Owen — right here in Chanhassen, Minnesota. What started as
               helping neighbors with their yards turned into a full-service
               mulch installation company with subscription plans serving the
