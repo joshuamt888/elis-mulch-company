@@ -25,11 +25,11 @@ export default function Home() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center">
+      <section className="relative h-screen flex items-center justify-center pt-16">
         <div className="absolute inset-0">
           <HeroSlideshow />
         </div>
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 pt-20">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h1 className="text-white text-5xl md:text-6xl font-outfit font-bold leading-tight mb-6">
             Professional Mulch Installation Near You in Chanhassen, MN
           </h1>
