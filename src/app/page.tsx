@@ -29,7 +29,7 @@ export default function Home() {
         <div className="absolute inset-0">
           <HeroSlideshow />
         </div>
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 pt-20">
           <h1 className="text-white text-5xl md:text-6xl font-outfit font-bold leading-tight mb-6">
             Professional Mulch Installation Near You in Chanhassen, MN
           </h1>

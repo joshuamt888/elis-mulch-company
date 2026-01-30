@@ -46,7 +46,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/images/logos/logo-icon.webp" alt="Mulch Company" width={40} height={40} />
+            <Image src="/images/logos/logo-icon.webp" alt="Mulch Company" width={32} height={32} />
             <span className="text-soil font-outfit font-semibold text-lg">Mulch Company</span>
           </Link>
 
