@@ -54,7 +54,7 @@ export default function MobileMenu() {
 
       {/* Full-screen overlay */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-[#1a1208] overflow-y-auto">
+        <div className="fixed inset-0 z-[60] bg-[#1a1208] overflow-y-auto">
           <div className="flex items-center justify-between px-4 h-16 border-b border-bark/30">
             <Link href="/" onClick={close} className="flex items-center gap-2">
               <Image src="/images/logos/logo-icon.webp" alt="Mulch Company" width={32} height={32} />
