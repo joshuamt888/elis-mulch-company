@@ -119,7 +119,7 @@ export default function Home() {
             {[
               { name: "Hardwood Mulch", image: "/images/hero/hero-4.webp" },
               { name: "Cedar Mulch", image: "/images/hero/hero-7.webp" },
-              { name: "Black Mulch", image: "/images/hero/hero-4.webp" },
+              { name: "Black Mulch", image: "/images/hero/hero-8.webp" },
               { name: "Brown Mulch", image: "/images/hero/hero-5.webp" },
               { name: "Red Mulch", image: "/images/hero/hero-9.webp" },
               { name: "Playground Mulch", image: "/images/hero/hero-6.webp" },
