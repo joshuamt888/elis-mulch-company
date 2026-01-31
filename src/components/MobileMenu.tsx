@@ -44,7 +44,7 @@ export default function MobileMenu() {
       {/* Hamburger */}
       <button
         onClick={() => setOpen(true)}
-        className="text-soil p-2"
+        className="relative z-10 text-soil p-3 -mr-2"
         aria-label="Open menu"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
