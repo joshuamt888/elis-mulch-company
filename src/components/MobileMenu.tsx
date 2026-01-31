@@ -1,135 +1,120 @@
 "use client";
 
 import { useState } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
-import Image from "next/image";
 
 const areas = [
-  "Chanhassen",
-  "Eden Prairie",
-  "Chaska",
-  "Shakopee",
-  "Victoria",
-  "Waconia",
-  "Excelsior",
-  "Minnetonka",
-  "Shorewood",
-  "Prior Lake",
-  "Savage",
-  "Carver",
+  { name: "Chanhassen", href: "/chanhassen-mulch-delivery" },
+  { name: "Eden Prairie", href: "/eden-prairie-mulch-delivery" },
+  { name: "Chaska", href: "/chaska-mulch-delivery" },
+  { name: "Shakopee", href: "/shakopee-mulch-delivery" },
+  { name: "Victoria", href: "/victoria-mulch-delivery" },
+  { name: "Waconia", href: "/waconia-mulch-delivery" },
+  { name: "Excelsior", href: "/excelsior-mulch-delivery" },
+  { name: "Minnetonka", href: "/minnetonka-mulch-delivery" },
+  { name: "Shorewood", href: "/shorewood-mulch-delivery" },
+  { name: "Prior Lake", href: "/prior-lake-mulch-delivery" },
+  { name: "Savage", href: "/savage-mulch-delivery" },
+  { name: "Carver", href: "/carver-mulch-delivery" },
 ];
 
 export default function MobileMenu() {
-  const [open, setOpen] = useState(false);
-  const [areasExpanded, setAreasExpanded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [areasOpen, setAreasOpen] = useState(false);
 
-  const close = () => {
-    setOpen(false);
-    setAreasExpanded(false);
+  const closeMenu = () => {
+    setIsOpen(false);
+    setAreasOpen(false);
   };
-
-  const chevron = (expanded: boolean) => (
-    <svg
-      className={`w-5 h-5 transition-transform ${expanded ? "rotate-180" : ""}`}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-    </svg>
-  );
-
-  const overlay = open ? (
-    <div className="fixed inset-0 z-[9999] bg-[#1a1208] overflow-y-auto md:hidden">
-      <div className="flex items-center justify-between px-4 h-16 border-b border-bark/30">
-        <Link href="/" onClick={close} className="flex items-center gap-2">
-          <Image src="/images/logos/logo-icon.webp" alt="Mulch Company" width={32} height={32} />
-          <span className="text-soil font-outfit font-semibold text-lg">Mulch Company</span>
-        </Link>
-        <button onClick={close} className="text-soil p-3" aria-label="Close menu">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <nav className="px-4 py-6 space-y-1">
-        <Link
-          href="/services/mulch-installation"
-          onClick={close}
-          className="block py-3 text-soil-dark hover:text-white transition-colors font-medium text-lg"
-        >
-          Mulch Installation
-        </Link>
-
-        <div>
-          <button
-            onClick={() => setAreasExpanded(!areasExpanded)}
-            className="flex items-center justify-between w-full py-3 text-soil-dark hover:text-white transition-colors font-medium text-lg"
-          >
-            Areas {chevron(areasExpanded)}
-          </button>
-          {areasExpanded && (
-            <div className="pl-4 pb-2 space-y-1">
-              {areas.map((area) => (
-                <Link
-                  key={area}
-                  href={`/${area.toLowerCase().replace(/\s+/g, "-")}-mulch-delivery`}
-                  onClick={close}
-                  className="block py-2.5 text-soil-dark hover:text-white transition-colors font-medium"
-                >
-                  {area}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <Link
-          href="/about"
-          onClick={close}
-          className="block py-3 text-soil-dark hover:text-white transition-colors font-medium text-lg"
-        >
-          About
-        </Link>
-
-        <a
-          href="tel:6125550100"
-          className="flex items-center gap-2 py-3 text-soil-dark hover:text-white transition-colors font-medium text-lg"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-          (612) 555-0100
-        </a>
-
-        <div className="pt-4">
-          <Link
-            href="/estimate"
-            onClick={close}
-            className="block text-center bg-forest hover:bg-forest-light text-white font-semibold px-5 py-3 rounded-lg transition-colors text-lg"
-          >
-            Get a Quote
-          </Link>
-        </div>
-      </nav>
-    </div>
-  ) : null;
 
   return (
     <div className="md:hidden">
       <button
-        onClick={() => setOpen(true)}
-        className="relative z-10 text-soil p-3 -mr-2"
-        aria-label="Open menu"
+        onClick={() => setIsOpen(!isOpen)}
+        className="text-soil p-2 hover:text-white transition-colors"
+        aria-label="Menu"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+        {isOpen ? (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        ) : (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        )}
       </button>
 
-      {typeof document !== "undefined" && createPortal(overlay, document.body)}
+      {isOpen && (
+        <div className="absolute right-4 top-full mt-2 w-64 bg-[#1a1208] border border-bark/30 rounded-lg shadow-xl max-h-[80vh] overflow-y-auto">
+          <div className="py-2">
+            <Link
+              href="/services/mulch-installation"
+              onClick={closeMenu}
+              className="block px-4 py-2 text-soil-dark hover:text-white hover:bg-bark/20 transition-colors font-medium"
+            >
+              Mulch Installation
+            </Link>
+
+            {/* Areas Accordion */}
+            <div>
+              <button
+                onClick={() => setAreasOpen(!areasOpen)}
+                className="w-full flex items-center justify-between px-4 py-2 text-soil-dark hover:text-white hover:bg-bark/20 transition-colors"
+              >
+                <span>Areas</span>
+                <svg
+                  className={`w-4 h-4 transition-transform ${areasOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {areasOpen && (
+                <div className="bg-bark/10 border-t border-b border-bark/20 grid grid-cols-2 gap-x-2">
+                  {areas.map((area) => (
+                    <Link
+                      key={area.href}
+                      href={area.href}
+                      onClick={closeMenu}
+                      className="block px-4 py-1.5 text-soil-dark hover:text-white text-sm transition-colors"
+                    >
+                      {area.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
+              href="/about"
+              onClick={closeMenu}
+              className="block px-4 py-2 text-soil-dark hover:text-white hover:bg-bark/20 transition-colors font-medium"
+            >
+              About
+            </Link>
+
+            <a
+              href="tel:6125550100"
+              className="block px-4 py-2 text-soil-dark hover:text-white hover:bg-bark/20 transition-colors font-medium"
+            >
+              (612) 555-0100
+            </a>
+
+            <div className="border-t border-bark/20 mt-2 pt-2 px-4 pb-2">
+              <Link
+                href="/estimate"
+                onClick={closeMenu}
+                className="block bg-forest hover:bg-forest-light text-white font-semibold px-4 py-2.5 rounded-lg text-center transition-colors"
+              >
+                Get a Quote
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
