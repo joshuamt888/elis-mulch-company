@@ -691,10 +691,10 @@ export default function PriceMulchForm() {
 
         {/* Estimate Link */}
         <div className={`text-center ${totalCost > 0 ? "mt-4" : "mt-6 pt-6 border-t border-sand/10"}`}>
-          {totalCost === 0 && <p className="text-bark-light text-sm mb-2">Not sure what you need?</p>}
+          {totalCost === 0 && <p className="text-bark-light text-base mb-2">Not sure what you need?</p>}
           <button
             onClick={() => setStep("estimate")}
-            className="text-bark hover:text-blossom font-semibold text-sm underline underline-offset-2 transition-colors"
+            className="text-bark hover:text-blossom font-semibold text-base underline underline-offset-2 transition-colors"
           >
             {totalCost > 0 ? "Need an in-person estimate instead?" : "Schedule a free in-person estimate"}
           </button>
