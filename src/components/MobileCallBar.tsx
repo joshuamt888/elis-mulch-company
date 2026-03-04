@@ -18,7 +18,7 @@ export default function MobileCallBar() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-[#1a1208] border-t border-bark/30 p-3">
+    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-stone-200 p-3">
       <a
         href="tel:9523144797"
         className="flex items-center justify-center gap-2 w-full bg-blossom hover:bg-blossom-dark text-white font-semibold py-3 rounded-xl text-lg transition-colors"
