@@ -6,11 +6,11 @@ import { createCheckoutLink, processEstimateBooking, searchAvailableSlots } from
 
 // ─── Mulch colors & pricing ────────────────────────────────────────────────
 const mulchColors = [
+  { label: "Brown Mulch", value: "brown", pricePerYard: 100 },
   { label: "Black Mulch", value: "black", pricePerYard: 100 },
-  { label: "Brown Mulch", value: "brown", pricePerYard: 160 },
   { label: "Red Mulch", value: "red", pricePerYard: 100 },
-  { label: "Cedar Mulch", value: "cedar", pricePerYard: 100 },
-  { label: "Hardwood Mulch", value: "hardwood", pricePerYard: 100 },
+  { label: "Western Red Cedar", value: "cedar", pricePerYard: 160 },
+  { label: "Playground Mulch", value: "playground", pricePerYard: 100 },
 ];
 
 const DELIVERY_FEE = 200;
