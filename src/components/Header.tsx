@@ -52,9 +52,9 @@ export default function Header() {
   );
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200 [transform:translateZ(0)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 py-2">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image src="/images/logos/logo-horizontal.png" alt="Mulch Company" width={220} height={70} className="h-12 w-auto" />
