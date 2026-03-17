@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Mulch Company MN",
   },
   description:
-    "Professional mulch installation near you in Chanhassen & the western Twin Cities. Cedar, hardwood & black mulch. Subscription plans available. Free in-person quotes.",
+    "Professional mulch installation near you in Chanhassen & the western Twin Cities. Cedar, hardwood & black mulch. Free in-person quotes. Locally owned.",
   keywords:
     "mulch near me, mulch installation near me, mulch company near me, mulch installation Chanhassen, cedar mulch near me, black mulch near me, hardwood mulch near me, mulch for sale near me, landscape mulch near me, mulch installation cost, mulch company MN",
   icons: {
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
     url: "https://mulchcompanymn.com",
     title: "Mulch Installation Chanhassen MN | Mulch Company MN",
     description:
-      "Subscription-based professional mulch installation in Chanhassen & western Twin Cities metro. Free in-person quotes. Locally owned.",
+      "Professional mulch installation in Chanhassen & the western Twin Cities metro. Free in-person quotes. Locally owned.",
     siteName: "Mulch Company MN",
   },
   twitter: {
     card: "summary",
     title: "Mulch Installation Chanhassen MN | Mulch Company MN",
     description:
-      "Subscription-based professional mulch installation in Chanhassen & western Twin Cities metro. Free in-person quotes. Locally owned.",
+      "Professional mulch installation in Chanhassen & the western Twin Cities metro. Free in-person quotes. Locally owned.",
   },
   alternates: {
     canonical: "https://mulchcompanymn.com",
@@ -71,7 +71,7 @@ export default function RootLayout({
         name: "Mulch Company MN",
         url: "https://mulchcompanymn.com",
         description:
-          "Subscription-based professional mulch installation serving Chanhassen and the western Twin Cities metro.",
+          "Professional mulch installation serving Chanhassen and the western Twin Cities metro.",
       },
       {
         "@type": "WebSite",
@@ -79,7 +79,7 @@ export default function RootLayout({
         url: "https://mulchcompanymn.com",
         name: "Mulch Company MN",
         description:
-          "Professional mulch installation with subscription plans in Chanhassen, MN.",
+          "Professional mulch installation in Chanhassen, MN.",
         publisher: {
           "@id": "https://mulchcompanymn.com/#organization",
         },
@@ -90,7 +90,7 @@ export default function RootLayout({
         "@id": "https://mulchcompanymn.com/#localbusiness",
         name: "Mulch Company MN",
         description:
-          "Subscription-based professional mulch installation serving Chanhassen and the western Twin Cities metro. Free in-person quotes, recurring service plans.",
+          "Professional mulch installation serving Chanhassen and the western Twin Cities metro. Free in-person quotes, expert crews, clean results.",
         url: "https://mulchcompanymn.com",
         telephone: "(952) 314-4797",
         slogan: "Your Yard, Our Mulch",
@@ -137,7 +137,7 @@ export default function RootLayout({
         ],
         knowsAbout: [
           "Mulch Installation",
-          "Subscription Mulch Service",
+          "Mulch Installation",
           "Landscape Maintenance",
           "Professional Mulching",
         ],
@@ -148,7 +148,7 @@ export default function RootLayout({
           itemListElement: [
             {
               "@type": "Offer",
-              itemOffered: { "@type": "Service", name: "Subscription Mulch Installation" },
+              itemOffered: { "@type": "Service", name: "Professional Mulch Installation" },
             },
           ],
         },

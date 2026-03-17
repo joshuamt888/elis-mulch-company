@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Eden Prairie, MN",
   description:
-    "Subscription-based professional mulch installation in Eden Prairie, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Professional mulch installation in Eden Prairie, Minnesota. Free in-person quotes. Locally owned and operated.",
   alternates: { canonical: "https://mulchcompanymn.com/eden-prairie-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -45,7 +45,7 @@ export default function EdenPrairieMulchDeliveryPage() {
             Professional Mulch Installation in Eden Prairie, MN
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/90">
-            Subscription-based mulch installation for Eden Prairie homes and businesses.
+            Professional mulch installation for Eden Prairie homes and businesses.
             Locally owned, free in-person quotes.
           </p>
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
@@ -66,9 +66,9 @@ export default function EdenPrairieMulchDeliveryPage() {
           </h2>
           <div className="max-w-3xl mx-auto">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Subscription-Based Mulch Installation</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Professional Mulch Installation</h3>
               <p className="text-bark mb-4">
-                Eden Prairie properties deserve top-tier landscaping. Our installation crews work across the city, handling everything from small garden beds to expansive commercial properties along Prairie Center Drive. Subscribe for recurring service and never worry about your mulch again.
+                Eden Prairie properties deserve top-tier landscaping. Our installation crews work across the city, handling everything from small garden beds to expansive commercial properties along Prairie Center Drive. Book professional installation and never worry about your mulch again.
               </p>
               <Link href="/services/mulch-installation" className="text-bark font-semibold hover:text-blossom transition-colors">
                 Learn More →
@@ -87,7 +87,7 @@ export default function EdenPrairieMulchDeliveryPage() {
             {[
               { title: "Based Right Here", desc: "We're based in Chanhassen, just minutes from Eden Prairie. Quick response times and local knowledge you can count on." },
               { title: "Free In-Person Quotes", desc: "We visit your property to assess your needs and provide accurate, honest pricing." },
-              { title: "Subscription Plans", desc: "Set it and forget it. Recurring mulch installation on a schedule that works for you." },
+              { title: "Expert Installation", desc: "Set it and forget it. Recurring mulch installation on a schedule that works for you." },
               { title: "Professional Installation", desc: "Expert crew, even coverage, clean edges. Save hours of work and let us handle it." },
             ].map((item) => (
               <div key={item.title} className="text-center">

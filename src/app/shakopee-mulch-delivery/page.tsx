@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Shakopee, MN",
   description:
-    "Subscription-based professional mulch installation in Shakopee, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Professional mulch installation in Shakopee, Minnesota. Free in-person quotes. Locally owned and operated.",
   alternates: { canonical: "https://mulchcompanymn.com/shakopee-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -39,7 +39,7 @@ export default function ShakopeeMulchDeliveryPage() {
             Professional Mulch Installation in Shakopee, MN
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/90">
-            Subscription-based mulch installation for Shakopee homes and businesses. Locally owned, free in-person quotes.
+            Professional mulch installation for Shakopee homes and businesses. Locally owned, free in-person quotes.
           </p>
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <Link href="/estimate" className="bg-blossom hover:bg-blossom-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors">Price Mulch</Link>
@@ -53,9 +53,9 @@ export default function ShakopeeMulchDeliveryPage() {
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">Mulch Installation in Shakopee</h2>
           <div className="max-w-3xl mx-auto">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Subscription-Based Mulch Installation</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Professional Mulch Installation</h3>
               <p className="text-bark mb-4">
-                From homes near Valleyfair to the residential areas along the Minnesota River bluffs, our crews install mulch with care and precision throughout Shakopee. Subscribe for recurring service and spend your Saturdays relaxing instead of hauling wheelbarrows.
+                From homes near Valleyfair to the residential areas along the Minnesota River bluffs, our crews install mulch with care and precision throughout Shakopee. Book professional installation and spend your Saturdays relaxing instead of hauling wheelbarrows.
               </p>
               <Link href="/services/mulch-installation" className="text-bark font-semibold hover:text-blossom transition-colors">Learn More →</Link>
             </div>
@@ -70,7 +70,7 @@ export default function ShakopeeMulchDeliveryPage() {
             {[
               { title: "Based Right Here", desc: "We're based in Chanhassen, just minutes from Shakopee via Highway 101. Fast service with no long waits." },
               { title: "Free In-Person Quotes", desc: "We visit your property and provide accurate pricing. No online guesswork." },
-              { title: "Subscription Plans", desc: "Recurring mulch installation on your schedule. No annual rebooking needed." },
+              { title: "Expert Installation", desc: "Professional installation completed on your schedule." },
               { title: "Professional Installation", desc: "Spend your Saturday at Valleyfair instead of hauling wheelbarrows. We handle it all." },
             ].map((item) => (
               <div key={item.title} className="text-center">

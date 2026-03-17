@@ -34,7 +34,7 @@ export default function Home() {
             Professional Mulch Installation in Chanhassen, MN
           </h1>
           <p className="text-white/90 text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
-            Subscription-based service for homes and businesses. Cedar, hardwood, black mulch and more.
+            Expert installation for homes and businesses. Cedar, hardwood, black mulch and more.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Link
@@ -51,7 +51,7 @@ export default function Home() {
             </a>
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-white/70 text-sm">
-            <span>Subscription Plans Available</span>
+            <span>Annual Installation Available</span>
             <span className="hidden sm:inline">&middot;</span>
             <span>Free In-Person Quotes</span>
             <span className="hidden sm:inline">&middot;</span>
@@ -69,7 +69,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { step: "1", title: "Schedule a Quote", desc: "We visit your property and assess your needs in person. No guesswork." },
-              { step: "2", title: "Choose Your Plan", desc: "Pick a subscription plan that fits your property and budget." },
+              { step: "2", title: "Schedule Your Install", desc: "We confirm your install week and set everything up. No guesswork." },
               { step: "3", title: "We Handle the Rest", desc: "Our crew installs fresh mulch on schedule. You never lift a finger." },
             ].map((item) => (
               <div key={item.step} className="relative bg-white shadow-md border border-soil-dark/50 rounded-xl p-8 pt-12 text-center">
@@ -92,7 +92,7 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { title: "Set It & Forget It", desc: "Recurring mulch installation on your schedule." },
+              { title: "Book Online Fast", desc: "Request your installation in minutes — we handle the rest." },
               { title: "In-Person Quotes", desc: "We visit your property for accurate pricing." },
               { title: "Pro Installation", desc: "Even coverage, clean edges, zero mess." },
               { title: "Locally Owned", desc: "Based in Chanhassen, serving the western metro." },

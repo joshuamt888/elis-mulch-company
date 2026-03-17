@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Chanhassen, MN",
   description:
-    "Subscription-based professional mulch installation in Chanhassen, Minnesota. Free in-person quotes. Locally owned and operated. Serving residential and commercial properties.",
+    "Professional mulch installation in Chanhassen, Minnesota. Free in-person quotes. Locally owned and operated. Serving residential and commercial properties.",
   alternates: { canonical: "https://mulchcompanymn.com/chanhassen-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -46,7 +46,7 @@ export default function ChannhassenMulchDeliveryPage() {
             Professional Mulch Installation in Chanhassen, MN
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/90">
-            Subscription-based mulch installation for Chanhassen homes and businesses.
+            Professional mulch installation for Chanhassen homes and businesses.
             Locally owned, free in-person quotes.
           </p>
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
@@ -74,9 +74,9 @@ export default function ChannhassenMulchDeliveryPage() {
           </h2>
           <div className="max-w-3xl mx-auto">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Subscription-Based Mulch Installation</h3>
+              <h3 className="text-xl font-bold text-sand mb-3">Professional Mulch Installation</h3>
               <p className="text-bark mb-4">
-                Chanhassen is our home base. We offer subscription plans for recurring mulch installation so your property always looks its best. We visit your property, provide an in-person quote, and set up a schedule that works for you. No heavy lifting, no hassle.
+                Chanhassen is our home base. We install mulch professionally across every property type — from established garden beds to new construction. We visit your property, provide a free in-person quote, and handle the full installation. No heavy lifting, no hassle.
               </p>
               <Link href="/services/mulch-installation" className="text-bark font-semibold hover:text-blossom transition-colors">
                 Learn More →
@@ -103,7 +103,7 @@ export default function ChannhassenMulchDeliveryPage() {
                 desc: "We visit your property to assess your needs and provide accurate, fair pricing. No guessing.",
               },
               {
-                title: "Subscription Plans",
+                title: "Expert Installation",
                 desc: "Set it and forget it. We install fresh mulch on a recurring schedule so your yard always looks great.",
               },
               {

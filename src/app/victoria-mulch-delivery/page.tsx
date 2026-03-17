@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Victoria, MN",
   description:
-    "Subscription-based professional mulch installation in Victoria, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Professional mulch installation in Victoria, Minnesota. Free in-person quotes. Locally owned and operated.",
   alternates: { canonical: "https://mulchcompanymn.com/victoria-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -36,7 +36,7 @@ export default function VictoriaMulchDeliveryPage() {
         <div className="absolute inset-0 bg-[#1a1208]/50" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
           <h1 className="text-white text-4xl md:text-5xl font-outfit font-bold max-w-4xl">Professional Mulch Installation in Victoria, MN</h1>
-          <p className="mt-4 max-w-2xl text-lg text-white/90">Subscription-based mulch installation for Victoria homes and businesses. Locally owned, free in-person quotes.</p>
+          <p className="mt-4 max-w-2xl text-lg text-white/90">Professional mulch installation for Victoria homes and businesses. Locally owned, free in-person quotes.</p>
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <Link href="/estimate" className="bg-blossom hover:bg-blossom-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors">Price Mulch</Link>
             <a href="tel:9523144797" className="border-2 border-white text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors">Call (952) 314-4797</a>
@@ -49,8 +49,8 @@ export default function VictoriaMulchDeliveryPage() {
           <h2 className="text-3xl md:text-4xl font-outfit font-bold text-sand text-center mb-12">Mulch Installation in Victoria</h2>
           <div className="max-w-3xl mx-auto">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-sand mb-3">Subscription-Based Mulch Installation</h3>
-              <p className="text-bark mb-4">Many Victoria homeowners are landscaping new construction or refreshing mature beds. Our installation crews bring expertise and efficiency to every Victoria project. Subscribe for recurring service and enjoy a beautiful yard without the effort.</p>
+              <h3 className="text-xl font-bold text-sand mb-3">Professional Mulch Installation</h3>
+              <p className="text-bark mb-4">Many Victoria homeowners are landscaping new construction or refreshing mature beds. Our installation crews bring expertise and efficiency to every Victoria project. Book professional installation and enjoy a beautiful yard without the effort.</p>
               <Link href="/services/mulch-installation" className="text-bark font-semibold hover:text-blossom transition-colors">Learn More →</Link>
             </div>
           </div>
@@ -64,7 +64,7 @@ export default function VictoriaMulchDeliveryPage() {
             {[
               { title: "Based Right Here", desc: "We're based in Chanhassen, right next door to Victoria. Your neighbor is your mulch company." },
               { title: "Free In-Person Quotes", desc: "We visit your Victoria property and provide accurate, fair pricing based on your actual needs." },
-              { title: "Subscription Plans", desc: "Recurring mulch installation on your schedule. Set it and forget it." },
+              { title: "Expert Installation", desc: "Recurring mulch installation on your schedule. Set it and forget it." },
               { title: "Professional Installation", desc: "Save hours of labor and enjoy Victoria's small-town charm instead." },
             ].map((item) => (
               <div key={item.title} className="text-center">

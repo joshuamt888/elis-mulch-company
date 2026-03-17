@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "About Mulch Company MN | Chanhassen MN",
   description:
-    "Mulch Company MN is a locally owned mulch installation company serving Chanhassen and the western Twin Cities metro. Subscription-based service for hassle-free yards.",
+    "Mulch Company MN is a locally owned mulch installation company serving Chanhassen and the western Twin Cities metro. Expert crews, clean results, hassle-free yards.",
   alternates: { canonical: "/about" },
 };
 
@@ -80,8 +80,7 @@ export default function AboutPage() {
               Mulch Company was founded by two brothers — Eli and
               Owen — right here in Chanhassen, Minnesota. What started as
               helping neighbors with their yards turned into a full-service
-              mulch installation company with subscription plans serving the
-              entire western Twin Cities metro.
+              mulch installation company serving the entire western Twin Cities metro.
             </p>
             <p className="text-bark leading-relaxed text-lg mt-4">
               We&apos;re not a big box store. We&apos;re not a franchise.

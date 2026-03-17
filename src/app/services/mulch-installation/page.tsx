@@ -5,9 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Mulch Installation Near Me | Chanhassen MN | Subscription Plans",
+  title: "Professional Mulch Installation Near Me | Chanhassen MN",
   description:
-    "Professional mulch installation near you. Cedar, hardwood, black & playground mulch installed by experts. Subscription plans available. Free in-person quotes in Chanhassen & western Twin Cities.",
+    "Professional mulch installation near you. Cedar, hardwood, black & playground mulch installed by expert crews. Free in-person quotes in Chanhassen & western Twin Cities.",
   alternates: {
     canonical: "/services/mulch-installation",
   },
@@ -87,9 +87,9 @@ const faqs = [
       "Not necessarily. As long as we have access to the areas that need mulching and clear instructions, we can complete the work while you're away. Many of our customers schedule installation during work hours and come home to a beautifully finished landscape.",
   },
   {
-    question: "How does the subscription work?",
+    question: "How do I get started?",
     answer:
-      "After your initial in-person quote, you choose a subscription plan based on your property size and needs. We schedule recurring mulch installations so your yard stays fresh without you having to remember to rebook each year. You get priority scheduling, locked-in pricing, and zero hassle.",
+      "Just fill out our contact form or give us a call. We'll schedule a free in-person visit to measure your beds and give you an exact quote. Once you're ready, we'll book your install and take it from there.",
   },
 ];
 
@@ -113,19 +113,19 @@ export default function MulchInstallationPage() {
             Professional Mulch Installation in Minnesota
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/90 sm:text-xl">
-            Subscription-based mulch installation — we handle everything so you never have to think about it.
+            Expert installation, clean results — we handle everything so you never have to think about it.
           </p>
         </div>
       </section>
 
-      {/* Subscription Intro */}
+      {/* Intro */}
       <section className="bg-white px-4 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-outfit text-3xl font-bold text-sand sm:text-4xl text-center">
-            Mulch Installation, On Autopilot
+            Professional Installation, Done Right
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-bark">
-            We offer subscription-based mulch installation plans designed to keep your yard looking its best year-round. After an in-person quote, we set up a recurring schedule tailored to your property. No annual rebooking, no hassle.
+            We handle everything — in-person quote, expert installation, and clean-up. Cedar, hardwood, black, red, and playground mulch available. One call and your yard is done.
           </p>
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             <div className="bg-white shadow-sm border border-soil-dark/50 rounded-xl overflow-hidden">
@@ -168,32 +168,32 @@ export default function MulchInstallationPage() {
         </div>
       </section>
 
-      {/* Subscription Plans */}
+      {/* Why Choose Us */}
       <section className="bg-blossom px-4 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="font-outfit text-3xl font-bold text-white sm:text-4xl">
-            Subscription Plans
+            Why Choose Mulch Company MN
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/90">
-            Our plans are based on your property size and mulch needs, determined by a free in-person quote. We don&apos;t list prices online because every property is different — and you deserve an accurate number, not a guess.
+            We don&apos;t list prices online because every property is different — and you deserve an accurate number, not a guess. Here&apos;s what you get when you work with us.
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                title: "Consistent Schedule",
-                desc: "Your mulch installation happens on a set schedule. No reminders needed.",
+                title: "Free In-Person Quote",
+                desc: "We visit your property, measure your beds, and give you an exact price on the spot.",
               },
               {
-                title: "Priority Service",
-                desc: "Subscribers get scheduled first during peak season. No waiting in line.",
+                title: "Expert Crews",
+                desc: "Trained installers who know proper depth, clean edges, and how to make it look great.",
               },
               {
-                title: "Locked-In Pricing",
-                desc: "Your rate stays the same for the duration of your plan. No surprise increases.",
+                title: "Fair Pricing",
+                desc: "Honest quotes based on your actual property. No hidden fees, no surprises.",
               },
               {
-                title: "Zero Hassle",
-                desc: "No annual rebooking, no phone calls. We just show up and make your yard look great.",
+                title: "Zero Mess",
+                desc: "We blow off all walkways and driveways when we&apos;re done. Your yard looks spotless.",
               },
             ].map((item) => (
               <div key={item.title} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-left">
@@ -299,7 +299,7 @@ export default function MulchInstallationPage() {
             Let Us Handle the Hard Part
           </h2>
           <p className="mt-4 text-lg text-white/90">
-            Get a free in-person quote for subscription-based mulch installation. We&apos;ll measure your beds, recommend the right approach, and set up a plan that keeps your yard looking great.
+            Get a free in-person quote. We&apos;ll measure your beds, recommend the right mulch, and handle the full installation. No heavy lifting, no mess.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
