@@ -59,8 +59,8 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-sand mb-4">Payments &amp; Pricing</h2>
               <p>
-                All payments are processed securely through Square. Prices displayed on our website include mulch
-                materials and a flat delivery fee. Payment is required at the time of booking.
+                We invoice manually after confirming your installation details. Prices include mulch
+                materials and a flat delivery fee. Payment is due upon completion of service unless otherwise agreed.
               </p>
               <p className="mt-3">
                 Pricing is subject to change without notice, but any price confirmed at the time of your purchase

@@ -6,7 +6,7 @@ import PriceMulchForm from "@/components/estimate/PriceMulchForm";
 export const metadata: Metadata = {
   title: "Price Mulch | Mulch Company MN",
   description:
-    "Price your mulch installation instantly. Choose your color and yards, see your total, and schedule your install online. Serving Chanhassen and the western Twin Cities metro.",
+    "Get a free in-person mulch estimate, request installation, or ask a question. Mulch Company MN serves Chanhassen and the western Twin Cities metro.",
   alternates: { canonical: "/estimate" },
 };
 
@@ -21,7 +21,7 @@ export default function EstimatePage() {
               Price Mulch
             </h1>
             <p className="text-bark text-lg max-w-md mx-auto">
-              Pick your color, enter your yards, and see your total instantly.
+              Tell us what you need and we'll take it from there.
             </p>
           </div>
           <PriceMulchForm />

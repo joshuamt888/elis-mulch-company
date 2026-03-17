@@ -15,7 +15,7 @@ export default function Footer() {
               <Image src="/images/logos/logo-horizontal.png" alt="Mulch Company" width={220} height={70} className="w-auto h-14" />
             </div>
             <p className="text-[#3d2b1f] text-sm leading-relaxed">
-              Subscription-based mulch installation serving Chanhassen and the western Twin Cities metro. Professional service, hassle-free yards.
+              Professional mulch installation serving Chanhassen and the western Twin Cities metro. Expert crews, clean work, hassle-free yards.
             </p>
           </div>
 

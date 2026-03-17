@@ -1,99 +1,23 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
-import { createCheckoutLink, processEstimateBooking, searchAvailableSlots } from "@/app/actions/square";
 
-// ─── Mulch colors & pricing ────────────────────────────────────────────────
+// ─── Mulch colors ─────────────────────────────────────────────────────────
 const mulchColors = [
-  { label: "Brown Mulch", value: "brown", pricePerYard: 100 },
-  { label: "Black Mulch", value: "black", pricePerYard: 100 },
-  { label: "Red Mulch", value: "red", pricePerYard: 100 },
-  { label: "Western Red Cedar", value: "cedar", pricePerYard: 160 },
-  { label: "Playground Mulch", value: "playground", pricePerYard: 100 },
+  { label: "Brown Mulch", value: "Brown Mulch" },
+  { label: "Black Mulch", value: "Black Mulch" },
+  { label: "Red Mulch", value: "Red Mulch" },
+  { label: "Western Red Cedar", value: "Western Red Cedar" },
+  { label: "Playground Mulch", value: "Playground Mulch" },
 ];
-
-const DELIVERY_FEE = 200;
 
 const depthOptions = [
   { label: "2 inches — standard top-up", value: 2 },
   { label: "4 inches — heavy coverage", value: 4 },
 ];
 
-// ─── Generate weeks starting from beginning of April ───────────────────────
-function getAvailableWeeks() {
-  const weeks: { label: string; value: string }[] = [];
-  const now = new Date();
-  // Start from April of current year; if past June, use next year's April
-  const seasonYear = now.getMonth() >= 5 ? now.getFullYear() + 1 : now.getFullYear();
-  const april1 = new Date(seasonYear, 3, 1); // April 1st (month 3 = April)
-  // Find the first Monday on or after April 1
-  const start = new Date(april1);
-  const dayOfWeek = start.getDay(); // 0=Sun, 1=Mon
-  if (dayOfWeek !== 1) {
-    const daysToMonday = dayOfWeek === 0 ? 1 : 8 - dayOfWeek;
-    start.setDate(start.getDate() + daysToMonday);
-  }
-  for (let i = 0; i < 10; i++) {
-    const weekStart = new Date(start);
-    weekStart.setDate(start.getDate() + i * 7);
-    const weekEnd = new Date(weekStart);
-    weekEnd.setDate(weekStart.getDate() + 4);
-    const fmt = (d: Date) =>
-      d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-    weeks.push({
-      label: `Week of ${fmt(weekStart)} – ${fmt(weekEnd)}`,
-      value: weekStart.toISOString(),
-    });
-  }
-  return weeks;
-}
-
-// ─── Generate 30-min time slots ────────────────────────────────────────────
-function getTimeSlotsForDate(dateStr: string) {
-  const slots: { label: string; value: string }[] = [];
-  const date = new Date(dateStr);
-  for (let hour = 8; hour < 18; hour++) {
-    for (const min of [0, 30]) {
-      if (hour === 17 && min === 30) continue;
-      const d = new Date(date);
-      d.setHours(hour, min, 0, 0);
-      if (d.getTime() - Date.now() < 24 * 60 * 60 * 1000) continue;
-      slots.push({
-        label: d.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true,
-        }),
-        value: d.toISOString(),
-      });
-    }
-  }
-  return slots;
-}
-
-// ─── Get available dates (next 14 weekdays) ────────────────────────────────
-function getAvailableDates() {
-  const dates: { label: string; value: string }[] = [];
-  const d = new Date();
-  d.setDate(d.getDate() + 1);
-  while (dates.length < 14) {
-    if (d.getDay() !== 0 && d.getDay() !== 6) {
-      dates.push({
-        label: d.toLocaleDateString("en-US", {
-          weekday: "short",
-          month: "short",
-          day: "numeric",
-        }),
-        value: d.toISOString().split("T")[0],
-      });
-    }
-    d.setDate(d.getDate() + 1);
-  }
-  return dates;
-}
-
-// ─── Phone formatting ──────────────────────────────────────────────────────
+// ─── Phone formatter ──────────────────────────────────────────────────────
 function formatPhone(raw: string) {
   const digits = raw.replace(/\D/g, "").slice(0, 10);
   if (digits.length <= 3) return digits;
@@ -101,605 +25,476 @@ function formatPhone(raw: string) {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 }
 
-// ─── Validation ────────────────────────────────────────────────────────────
-function validateField(field: string, value: string): string {
-  switch (field) {
-    case "firstName":
-    case "lastName":
-      return value.trim().length < 2 ? "Required" : "";
-    case "email":
-      return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
-        ? "Enter a valid email"
-        : "";
-    case "phone":
-      return value.replace(/\D/g, "").length !== 10
-        ? "Enter a 10-digit phone number"
-        : "";
-    case "street":
-      return value.trim().length < 3 ? "Enter your street address" : "";
-    case "city":
-      return value.trim().length < 2 ? "Required" : "";
-    case "zip":
-      return !/^\d{5}$/.test(value.trim()) ? "Enter a 5-digit zip" : "";
-    default:
-      return "";
-  }
+// ─── Shared field styles ──────────────────────────────────────────────────
+const inputBase =
+  "w-full px-4 py-3 rounded-xl border border-sand/15 bg-[#faf7f2] text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all";
+const inputError =
+  "w-full px-4 py-3 rounded-xl border border-red-300 bg-red-50/50 text-sand focus:border-red-400 focus:ring-2 focus:ring-red-200 transition-all";
+
+const selectArrow = {
+  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%231e293b' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
+  backgroundRepeat: "no-repeat" as const,
+  backgroundPosition: "right 16px center",
+};
+
+// ─── Yard Calculator ──────────────────────────────────────────────────────
+function YardCalculator({ onFill }: { onFill: (yards: string) => void }) {
+  const [sqft, setSqft] = useState("");
+  const [depth, setDepth] = useState(2);
+  const [result, setResult] = useState<number | null>(null);
+
+  const calculate = () => {
+    const area = parseFloat(sqft);
+    if (!area || area <= 0) return;
+    const yards = Math.round((area * (depth / 12)) / 27);
+    setResult(yards);
+    onFill(String(yards));
+  };
+
+  return (
+    <div className="mt-3 bg-[#faf7f2] border border-sand/10 rounded-xl p-4 space-y-3">
+      <p className="text-bark text-xs font-medium">Enter your bed area to calculate cubic yards:</p>
+      <div>
+        <label className="block text-sand text-xs font-semibold mb-1">Area (square feet)</label>
+        <input
+          type="number"
+          inputMode="decimal"
+          placeholder="e.g. 500"
+          value={sqft}
+          onChange={(e) => setSqft(e.target.value)}
+          className="w-full px-3 py-2.5 rounded-lg border border-sand/15 bg-white text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all"
+        />
+      </div>
+      <div>
+        <label className="block text-sand text-xs font-semibold mb-1">Depth</label>
+        <select
+          value={depth}
+          onChange={(e) => setDepth(Number(e.target.value))}
+          className="w-full px-3 py-2.5 rounded-lg border border-sand/15 bg-white text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all appearance-none"
+          style={{ ...selectArrow, backgroundPosition: "right 12px center" }}
+        >
+          {depthOptions.map((opt) => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      </div>
+      <button
+        onClick={calculate}
+        className="w-full bg-blossom/10 hover:bg-blossom/20 text-bark font-semibold py-2.5 rounded-lg transition-colors text-sm"
+      >
+        Calculate &amp; Fill In
+      </button>
+      {result !== null && (
+        <p className="text-bark text-xs text-center">
+          ≈ <strong className="text-sand">{result} cubic yards</strong> — filled in above
+        </p>
+      )}
+    </div>
+  );
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
-type Step = "pricing" | "estimate" | "confirmation";
+// ─── Success Screen ───────────────────────────────────────────────────────
+function SuccessScreen({ onReset }: { onReset: () => void }) {
+  return (
+    <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-8 sm:p-12 text-center">
+      <div className="inline-flex items-center justify-center w-16 h-16 bg-blossom/10 rounded-full mb-6">
+        <svg className="w-8 h-8 text-blossom" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h2 className="text-2xl font-outfit font-bold text-sand mb-3">Message Sent!</h2>
+      <p className="text-bark mb-6 leading-relaxed">
+        We got your info and will be in touch soon. Expect a call or text from us.
+      </p>
+      <button onClick={onReset} className="text-bark hover:text-blossom text-sm font-medium underline underline-offset-2 transition-colors">
+        Submit another request
+      </button>
+    </div>
+  );
+}
 
-export default function PriceMulchForm() {
-  const [step, setStep] = useState<Step>("pricing");
-
-  // Pricing + week
-  const [color, setColor] = useState("");
-  const [yards, setYards] = useState("");
-  const [showCalculator, setShowCalculator] = useState(false);
-  const [calcSqft, setCalcSqft] = useState("");
-  const [calcDepth, setCalcDepth] = useState(2);
-  const [selectedWeek, setSelectedWeek] = useState("");
-  const [notes, setNotes] = useState("");
-
-  // Contact info (shared — Plan A & Plan B)
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+// ─── Estimate Form (Button 1) — Free in-person estimate ───────────────────
+function EstimateForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => void }) {
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("MN");
-  const [zip, setZip] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-
-  // Terms + UI
-  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [email, setEmail] = useState("");
+  const [yards, setYards] = useState("");
+  const [color, setColor] = useState("");
+  const [notes, setNotes] = useState("");
+  const [showCalc, setShowCalc] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [confirmationData, setConfirmationData] = useState<{
-    type: "estimate";
-    message: string;
-  } | null>(null);
 
-  // ─── Derived ───────────────────────────────────────────────────────────
-  const selectedColor = mulchColors.find((c) => c.value === color);
-  const yardsNum = parseInt(yards) || 0;
-  const mulchCost = selectedColor ? yardsNum * selectedColor.pricePerYard : 0;
-  const totalCost = yardsNum > 0 && selectedColor ? DELIVERY_FEE + mulchCost : 0;
+  const blur = useCallback((f: string) => setTouched((p) => ({ ...p, [f]: true })), []);
 
-  const availableWeeks = useMemo(() => getAvailableWeeks(), []);
-  const availableDates = useMemo(() => getAvailableDates(), []);
+  const nameErr = touched.name && name.trim().length < 2 ? "Required" : "";
+  const phoneErr = touched.phone && phone.replace(/\D/g, "").length !== 10 ? "Enter a 10-digit phone" : "";
+  const emailErr = touched.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "Enter a valid email" : "";
+  const valid = name.trim().length >= 2 && phone.replace(/\D/g, "").length === 10 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  // Fetch real availability from Square (prevents double-booking)
-  const [timeSlots, setTimeSlots] = useState<{ label: string; value: string }[]>([]);
-  const [loadingSlots, setLoadingSlots] = useState(false);
-
-  useEffect(() => {
-    if (!selectedDate) {
-      setTimeSlots([]);
-      return;
-    }
-
-    setLoadingSlots(true);
-    setSelectedTime("");
-
-    const startAt = new Date(selectedDate + "T08:00:00");
-    const endAt = new Date(selectedDate + "T18:00:00");
-
-    searchAvailableSlots(startAt.toISOString(), endAt.toISOString())
-      .then((result) => {
-        if (result.success && result.availabilities.length > 0) {
-          const slots = result.availabilities
-            .filter((a) => typeof a.startAt === "string")
-            .map((a) => {
-              const iso = a.startAt as string;
-              const d = new Date(iso);
-              return {
-                label: d.toLocaleTimeString("en-US", {
-                  hour: "numeric",
-                  minute: "2-digit",
-                  hour12: true,
-                }),
-                value: iso,
-              };
-            });
-          setTimeSlots(slots);
-        } else {
-          // Fallback to client-side slots (sandbox / API down)
-          setTimeSlots(getTimeSlotsForDate(selectedDate));
-        }
-      })
-      .catch(() => {
-        // Fallback to client-side slots
-        setTimeSlots(getTimeSlotsForDate(selectedDate));
-      })
-      .finally(() => setLoadingSlots(false));
-  }, [selectedDate]);
-
-  // ─── Validation (Plan B) ──────────────────────────────────────────────
-  const fieldErrors = useMemo(
-    () => ({
-      firstName: validateField("firstName", firstName),
-      lastName: validateField("lastName", lastName),
-      email: validateField("email", email),
-      phone: validateField("phone", phone),
-      street: validateField("street", street),
-      city: validateField("city", city),
-      zip: validateField("zip", zip),
-    }),
-    [firstName, lastName, email, phone, street, city, zip]
-  );
-
-  const contactValid =
-    !fieldErrors.firstName &&
-    !fieldErrors.lastName &&
-    !fieldErrors.email &&
-    !fieldErrors.phone &&
-    !fieldErrors.street &&
-    !fieldErrors.city &&
-    !fieldErrors.zip;
-
-  const handleBlur = useCallback((field: string) => {
-    setTouched((prev) => ({ ...prev, [field]: true }));
-  }, []);
-
-  const showError = useCallback(
-    (field: string) =>
-      touched[field] && fieldErrors[field as keyof typeof fieldErrors],
-    [touched, fieldErrors]
-  );
-
-  const inputClass = useCallback(
-    (field: string) =>
-      `w-full px-4 py-3 rounded-xl border ${
-        showError(field)
-          ? "border-red-300 bg-red-50/50 focus:border-red-400 focus:ring-2 focus:ring-red-200"
-          : "border-sand/15 bg-[#faf7f2] focus:border-blossom focus:ring-2 focus:ring-blossom/20"
-      } text-sand transition-all`,
-    [showError]
-  );
-
-  // ─── Yard calculator ──────────────────────────────────────────────────
-  const runCalculator = () => {
-    const area = parseFloat(calcSqft);
-    if (!area || area <= 0) return;
-    setYards(String(Math.round((area * (calcDepth / 12)) / 27)));
-  };
-
-  // ─── Plan A: Redirect to Square ───────────────────────────────────────
-  const handleCheckout = async () => {
-    if (!selectedWeek || !selectedColor || totalCost <= 0 || !contactValid) return;
-    setLoading(true);
-    setError("");
-
-    try {
-      const weekLabel =
-        availableWeeks.find((w) => w.value === selectedWeek)?.label ||
-        selectedWeek;
-
-      const result = await createCheckoutLink(
-        { firstName, lastName, email, phone, street, city, state, zip },
-        {
-          color: selectedColor.label,
-          yards: yardsNum,
-          pricePerYard: selectedColor.pricePerYard,
-          deliveryFee: DELIVERY_FEE,
-          selectedWeek: weekLabel,
-          notes,
-        },
-        window.location.origin
-      );
-
-      if (result.success && result.checkoutUrl) {
-        localStorage.setItem(
-          "mulchOrder",
-          JSON.stringify({
-            color: selectedColor.label,
-            yards: yardsNum,
-            weekStart: selectedWeek,
-            weekLabel,
-            totalCost,
-          })
-        );
-        window.location.href = result.checkoutUrl;
-      } else {
-        setError(result.error || "Something went wrong. Please try again.");
-        setLoading(false);
-      }
-    } catch {
-      setError("Failed to create checkout. Please try again.");
-      setLoading(false);
-    }
-  };
-
-  // ─── Plan B: Book Estimate ────────────────────────────────────────────
-  const handleEstimateBooking = async () => {
-    if (!selectedTime || !contactValid) return;
+  const submit = async () => {
+    setTouched({ name: true, phone: true, email: true });
+    if (!valid) return;
     setLoading(true);
     setError("");
     try {
-      const result = await processEstimateBooking(
-        { firstName, lastName, email, phone, street, city, state, zip },
-        selectedTime
-      );
-      if (result.success) {
-        const slotDate = new Date(selectedTime);
-        setStep("confirmation");
-        setConfirmationData({
-          type: "estimate",
-          message: `Your free estimate is booked for ${slotDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })} at ${slotDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })}. We'll see you at ${street}, ${city}.`,
-        });
-      } else {
-        setError(result.error || "Something went wrong. Please try again.");
-      }
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "estimate", name, phone, email, yards, color, notes }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      onSuccess();
     } catch {
-      setError("Failed to book. Please try again.");
+      setError("Something went wrong. Please call us at (952) 314-4797.");
     } finally {
       setLoading(false);
     }
   };
 
-  // ─── Confirmation (Plan B only) ───────────────────────────────────────
-  if (step === "confirmation" && confirmationData) {
-    return (
-      <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-8 sm:p-12 text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-blossom/10 rounded-full mb-6">
-          <svg className="w-8 h-8 text-bark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h2 className="text-2xl font-outfit font-bold text-sand mb-3">Estimate Booked!</h2>
-        <p className="text-bark mb-6 leading-relaxed">{confirmationData.message}</p>
-        <p className="text-bark-light text-sm">
-          A confirmation will be sent to <strong className="text-sand">{email}</strong>
-        </p>
-      </div>
-    );
-  }
-
-  // ─── Plan B: Estimate Booking ─────────────────────────────────────────
-  if (step === "estimate") {
-    return (
-      <div className="space-y-6">
-        <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-6 sm:p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <button onClick={() => setStep("pricing")} className="text-bark-light hover:text-sand transition-colors">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <h2 className="text-xl font-outfit font-bold text-sand">Schedule a Free Estimate</h2>
-          </div>
-
-          <p className="text-bark text-sm mb-6">
-            We&apos;ll visit your property, measure everything, and give you an exact price on the spot. No obligation.
-          </p>
-
-          {/* Contact Fields */}
-          <div className="space-y-4 mb-6">
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-sand font-semibold text-sm mb-1">First name</label>
-                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} onBlur={() => handleBlur("firstName")} className={inputClass("firstName")} placeholder="First" />
-                {showError("firstName") && <p className="text-red-500 text-xs mt-1">{fieldErrors.firstName}</p>}
-              </div>
-              <div>
-                <label className="block text-sand font-semibold text-sm mb-1">Last name</label>
-                <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} onBlur={() => handleBlur("lastName")} className={inputClass("lastName")} placeholder="Last" />
-                {showError("lastName") && <p className="text-red-500 text-xs mt-1">{fieldErrors.lastName}</p>}
-              </div>
-            </div>
-            <div>
-              <label className="block text-sand font-semibold text-sm mb-1">Email</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => handleBlur("email")} className={inputClass("email")} placeholder="you@email.com" />
-              {showError("email") && <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>}
-            </div>
-            <div>
-              <label className="block text-sand font-semibold text-sm mb-1">Phone</label>
-              <input type="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} onBlur={() => handleBlur("phone")} className={inputClass("phone")} placeholder="(952) 555-0123" />
-              {showError("phone") && <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>}
-            </div>
-            <div>
-              <label className="block text-sand font-semibold text-sm mb-1">Street address</label>
-              <input type="text" value={street} onChange={(e) => setStreet(e.target.value)} onBlur={() => handleBlur("street")} className={inputClass("street")} placeholder="123 Main St" />
-              {showError("street") && <p className="text-red-500 text-xs mt-1">{fieldErrors.street}</p>}
-            </div>
-            <div className="grid grid-cols-3 gap-3">
-              <div className="col-span-1">
-                <label className="block text-sand font-semibold text-sm mb-1">City</label>
-                <input type="text" value={city} onChange={(e) => setCity(e.target.value)} onBlur={() => handleBlur("city")} className={inputClass("city")} placeholder="Chanhassen" />
-                {showError("city") && <p className="text-red-500 text-xs mt-1">{fieldErrors.city}</p>}
-              </div>
-              <div>
-                <label className="block text-sand font-semibold text-sm mb-1">State</label>
-                <input type="text" value={state} onChange={(e) => setState(e.target.value.toUpperCase().slice(0, 2))} className={inputClass("state")} placeholder="MN" />
-              </div>
-              <div>
-                <label className="block text-sand font-semibold text-sm mb-1">Zip</label>
-                <input type="text" inputMode="numeric" value={zip} onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))} onBlur={() => handleBlur("zip")} className={inputClass("zip")} placeholder="55317" />
-                {showError("zip") && <p className="text-red-500 text-xs mt-1">{fieldErrors.zip}</p>}
-              </div>
-            </div>
-          </div>
-
-          {/* Date Picker */}
-          <div className="mb-4">
-            <label className="block text-sand font-semibold text-sm mb-2">Pick a date</label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {availableDates.map((d) => (
-                <button key={d.value} onClick={() => { setSelectedDate(d.value); setSelectedTime(""); }} className={`py-2.5 px-3 rounded-xl border text-sm font-medium transition-all ${selectedDate === d.value ? "bg-blossom text-white border-blossom" : "bg-[#faf7f2] text-sand border-sand/15 hover:border-blossom/30"}`}>
-                  {d.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {selectedDate && (
-            <div className="mb-6">
-              <label className="block text-sand font-semibold text-sm mb-2">Pick a time</label>
-              {loadingSlots ? (
-                <div className="flex items-center gap-2 text-bark-light text-sm py-4">
-                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                  </svg>
-                  Loading available times...
-                </div>
-              ) : timeSlots.length > 0 ? (
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                  {timeSlots.map((t) => (
-                    <button key={t.value} onClick={() => setSelectedTime(t.value)} className={`py-2.5 px-3 rounded-xl border text-sm font-medium transition-all ${selectedTime === t.value ? "bg-blossom text-white border-blossom" : "bg-[#faf7f2] text-sand border-sand/15 hover:border-blossom/30"}`}>
-                      {t.label}
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-bark-light text-sm">No available slots for this date. Try another day.</p>
-              )}
-            </div>
-          )}
-
-          {/* Terms Checkbox */}
-          {contactValid && selectedTime && (
-            <label className="flex items-start gap-3 mb-4 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={agreedToTerms}
-                onChange={(e) => setAgreedToTerms(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded border-sand/30 text-bark focus:ring-blossom/30"
-              />
-              <span className="text-bark text-sm leading-snug">
-                I agree to the{" "}
-                <Link href="/terms" target="_blank" className="text-bark hover:underline font-medium">Terms of Service</Link>
-                {" "}and{" "}
-                <Link href="/privacy" target="_blank" className="text-bark hover:underline font-medium">Privacy Policy</Link>
-              </span>
-            </label>
-          )}
-
-          {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mb-4 text-sm">{error}</div>}
-
-          <button onClick={handleEstimateBooking} disabled={!contactValid || !selectedTime || !agreedToTerms || loading} className="w-full bg-blossom hover:bg-blossom-dark disabled:bg-sand/20 disabled:text-bark-light text-white font-bold py-4 rounded-xl transition-colors text-lg">
-            {loading ? "Booking..." : "Book Free Estimate"}
-          </button>
-          {!contactValid && <p className="text-bark-light text-xs text-center mt-2">Please fill in all fields correctly above.</p>}
-        </div>
-      </div>
-    );
-  }
-
-  // ─── Pricing Step (one-screen Plan A + estimate link) ─────────────────
   return (
-    <div className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-6 sm:p-8">
-        <div className="space-y-6">
-          {/* Color */}
-          <div>
-            <label htmlFor="color" className="block text-sand font-semibold mb-1.5 text-sm">What color mulch?</label>
-            <select
-              id="color"
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
-              className="w-full px-4 py-3.5 rounded-xl border border-sand/15 bg-[#faf7f2] text-sand text-lg focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all appearance-none"
-              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%231e293b' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 16px center" }}
-            >
-              <option value="">Select a color...</option>
-              {mulchColors.map((c) => (
-                <option key={c.value} value={c.value}>{c.label} — ${c.pricePerYard}/yd</option>
-              ))}
-            </select>
-          </div>
+    <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-6 sm:p-8">
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={onBack} className="text-bark-light hover:text-sand transition-colors">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h2 className="text-xl font-outfit font-bold text-sand">Free In-Person Estimate</h2>
+      </div>
+      <p className="text-bark text-sm mb-6">
+        We&apos;ll come out, measure your beds, and give you an exact price — no obligation.
+      </p>
 
-          {/* Yards */}
-          <div>
-            <label htmlFor="yards" className="block text-sand font-semibold mb-1.5 text-sm">How many yards?</label>
-            <div className="relative">
-              <input id="yards" type="number" inputMode="numeric" placeholder="0" value={yards} onChange={(e) => setYards(e.target.value)} className="w-full px-4 py-3.5 pr-16 rounded-xl border border-sand/15 bg-[#faf7f2] text-sand text-lg focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all" />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-bark-light text-sm font-medium">yards</span>
-            </div>
-            <button onClick={() => setShowCalculator(!showCalculator)} className="mt-3 w-full border-2 border-blossom text-bark hover:bg-blossom hover:text-white py-3 px-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2 transition-colors">
-              <svg className={`w-5 h-5 transition-transform ${showCalculator ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-              Don&apos;t know your yards? Use our calculator
-            </button>
-            {showCalculator && (
-              <div className="mt-3 bg-[#faf7f2] border border-sand/10 rounded-xl p-4 space-y-3">
-                <div>
-                  <label className="block text-sand text-xs font-semibold mb-1">Area (square feet)</label>
-                  <input type="number" inputMode="decimal" placeholder="e.g. 500" value={calcSqft} onChange={(e) => setCalcSqft(e.target.value)} className="w-full px-3 py-2.5 rounded-lg border border-sand/15 bg-white text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all" />
-                </div>
-                <div>
-                  <label className="block text-sand text-xs font-semibold mb-1">Depth</label>
-                  <select value={calcDepth} onChange={(e) => setCalcDepth(Number(e.target.value))} className="w-full px-3 py-2.5 rounded-lg border border-sand/15 bg-white text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all appearance-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%231e293b' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 12px center" }}>
-                    {depthOptions.map((opt) => (
-                      <option key={opt.value} value={opt.value}>{opt.label}</option>
-                    ))}
-                  </select>
-                </div>
-                <button onClick={runCalculator} className="w-full bg-blossom/10 hover:bg-blossom/20 text-bark font-semibold py-2.5 rounded-lg transition-colors text-sm">
-                  Calculate &amp; Fill In
-                </button>
-              </div>
-            )}
-          </div>
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Full name <span className="text-blossom">*</span></label>
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} onBlur={() => blur("name")} className={nameErr ? inputError : inputBase} placeholder="Jane Smith" />
+          {nameErr && <p className="text-red-500 text-xs mt-1">{nameErr}</p>}
         </div>
-
-        {/* Cost Breakdown */}
-        {(color || yardsNum > 0) && (
-          <div className="mt-8 pt-6 border-t border-sand/10">
-            <h3 className="text-sm font-semibold text-bark-light uppercase tracking-wider mb-3">Cost of Mulch</h3>
-            <div className="space-y-2">
-              <div className="flex justify-between text-bark">
-                <span>Delivery</span>
-                <span className="font-semibold text-sand">${DELIVERY_FEE}</span>
-              </div>
-              {selectedColor && yardsNum > 0 && (
-                <div className="flex justify-between text-bark">
-                  <span>{selectedColor.label} &times; {yardsNum} yd{yardsNum !== 1 ? "s" : ""} @ ${selectedColor.pricePerYard}/yd</span>
-                  <span className="font-semibold text-sand">${mulchCost.toLocaleString()}</span>
-                </div>
-              )}
-              {totalCost > 0 && (
-                <div className="flex justify-between text-lg font-bold text-sand border-t border-sand/10 pt-3 mt-3">
-                  <span>Total</span>
-                  <span className="text-bark">${totalCost.toLocaleString()}</span>
-                </div>
-              )}
-            </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Phone <span className="text-blossom">*</span></label>
+          <input type="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} onBlur={() => blur("phone")} className={phoneErr ? inputError : inputBase} placeholder="(952) 555-0123" />
+          {phoneErr && <p className="text-red-500 text-xs mt-1">{phoneErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Email <span className="text-blossom">*</span></label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => blur("email")} className={emailErr ? inputError : inputBase} placeholder="you@email.com" />
+          {emailErr && <p className="text-red-500 text-xs mt-1">{emailErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Approximate yards <span className="text-bark-light font-normal">(optional)</span></label>
+          <div className="relative">
+            <input type="number" inputMode="numeric" placeholder="0" value={yards} onChange={(e) => setYards(e.target.value)} className={`${inputBase} pr-16`} />
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-bark-light text-sm font-medium">yards</span>
           </div>
-        )}
-
-        {/* Week Picker + Checkout Button */}
-        {totalCost > 0 && (
-          <div className="mt-6 pt-6 border-t border-sand/10">
-            <label className="block text-sand font-semibold text-sm mb-2">Pick your install week</label>
-            <p className="text-bark-light text-xs mb-3">
-              We&apos;ll confirm the exact day during your selected week.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
-              {availableWeeks.map((w) => (
-                <button
-                  key={w.value}
-                  onClick={() => setSelectedWeek(w.value)}
-                  className={`py-3 px-4 rounded-xl border text-sm font-medium transition-all text-left ${
-                    selectedWeek === w.value
-                      ? "bg-blossom text-white border-blossom"
-                      : "bg-[#faf7f2] text-sand border-sand/15 hover:border-blossom/30"
-                  }`}
-                >
-                  {w.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Contact Fields */}
-            {selectedWeek && (
-              <div className="space-y-4 mb-6">
-                <label className="block text-sand font-semibold text-sm">Your details</label>
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} onBlur={() => handleBlur("firstName")} className={inputClass("firstName")} placeholder="First name" />
-                    {showError("firstName") && <p className="text-red-500 text-xs mt-1">{fieldErrors.firstName}</p>}
-                  </div>
-                  <div>
-                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} onBlur={() => handleBlur("lastName")} className={inputClass("lastName")} placeholder="Last name" />
-                    {showError("lastName") && <p className="text-red-500 text-xs mt-1">{fieldErrors.lastName}</p>}
-                  </div>
-                </div>
-                <div>
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => handleBlur("email")} className={inputClass("email")} placeholder="Email address" />
-                  {showError("email") && <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>}
-                </div>
-                <div>
-                  <input type="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} onBlur={() => handleBlur("phone")} className={inputClass("phone")} placeholder="(952) 555-0123" />
-                  {showError("phone") && <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>}
-                </div>
-                <div>
-                  <input type="text" value={street} onChange={(e) => setStreet(e.target.value)} onBlur={() => handleBlur("street")} className={inputClass("street")} placeholder="Street address" />
-                  {showError("street") && <p className="text-red-500 text-xs mt-1">{fieldErrors.street}</p>}
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="col-span-1">
-                    <input type="text" value={city} onChange={(e) => setCity(e.target.value)} onBlur={() => handleBlur("city")} className={inputClass("city")} placeholder="City" />
-                    {showError("city") && <p className="text-red-500 text-xs mt-1">{fieldErrors.city}</p>}
-                  </div>
-                  <div>
-                    <input type="text" value={state} onChange={(e) => setState(e.target.value.toUpperCase().slice(0, 2))} className={inputClass("state")} placeholder="MN" />
-                  </div>
-                  <div>
-                    <input type="text" inputMode="numeric" value={zip} onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))} onBlur={() => handleBlur("zip")} className={inputClass("zip")} placeholder="Zip" />
-                    {showError("zip") && <p className="text-red-500 text-xs mt-1">{fieldErrors.zip}</p>}
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sand font-semibold text-sm mb-1">Anything you want us to know?</label>
-                  <textarea
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    rows={3}
-                    className="w-full px-4 py-3 rounded-xl border border-sand/15 bg-[#faf7f2] text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all resize-none"
-                    placeholder="e.g. Any sensitive areas in your garden? Where do you want it installed — front or backyard? Anything to watch out for?"
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Terms Checkbox */}
-            {selectedWeek && contactValid && (
-              <label className="flex items-start gap-3 mb-6 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={agreedToTerms}
-                  onChange={(e) => setAgreedToTerms(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 rounded border-sand/30 text-bark focus:ring-blossom/30"
-                />
-                <span className="text-bark text-sm leading-snug">
-                  I agree to the{" "}
-                  <Link href="/terms" target="_blank" className="text-bark hover:underline font-medium">Terms of Service</Link>
-                  {" "}and{" "}
-                  <Link href="/privacy" target="_blank" className="text-bark hover:underline font-medium">Privacy Policy</Link>
-                </span>
-              </label>
-            )}
-
-            {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mb-4 text-sm">{error}</div>}
-
-            <button
-              onClick={handleCheckout}
-              disabled={!selectedWeek || !contactValid || !agreedToTerms || loading}
-              className="w-full bg-blossom hover:bg-blossom-dark disabled:bg-sand/20 disabled:text-bark-light text-white font-bold py-4 rounded-xl transition-colors text-lg"
-            >
-              {loading
-                ? "Preparing checkout..."
-                : `Continue to Payment — $${totalCost.toLocaleString()}`}
-            </button>
-
-            <p className="text-bark-light text-xs text-center mt-2">
-              {!selectedWeek
-                ? "Pick an install week to continue."
-                : !contactValid
-                ? "Fill in your details above to continue."
-                : !agreedToTerms
-                ? "Please agree to the terms above."
-                : "You'll be redirected to Square for payment only — no address needed there."}
-            </p>
-          </div>
-        )}
-
-        {/* Estimate Link */}
-        <div className={`text-center ${totalCost > 0 ? "mt-4" : "mt-6 pt-6 border-t border-sand/10"}`}>
-          {totalCost === 0 && <p className="text-bark-light text-base mb-2">Not sure what you need?</p>}
-          <button
-            onClick={() => setStep("estimate")}
-            className="text-bark hover:text-blossom font-semibold text-base underline underline-offset-2 transition-colors"
-          >
-            {totalCost > 0 ? "Need an in-person estimate instead?" : "Schedule a free in-person estimate"}
+          <button onClick={() => setShowCalc(!showCalc)} className="mt-2 text-bark hover:text-blossom text-xs font-medium underline underline-offset-2 transition-colors">
+            {showCalc ? "Hide calculator" : "Don't know your yards? Use the calculator"}
           </button>
+          {showCalc && <YardCalculator onFill={(y) => setYards(y)} />}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Preferred color <span className="text-bark-light font-normal">(optional)</span></label>
+          <select value={color} onChange={(e) => setColor(e.target.value)} className={`${inputBase} appearance-none`} style={selectArrow}>
+            <option value="">Not sure yet</option>
+            {mulchColors.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Notes <span className="text-bark-light font-normal">(optional)</span></label>
+          <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className={`${inputBase} resize-none`} placeholder="Access notes, specific areas, anything helpful." />
         </div>
       </div>
+
+      {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mt-4 text-sm">{error}</div>}
+
+      <button onClick={submit} disabled={loading} className="w-full mt-6 bg-blossom hover:bg-blossom-dark disabled:bg-sand/20 disabled:text-bark-light text-white font-bold py-4 rounded-xl transition-colors text-lg">
+        {loading ? "Sending..." : "Request Free Estimate"}
+      </button>
+      <p className="text-bark-light text-xs text-center mt-2">
+        We&apos;ll reach out by phone or text to schedule a time.
+      </p>
+    </div>
+  );
+}
+
+// ─── Know Form (Button 2) — I know my yards + color ───────────────────────
+function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => void }) {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [yards, setYards] = useState("");
+  const [color, setColor] = useState("");
+  const [notes, setNotes] = useState("");
+  const [showCalc, setShowCalc] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const blur = useCallback((f: string) => setTouched((p) => ({ ...p, [f]: true })), []);
+
+  const nameErr = touched.name && name.trim().length < 2 ? "Required" : "";
+  const phoneErr = touched.phone && phone.replace(/\D/g, "").length !== 10 ? "Enter a 10-digit phone" : "";
+  const emailErr = touched.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "Enter a valid email" : "";
+  const yardsErr = touched.yards && (!yards || parseInt(yards) <= 0) ? "Required" : "";
+  const colorErr = touched.color && !color ? "Please select a color" : "";
+  const valid =
+    name.trim().length >= 2 &&
+    phone.replace(/\D/g, "").length === 10 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
+    parseInt(yards) > 0 &&
+    !!color;
+
+  const submit = async () => {
+    setTouched({ name: true, phone: true, email: true, yards: true, color: true });
+    if (!valid) return;
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "know", name, phone, email, yards, color, notes }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      onSuccess();
+    } catch {
+      setError("Something went wrong. Please call us at (952) 314-4797.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-6 sm:p-8">
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={onBack} className="text-bark-light hover:text-sand transition-colors">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h2 className="text-xl font-outfit font-bold text-sand">I Know What I Want</h2>
+      </div>
+      <p className="text-bark text-sm mb-6">
+        Lock in your yards and color — we&apos;ll be in touch to schedule your installation.
+      </p>
+
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Full name <span className="text-blossom">*</span></label>
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} onBlur={() => blur("name")} className={nameErr ? inputError : inputBase} placeholder="Jane Smith" />
+          {nameErr && <p className="text-red-500 text-xs mt-1">{nameErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Phone <span className="text-blossom">*</span></label>
+          <input type="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} onBlur={() => blur("phone")} className={phoneErr ? inputError : inputBase} placeholder="(952) 555-0123" />
+          {phoneErr && <p className="text-red-500 text-xs mt-1">{phoneErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Email <span className="text-blossom">*</span></label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => blur("email")} className={emailErr ? inputError : inputBase} placeholder="you@email.com" />
+          {emailErr && <p className="text-red-500 text-xs mt-1">{emailErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">How many yards? <span className="text-blossom">*</span></label>
+          <div className="relative">
+            <input type="number" inputMode="numeric" placeholder="0" value={yards} onChange={(e) => setYards(e.target.value)} onBlur={() => blur("yards")} className={`${yardsErr ? inputError : inputBase} pr-16`} />
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-bark-light text-sm font-medium">yards</span>
+          </div>
+          {yardsErr && <p className="text-red-500 text-xs mt-1">{yardsErr}</p>}
+          <button onClick={() => setShowCalc(!showCalc)} className="mt-2 text-bark hover:text-blossom text-xs font-medium underline underline-offset-2 transition-colors">
+            {showCalc ? "Hide calculator" : "Need help calculating yards?"}
+          </button>
+          {showCalc && <YardCalculator onFill={(y) => setYards(y)} />}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Mulch color <span className="text-blossom">*</span></label>
+          <select value={color} onChange={(e) => setColor(e.target.value)} onBlur={() => blur("color")} className={`${colorErr ? inputError : inputBase} appearance-none`} style={selectArrow}>
+            <option value="">Select a color...</option>
+            {mulchColors.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
+          </select>
+          {colorErr && <p className="text-red-500 text-xs mt-1">{colorErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Notes <span className="text-bark-light font-normal">(optional)</span></label>
+          <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className={`${inputBase} resize-none`} placeholder="Access notes, which beds, anything else we should know." />
+        </div>
+      </div>
+
+      {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mt-4 text-sm">{error}</div>}
+
+      <button onClick={submit} disabled={loading} className="w-full mt-6 bg-blossom hover:bg-blossom-dark disabled:bg-sand/20 disabled:text-bark-light text-white font-bold py-4 rounded-xl transition-colors text-lg">
+        {loading ? "Sending..." : "Request My Installation"}
+      </button>
+      <p className="text-bark-light text-xs text-center mt-2">
+        We&apos;ll call or text to confirm timing and details.
+      </p>
+    </div>
+  );
+}
+
+// ─── Question Form (Button 3) — General question ──────────────────────────
+function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => void }) {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const blur = useCallback((f: string) => setTouched((p) => ({ ...p, [f]: true })), []);
+
+  const nameErr = touched.name && name.trim().length < 2 ? "Required" : "";
+  const phoneErr = touched.phone && phone.replace(/\D/g, "").length !== 10 ? "Enter a 10-digit phone" : "";
+  const emailErr = touched.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "Enter a valid email" : "";
+  const messageErr = touched.message && message.trim().length < 5 ? "Please write a message" : "";
+  const valid =
+    name.trim().length >= 2 &&
+    phone.replace(/\D/g, "").length === 10 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
+    message.trim().length >= 5;
+
+  const submit = async () => {
+    setTouched({ name: true, phone: true, email: true, message: true });
+    if (!valid) return;
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "question", name, phone, email, message }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      onSuccess();
+    } catch {
+      setError("Something went wrong. Please call us at (952) 314-4797.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-6 sm:p-8">
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={onBack} className="text-bark-light hover:text-sand transition-colors">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h2 className="text-xl font-outfit font-bold text-sand">Ask Us Anything</h2>
+      </div>
+      <p className="text-bark text-sm mb-6">
+        Not sure where to start? Send us a message and we&apos;ll get back to you.
+      </p>
+
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Full name <span className="text-blossom">*</span></label>
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} onBlur={() => blur("name")} className={nameErr ? inputError : inputBase} placeholder="Jane Smith" />
+          {nameErr && <p className="text-red-500 text-xs mt-1">{nameErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Phone <span className="text-blossom">*</span></label>
+          <input type="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} onBlur={() => blur("phone")} className={phoneErr ? inputError : inputBase} placeholder="(952) 555-0123" />
+          {phoneErr && <p className="text-red-500 text-xs mt-1">{phoneErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Email <span className="text-blossom">*</span></label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => blur("email")} className={emailErr ? inputError : inputBase} placeholder="you@email.com" />
+          {emailErr && <p className="text-red-500 text-xs mt-1">{emailErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Your question <span className="text-blossom">*</span></label>
+          <textarea value={message} onChange={(e) => setMessage(e.target.value)} onBlur={() => blur("message")} rows={4} className={`${messageErr ? inputError : inputBase} resize-none`} placeholder="What would you like to know?" />
+          {messageErr && <p className="text-red-500 text-xs mt-1">{messageErr}</p>}
+        </div>
+      </div>
+
+      {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mt-4 text-sm">{error}</div>}
+
+      <button onClick={submit} disabled={loading} className="w-full mt-6 bg-blossom hover:bg-blossom-dark disabled:bg-sand/20 disabled:text-bark-light text-white font-bold py-4 rounded-xl transition-colors text-lg">
+        {loading ? "Sending..." : "Send Message"}
+      </button>
+    </div>
+  );
+}
+
+// ─── Main Component — 3-button landing ───────────────────────────────────
+type Mode = null | "estimate" | "know" | "question";
+
+export default function PriceMulchForm() {
+  const [mode, setMode] = useState<Mode>(null);
+  const [success, setSuccess] = useState(false);
+
+  if (success) {
+    return <SuccessScreen onReset={() => { setMode(null); setSuccess(false); }} />;
+  }
+
+  if (mode === "estimate") return <EstimateForm onBack={() => setMode(null)} onSuccess={() => setSuccess(true)} />;
+  if (mode === "know") return <KnowForm onBack={() => setMode(null)} onSuccess={() => setSuccess(true)} />;
+  if (mode === "question") return <QuestionForm onBack={() => setMode(null)} onSuccess={() => setSuccess(true)} />;
+
+  const buttons = [
+    {
+      mode: "estimate" as Mode,
+      icon: (
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      ),
+      label: "Come Measure My Site",
+      sub: "Free in-person estimate — we come to you",
+    },
+    {
+      mode: "know" as Mode,
+      icon: (
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        </svg>
+      ),
+      label: "I Know My Yards & Color",
+      sub: "Ready to book — let's get you scheduled",
+    },
+    {
+      mode: "question" as Mode,
+      icon: (
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+      ),
+      label: "I Have a General Question",
+      sub: "Not sure yet — just reach out",
+    },
+  ];
+
+  return (
+    <div className="space-y-4">
+      {buttons.map((btn) => (
+        <button
+          key={btn.mode}
+          onClick={() => setMode(btn.mode)}
+          className="w-full bg-blossom hover:bg-blossom-dark text-white rounded-2xl px-6 py-5 flex items-center gap-4 text-left transition-colors shadow-md hover:shadow-lg group"
+        >
+          <div className="flex-shrink-0 opacity-90">{btn.icon}</div>
+          <div className="flex-1">
+            <div className="font-outfit font-bold text-lg leading-tight">{btn.label}</div>
+            <div className="text-white/80 text-sm mt-0.5">{btn.sub}</div>
+          </div>
+          <svg className="w-5 h-5 opacity-70 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      ))}
+      <p className="text-center text-bark-light text-sm pt-2">
+        Or call us directly:{" "}
+        <Link href="tel:9523144797" className="text-bark font-semibold hover:text-blossom transition-colors">
+          (952) 314-4797
+        </Link>
+      </p>
     </div>
   );
 }
