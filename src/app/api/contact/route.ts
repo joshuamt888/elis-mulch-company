@@ -107,8 +107,7 @@ Mulch Company MN`;
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    const e = err as Error & { Code?: string };
     console.error("Contact API error:", err);
-    return NextResponse.json({ error: "Failed to send message", debug: e.message, code: e.Code }, { status: 500 });
+    return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
   }
 }
