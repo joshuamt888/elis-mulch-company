@@ -1,24 +1,21 @@
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 import { NextRequest, NextResponse } from "next/server";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 import { SNSClient, PublishCommand } from "@aws-sdk/client-sns";
 
-const sesClient = new SESClient({
-  region: process.env.AWS_REGION!,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
-});
-
-const snsClient = new SNSClient({
-  region: process.env.AWS_REGION!,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
-});
-
 export async function POST(req: NextRequest) {
+  const awsCreds = {
+    region: process.env.AWS_REGION!,
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    },
+  };
+  const sesClient = new SESClient(awsCreds);
+  const snsClient = new SNSClient(awsCreds);
+
   try {
     const body = await req.json();
     const { formType, name, phone, email, yards, color, notes, message } = body;
@@ -78,19 +75,24 @@ Mulch Company MN`;
     }
 
     // ─── Send email via SES ──────────────────────────────────────────────
-    await sesClient.send(
-      new SendEmailCommand({
-        Source: "noreply@steadyscaling.com",
-        Destination: { ToAddresses: [notifyEmail] },
-        Message: {
-          Subject: { Data: subject },
-          Body: { Text: { Data: textBody } },
-        },
-      })
-    );
+    try {
+      await sesClient.send(
+        new SendEmailCommand({
+          Source: "noreply@steadyscaling.com",
+          Destination: { ToAddresses: [notifyEmail] },
+          Message: {
+            Subject: { Data: subject },
+            Body: { Text: { Data: textBody } },
+          },
+        })
+      );
+    } catch (sesErr) {
+      console.error("SES error:", sesErr);
+      throw sesErr;
+    }
 
-    // ─── Send SMS via SNS ────────────────────────────────────────────────
-    await snsClient.send(
+    // ─── Send SMS via SNS (non-blocking — don't fail the form if SMS fails) ──
+    snsClient.send(
       new PublishCommand({
         PhoneNumber: notifyPhone,
         Message: smsBody,
@@ -101,7 +103,7 @@ Mulch Company MN`;
           },
         },
       })
-    );
+    ).catch((snsErr) => console.error("SNS error:", snsErr));
 
     return NextResponse.json({ success: true });
   } catch (err) {
