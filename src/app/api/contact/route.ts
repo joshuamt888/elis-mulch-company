@@ -7,10 +7,10 @@ import { SNSClient, PublishCommand } from "@aws-sdk/client-sns";
 
 export async function POST(req: NextRequest) {
   const awsCreds = {
-    region: process.env.AWS_REGION!,
+    region: (process.env.AWS_REGION ?? "us-east-2").trim(),
     credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      accessKeyId: (process.env.AWS_ACCESS_KEY_ID ?? "").trim(),
+      secretAccessKey: (process.env.AWS_SECRET_ACCESS_KEY ?? "").trim(),
     },
   };
   const sesClient = new SESClient(awsCreds);
@@ -24,9 +24,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const notifyEmail = process.env.NOTIFY_EMAIL!;
-    const notifyPhone = process.env.NOTIFY_PHONE!;
-    const snsFrom = process.env.SNS_ORIGINATION_NUMBER!;
+    const notifyEmail = (process.env.NOTIFY_EMAIL ?? "").trim();
+    const notifyPhone = (process.env.NOTIFY_PHONE ?? "").trim();
+    const snsFrom = (process.env.SNS_ORIGINATION_NUMBER ?? "").trim();
 
     // ─── Build message content ───────────────────────────────────────────
     let subject = "";
@@ -107,7 +107,8 @@ Mulch Company MN`;
 
     return NextResponse.json({ success: true });
   } catch (err) {
+    const e = err as Error & { Code?: string };
     console.error("Contact API error:", err);
-    return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to send message", debug: e.message, code: e.Code }, { status: 500 });
   }
 }
