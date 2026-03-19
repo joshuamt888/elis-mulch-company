@@ -3,14 +3,16 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 
-// ─── Mulch colors ─────────────────────────────────────────────────────────
+// ─── Mulch colors & pricing ────────────────────────────────────────────────
 const mulchColors = [
-  { label: "Brown Mulch", value: "Brown Mulch" },
-  { label: "Black Mulch", value: "Black Mulch" },
-  { label: "Red Mulch", value: "Red Mulch" },
-  { label: "Western Red Cedar", value: "Western Red Cedar" },
-  { label: "Playground Mulch", value: "Playground Mulch" },
+  { label: "Brown Mulch", value: "Brown Mulch", pricePerYard: 160 },
+  { label: "Black Mulch", value: "Black Mulch", pricePerYard: 100 },
+  { label: "Red Mulch", value: "Red Mulch", pricePerYard: 100 },
+  { label: "Western Red Cedar", value: "Western Red Cedar", pricePerYard: 100 },
+  { label: "Playground Mulch", value: "Playground Mulch", pricePerYard: 100 },
 ];
+
+const DELIVERY_FEE = 200;
 
 const depthOptions = [
   { label: "2 inches — standard top-up", value: 2 },
@@ -219,7 +221,7 @@ function EstimateForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
   );
 }
 
-// ─── Know Form (Button 2) — I know my yards + color ───────────────────────
+// ─── Know Form (Button 2) — Price calculator + booking ────────────────────
 function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => void }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -233,6 +235,13 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const blur = useCallback((f: string) => setTouched((p) => ({ ...p, [f]: true })), []);
+
+  // ─── Live price calc ───────────────────────────────────────────────────
+  const yardsNum = parseInt(yards) || 0;
+  const selectedColor = mulchColors.find((c) => c.value === color);
+  const mulchCost = yardsNum > 0 && selectedColor ? yardsNum * selectedColor.pricePerYard : 0;
+  const totalCost = mulchCost > 0 ? mulchCost + DELIVERY_FEE : 0;
+  const showPrice = yardsNum > 0 && !!selectedColor;
 
   const nameErr = touched.name && name.trim().length < 2 ? "Required" : "";
   const phoneErr = touched.phone && phone.replace(/\D/g, "").length !== 10 ? "Enter a 10-digit phone" : "";
@@ -255,7 +264,7 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "know", name, phone, email, yards, color, notes }),
+        body: JSON.stringify({ formType: "know", name, phone, email, yards, color, total: totalCost, notes }),
       });
       if (!res.ok) throw new Error("Request failed");
       onSuccess();
@@ -274,13 +283,64 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <h2 className="text-xl font-outfit font-bold text-sand">I Know What I Want</h2>
+        <h2 className="text-xl font-outfit font-bold text-sand">Price It Out</h2>
       </div>
       <p className="text-bark text-sm mb-6">
-        Lock in your yards and color — we&apos;ll be in touch to schedule your installation.
+        Pick your color and enter your yards — see your price instantly.
       </p>
 
       <div className="space-y-4">
+        {/* Color first so price shows as soon as yards entered */}
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Mulch color <span className="text-blossom">*</span></label>
+          <select value={color} onChange={(e) => setColor(e.target.value)} onBlur={() => blur("color")} className={`${colorErr ? inputError : inputBase} appearance-none`} style={selectArrow}>
+            <option value="">Select a color...</option>
+            {mulchColors.map((c) => (
+              <option key={c.value} value={c.value}>
+                {c.label} — ${c.pricePerYard}/yd
+              </option>
+            ))}
+          </select>
+          {colorErr && <p className="text-red-500 text-xs mt-1">{colorErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">How many yards? <span className="text-blossom">*</span></label>
+          <div className="relative">
+            <input type="number" inputMode="numeric" placeholder="0" value={yards} onChange={(e) => setYards(e.target.value)} onBlur={() => blur("yards")} className={`${yardsErr ? inputError : inputBase} pr-16`} />
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-bark-light text-sm font-medium">yards</span>
+          </div>
+          {yardsErr && <p className="text-red-500 text-xs mt-1">{yardsErr}</p>}
+          <button onClick={() => setShowCalc(!showCalc)} className="mt-2 text-bark hover:text-blossom text-xs font-medium underline underline-offset-2 transition-colors">
+            {showCalc ? "Hide calculator" : "Need help calculating yards?"}
+          </button>
+          {showCalc && <YardCalculator onFill={(y) => setYards(y)} />}
+        </div>
+
+        {/* Live price breakdown */}
+        {showPrice && (
+          <div className="bg-gradient-to-br from-blossom to-blossom-dark rounded-2xl p-5 text-white">
+            <p className="text-white/70 text-xs font-medium uppercase tracking-wide mb-3">Your Price</p>
+            <div className="space-y-1.5 text-sm mb-4">
+              <div className="flex justify-between">
+                <span className="text-white/80">{yardsNum} yd × ${selectedColor!.pricePerYard}/yd</span>
+                <span className="font-semibold">${mulchCost.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/80">Delivery</span>
+                <span className="font-semibold">${DELIVERY_FEE}</span>
+              </div>
+              <div className="flex justify-between border-t border-white/20 pt-2 mt-2">
+                <span className="font-bold text-base">Total</span>
+                <span className="font-bold text-xl">${totalCost.toLocaleString()}</span>
+              </div>
+            </div>
+            <p className="text-white/60 text-xs text-center">Play around — change yards or color to see how the price changes</p>
+          </div>
+        )}
+
+        <hr className="border-sand/10" />
+        <p className="text-bark text-sm font-medium">Ready to book? Drop your info and we&apos;ll reach out to schedule.</p>
+
         <div>
           <label className="block text-sand font-semibold text-sm mb-1">Full name <span className="text-blossom">*</span></label>
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} onBlur={() => blur("name")} className={nameErr ? inputError : inputBase} placeholder="Jane Smith" />
@@ -297,26 +357,6 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
           {emailErr && <p className="text-red-500 text-xs mt-1">{emailErr}</p>}
         </div>
         <div>
-          <label className="block text-sand font-semibold text-sm mb-1">How many yards? <span className="text-blossom">*</span></label>
-          <div className="relative">
-            <input type="number" inputMode="numeric" placeholder="0" value={yards} onChange={(e) => setYards(e.target.value)} onBlur={() => blur("yards")} className={`${yardsErr ? inputError : inputBase} pr-16`} />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-bark-light text-sm font-medium">yards</span>
-          </div>
-          {yardsErr && <p className="text-red-500 text-xs mt-1">{yardsErr}</p>}
-          <button onClick={() => setShowCalc(!showCalc)} className="mt-2 text-bark hover:text-blossom text-xs font-medium underline underline-offset-2 transition-colors">
-            {showCalc ? "Hide calculator" : "Need help calculating yards?"}
-          </button>
-          {showCalc && <YardCalculator onFill={(y) => setYards(y)} />}
-        </div>
-        <div>
-          <label className="block text-sand font-semibold text-sm mb-1">Mulch color <span className="text-blossom">*</span></label>
-          <select value={color} onChange={(e) => setColor(e.target.value)} onBlur={() => blur("color")} className={`${colorErr ? inputError : inputBase} appearance-none`} style={selectArrow}>
-            <option value="">Select a color...</option>
-            {mulchColors.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
-          </select>
-          {colorErr && <p className="text-red-500 text-xs mt-1">{colorErr}</p>}
-        </div>
-        <div>
           <label className="block text-sand font-semibold text-sm mb-1">Notes <span className="text-bark-light font-normal">(optional)</span></label>
           <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className={`${inputBase} resize-none`} placeholder="Access notes, which beds, anything else we should know." />
         </div>
@@ -325,7 +365,7 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
       {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mt-4 text-sm">{error}</div>}
 
       <button onClick={submit} disabled={loading} className="w-full mt-6 bg-blossom hover:bg-blossom-dark disabled:bg-sand/20 disabled:text-bark-light text-white font-bold py-4 rounded-xl transition-colors text-lg">
-        {loading ? "Sending..." : "Request My Installation"}
+        {loading ? "Sending..." : showPrice ? `Book My Install — $${totalCost.toLocaleString()}` : "Request My Installation"}
       </button>
       <p className="text-bark-light text-xs text-center mt-2">
         We&apos;ll call or text to confirm timing and details.
@@ -456,8 +496,8 @@ export default function PriceMulchForm() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
         </svg>
       ),
-      label: "I Know My Yards & Color",
-      sub: "Ready to book — let's get you scheduled",
+      label: "Price It Out",
+      sub: "See your exact price instantly — then book",
     },
     {
       mode: "question" as Mode,
