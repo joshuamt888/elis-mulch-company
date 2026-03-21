@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Prior Lake, MN",
   description:
-    "Professional mulch installation in Prior Lake, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Mulch delivery in Prior Lake, MN for waterfront and suburban properties. Eli's Mulch Company delivers bulk mulch, rock & soil. Locally owned. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/prior-lake-mulch-delivery" },
   robots: { index: true, follow: true },
 };

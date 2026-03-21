@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Chaska, MN",
   description:
-    "Professional mulch installation in Chaska, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Mulch delivery in Chaska, MN — Eli's serves both historic and newer homes across the city. Bulk mulch, rock & soil. Locally owned. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/chaska-mulch-delivery" },
   robots: { index: true, follow: true },
 };

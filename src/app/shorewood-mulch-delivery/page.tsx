@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Shorewood, MN",
   description:
-    "Professional mulch installation in Shorewood, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Mulch delivery in Shorewood, MN for homes near Lake Minnetonka. Eli's Mulch Company serves long-term homeowners who invest in their properties. Free quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/shorewood-mulch-delivery" },
   robots: { index: true, follow: true },
 };

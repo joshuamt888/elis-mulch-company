@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Excelsior, MN",
   description:
-    "Professional mulch installation in Excelsior, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Mulch delivery for Excelsior homes and gardens near Lake Minnetonka. Eli's Mulch Company offers bulk mulch, rock & soil. Locally owned. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/excelsior-mulch-delivery" },
   robots: { index: true, follow: true },
 };

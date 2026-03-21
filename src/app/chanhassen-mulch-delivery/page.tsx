@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Chanhassen, MN",
   description:
-    "Professional mulch installation in Chanhassen, Minnesota. Free in-person quotes. Locally owned and operated. Serving residential and commercial properties.",
+    "Eli's Mulch Company delivers bulk mulch, rock, and soil to Chanhassen homes. Manicured west metro yards deserve quality materials. Locally owned. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/chanhassen-mulch-delivery" },
   robots: { index: true, follow: true },
 };

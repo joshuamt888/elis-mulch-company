@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Eden Prairie, MN",
   description:
-    "Professional mulch installation in Eden Prairie, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Eli's Mulch delivers premium bulk mulch and landscaping materials to Eden Prairie properties. Serving west metro suburbs. Locally owned. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/eden-prairie-mulch-delivery" },
   robots: { index: true, follow: true },
 };

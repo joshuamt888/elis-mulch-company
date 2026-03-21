@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Shakopee, MN",
   description:
-    "Professional mulch installation in Shakopee, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Eli's Mulch delivers bulk mulch, rock & soil across Shakopee — new construction and established homes. Locally owned and operated. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/shakopee-mulch-delivery" },
   robots: { index: true, follow: true },
 };

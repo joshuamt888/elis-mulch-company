@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Savage, MN",
   description:
-    "Professional mulch installation in Savage, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Bulk mulch and soil delivery to Savage, MN by Eli's Mulch Company. Serving south metro residential yards and garden beds. Locally owned. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/savage-mulch-delivery" },
   robots: { index: true, follow: true },
 };

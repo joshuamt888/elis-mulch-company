@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Minnetonka, MN",
   description:
-    "Professional mulch installation in Minnetonka, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Eli's Mulch delivers bulk mulch and rock to Minnetonka's established, tree-filled yards. West metro coverage. Locally owned and operated. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/minnetonka-mulch-delivery" },
   robots: { index: true, follow: true },
 };

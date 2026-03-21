@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Victoria, MN",
   description:
-    "Professional mulch installation in Victoria, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Eli's Mulch Company delivers bulk mulch and landscaping materials to Victoria's large-lot properties. Serving natural surroundings well. Locally owned. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/victoria-mulch-delivery" },
   robots: { index: true, follow: true },
 };

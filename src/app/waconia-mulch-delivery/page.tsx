@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Waconia, MN",
   description:
-    "Professional mulch installation in Waconia, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Bulk mulch delivery in Waconia, MN for lake-lifestyle homeowners. Eli's Mulch delivers mulch, rock & soil to outdoor-focused properties. Locally owned. Free quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/waconia-mulch-delivery" },
   robots: { index: true, follow: true },
 };

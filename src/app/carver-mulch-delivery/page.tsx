@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Carver, MN",
   description:
-    "Professional mulch installation in Carver, Minnesota. Free in-person quotes. Locally owned and operated.",
+    "Mulch delivery in Carver, MN by Eli's Mulch Company. Bulk mulch, rock & soil delivered to residential and rural properties. Locally owned. Free in-person quotes.",
   alternates: { canonical: "https://mulchcompanymn.com/carver-mulch-delivery" },
   robots: { index: true, follow: true },
 };
