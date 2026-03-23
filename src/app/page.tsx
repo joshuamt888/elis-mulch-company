@@ -51,7 +51,7 @@ export default function Home() {
             </a>
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-white/70 text-sm">
-            <span>Annual Installation Available</span>
+            <span>Fully Insured</span>
             <span className="hidden sm:inline">&middot;</span>
             <span>Free In-Person Quotes</span>
             <span className="hidden sm:inline">&middot;</span>

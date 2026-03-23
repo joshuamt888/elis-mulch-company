@@ -39,40 +39,107 @@ const selectArrow = {
   backgroundPosition: "right 16px center",
 };
 
-// ─── Yard Calculator ──────────────────────────────────────────────────────
+// ─── Multi-bed Yard Calculator ────────────────────────────────────────────
+interface Bed {
+  length: string;
+  width: string;
+}
+
 function YardCalculator({ onFill }: { onFill: (yards: string) => void }) {
-  const [sqft, setSqft] = useState("");
+  const [beds, setBeds] = useState<Bed[]>([{ length: "", width: "" }]);
   const [depth, setDepth] = useState(2);
-  const [result, setResult] = useState<number | null>(null);
+  const [result, setResult] = useState<{ sqft: number; yards: number } | null>(null);
+
+  const updateBed = (index: number, field: keyof Bed, value: string) => {
+    setBeds((prev) => prev.map((b, i) => (i === index ? { ...b, [field]: value } : b)));
+    setResult(null);
+  };
+
+  const addBed = () => {
+    setBeds((prev) => [...prev, { length: "", width: "" }]);
+    setResult(null);
+  };
+
+  const removeBed = (index: number) => {
+    setBeds((prev) => prev.filter((_, i) => i !== index));
+    setResult(null);
+  };
 
   const calculate = () => {
-    const area = parseFloat(sqft);
-    if (!area || area <= 0) return;
-    const yards = Math.round((area * (depth / 12)) / 27);
-    setResult(yards);
+    const totalSqft = beds.reduce((sum, bed) => {
+      const l = parseFloat(bed.length);
+      const w = parseFloat(bed.width);
+      if (l > 0 && w > 0) return sum + l * w;
+      return sum;
+    }, 0);
+    if (totalSqft <= 0) return;
+    const yards = Math.ceil((totalSqft * (depth / 12)) / 27);
+    setResult({ sqft: Math.round(totalSqft), yards });
     onFill(String(yards));
   };
 
   return (
-    <div className="mt-3 bg-[#faf7f2] border border-sand/10 rounded-xl p-4 space-y-3">
-      <p className="text-bark text-xs font-medium">Enter your bed area to calculate cubic yards:</p>
-      <div>
-        <label className="block text-sand text-xs font-semibold mb-1">Area (square feet)</label>
-        <input
-          type="number"
-          inputMode="decimal"
-          placeholder="e.g. 500"
-          value={sqft}
-          onChange={(e) => setSqft(e.target.value)}
-          className="w-full px-3 py-2.5 rounded-lg border border-sand/15 bg-white text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all"
-        />
-      </div>
+    <div className="mt-3 bg-[#faf7f2] border border-sand/10 rounded-xl p-4 space-y-4">
+      <p className="text-bark text-xs font-medium">Enter each bed&apos;s length and width to calculate cubic yards:</p>
+
+      {beds.map((bed, i) => (
+        <div key={i} className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-sand text-xs font-semibold">Bed #{i + 1}</span>
+            {beds.length > 1 && (
+              <button
+                onClick={() => removeBed(i)}
+                className="text-red-400 hover:text-red-600 text-xs transition-colors"
+              >
+                Remove
+              </button>
+            )}
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="block text-bark text-xs mb-1">Length (ft)</label>
+              <input
+                type="number"
+                inputMode="decimal"
+                placeholder="e.g. 20"
+                value={bed.length}
+                onChange={(e) => updateBed(i, "length", e.target.value)}
+                className="w-full px-3 py-2.5 rounded-lg border border-sand/15 bg-white text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-bark text-xs mb-1">Width (ft)</label>
+              <input
+                type="number"
+                inputMode="decimal"
+                placeholder="e.g. 10"
+                value={bed.width}
+                onChange={(e) => updateBed(i, "width", e.target.value)}
+                className="w-full px-3 py-2.5 rounded-lg border border-sand/15 bg-white text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all text-sm"
+              />
+            </div>
+          </div>
+          {bed.length && bed.width && parseFloat(bed.length) > 0 && parseFloat(bed.width) > 0 && (
+            <p className="text-bark-light text-xs">
+              = {Math.round(parseFloat(bed.length) * parseFloat(bed.width))} sq ft
+            </p>
+          )}
+        </div>
+      ))}
+
+      <button
+        onClick={addBed}
+        className="w-full border border-dashed border-sand/30 hover:border-blossom/50 text-bark hover:text-blossom text-sm py-2 rounded-lg transition-colors"
+      >
+        + Add another bed
+      </button>
+
       <div>
         <label className="block text-sand text-xs font-semibold mb-1">Depth</label>
         <select
           value={depth}
           onChange={(e) => setDepth(Number(e.target.value))}
-          className="w-full px-3 py-2.5 rounded-lg border border-sand/15 bg-white text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all appearance-none"
+          className="w-full px-3 py-2.5 rounded-lg border border-sand/15 bg-white text-sand focus:border-blossom focus:ring-2 focus:ring-blossom/20 transition-all appearance-none text-sm"
           style={{ ...selectArrow, backgroundPosition: "right 12px center" }}
         >
           {depthOptions.map((opt) => (
@@ -80,16 +147,23 @@ function YardCalculator({ onFill }: { onFill: (yards: string) => void }) {
           ))}
         </select>
       </div>
+
       <button
         onClick={calculate}
         className="w-full bg-blossom/10 hover:bg-blossom/20 text-bark font-semibold py-2.5 rounded-lg transition-colors text-sm"
       >
         Calculate &amp; Fill In
       </button>
+
       {result !== null && (
-        <p className="text-bark text-xs text-center">
-          ≈ <strong className="text-sand">{result} cubic yards</strong> — filled in above
-        </p>
+        <div className="text-center space-y-1">
+          <p className="text-bark text-xs">
+            Total area: <strong className="text-sand">{result.sqft} sq ft</strong>
+          </p>
+          <p className="text-bark text-xs">
+            ≈ <strong className="text-sand">{result.yards} cubic yards</strong> — filled in above
+          </p>
+        </div>
       )}
     </div>
   );
@@ -120,6 +194,7 @@ function EstimateForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [yards, setYards] = useState("");
   const [color, setColor] = useState("");
   const [notes, setNotes] = useState("");
@@ -144,7 +219,7 @@ function EstimateForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "estimate", name, phone, email, yards, color, notes }),
+        body: JSON.stringify({ formType: "estimate", name, phone, email, address, yards, color, notes }),
       });
       if (!res.ok) throw new Error("Request failed");
       onSuccess();
@@ -184,6 +259,10 @@ function EstimateForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
           <label className="block text-sand font-semibold text-sm mb-1">Email <span className="text-blossom">*</span></label>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => blur("email")} className={emailErr ? inputError : inputBase} placeholder="you@email.com" />
           {emailErr && <p className="text-red-500 text-xs mt-1">{emailErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Property address <span className="text-bark-light font-normal">(optional)</span></label>
+          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className={inputBase} placeholder="123 Oak St, Chanhassen, MN" />
         </div>
         <div>
           <label className="block text-sand font-semibold text-sm mb-1">Approximate yards <span className="text-bark-light font-normal">(optional)</span></label>
@@ -226,6 +305,7 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [yards, setYards] = useState("");
   const [color, setColor] = useState("");
   const [notes, setNotes] = useState("");
@@ -264,7 +344,7 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "know", name, phone, email, yards, color, total: totalCost, notes }),
+        body: JSON.stringify({ formType: "know", name, phone, email, address, yards, color, total: totalCost, notes }),
       });
       if (!res.ok) throw new Error("Request failed");
       onSuccess();
@@ -310,8 +390,16 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-bark-light text-sm font-medium">yards</span>
           </div>
           {yardsErr && <p className="text-red-500 text-xs mt-1">{yardsErr}</p>}
-          <button onClick={() => setShowCalc(!showCalc)} className="mt-2 text-bark hover:text-blossom text-xs font-medium underline underline-offset-2 transition-colors">
-            {showCalc ? "Hide calculator" : "Need help calculating yards?"}
+
+          {/* Bigger, more prominent calculator toggle */}
+          <button
+            onClick={() => setShowCalc(!showCalc)}
+            className="mt-3 w-full flex items-center justify-center gap-2 bg-sand/5 hover:bg-blossom/10 border border-sand/20 hover:border-blossom/40 text-sand hover:text-blossom font-semibold py-3 px-4 rounded-xl transition-all text-sm"
+          >
+            <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            {showCalc ? "Hide yard calculator" : "Need help calculating yards?"}
           </button>
           {showCalc && <YardCalculator onFill={(y) => setYards(y)} />}
         </div>
@@ -357,6 +445,10 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
           {emailErr && <p className="text-red-500 text-xs mt-1">{emailErr}</p>}
         </div>
         <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Property address <span className="text-bark-light font-normal">(optional)</span></label>
+          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className={inputBase} placeholder="123 Oak St, Chanhassen, MN" />
+        </div>
+        <div>
           <label className="block text-sand font-semibold text-sm mb-1">Notes <span className="text-bark-light font-normal">(optional)</span></label>
           <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className={`${inputBase} resize-none`} placeholder="Access notes, which beds, anything else we should know." />
         </div>
@@ -379,6 +471,7 @@ function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -405,7 +498,7 @@ function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "question", name, phone, email, message }),
+        body: JSON.stringify({ formType: "question", name, phone, email, address, message }),
       });
       if (!res.ok) throw new Error("Request failed");
       onSuccess();
@@ -445,6 +538,10 @@ function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
           <label className="block text-sand font-semibold text-sm mb-1">Email <span className="text-blossom">*</span></label>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => blur("email")} className={emailErr ? inputError : inputBase} placeholder="you@email.com" />
           {emailErr && <p className="text-red-500 text-xs mt-1">{emailErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Property address <span className="text-bark-light font-normal">(optional)</span></label>
+          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className={inputBase} placeholder="123 Oak St, Chanhassen, MN" />
         </div>
         <div>
           <label className="block text-sand font-semibold text-sm mb-1">Your question <span className="text-blossom">*</span></label>
