@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+import Script from "next/script";
 import MobileCallBar from "@/components/MobileCallBar";
 import "./globals.css";
 
@@ -168,6 +169,16 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-NBWTEY1D7R"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-NBWTEY1D7R');
+        `}</Script>
       </head>
       <body className={`${inter.variable} ${outfit.variable} antialiased`}>
         {children}
