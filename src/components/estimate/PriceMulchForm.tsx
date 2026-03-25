@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import AddressAutocomplete from "./AddressAutocomplete";
 
 // ─── Mulch colors & pricing ────────────────────────────────────────────────
 const mulchColors = [
@@ -262,7 +263,7 @@ function EstimateForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
         </div>
         <div>
           <label className="block text-sand font-semibold text-sm mb-1">Property address <span className="text-bark-light font-normal">(optional)</span></label>
-          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className={inputBase} placeholder="123 Oak St, Chanhassen, MN" />
+          <AddressAutocomplete value={address} onChange={setAddress} className={inputBase} />
         </div>
         <div>
           <label className="block text-sand font-semibold text-sm mb-1">Approximate yards <span className="text-bark-light font-normal">(optional)</span></label>
@@ -446,7 +447,7 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
         </div>
         <div>
           <label className="block text-sand font-semibold text-sm mb-1">Property address <span className="text-bark-light font-normal">(optional)</span></label>
-          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className={inputBase} placeholder="123 Oak St, Chanhassen, MN" />
+          <AddressAutocomplete value={address} onChange={setAddress} className={inputBase} />
         </div>
         <div>
           <label className="block text-sand font-semibold text-sm mb-1">Notes <span className="text-bark-light font-normal">(optional)</span></label>
@@ -541,7 +542,7 @@ function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
         </div>
         <div>
           <label className="block text-sand font-semibold text-sm mb-1">Property address <span className="text-bark-light font-normal">(optional)</span></label>
-          <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className={inputBase} placeholder="123 Oak St, Chanhassen, MN" />
+          <AddressAutocomplete value={address} onChange={setAddress} className={inputBase} />
         </div>
         <div>
           <label className="block text-sand font-semibold text-sm mb-1">Your question <span className="text-blossom">*</span></label>
