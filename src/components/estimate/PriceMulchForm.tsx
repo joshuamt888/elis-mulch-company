@@ -6,10 +6,10 @@ import AddressAutocomplete from "./AddressAutocomplete";
 
 // ─── Mulch colors & pricing ────────────────────────────────────────────────
 const mulchColors = [
-  { label: "Brown Mulch", value: "Brown Mulch", pricePerYard: 160 },
+  { label: "Brown Mulch", value: "Brown Mulch", pricePerYard: 100 },
   { label: "Black Mulch", value: "Black Mulch", pricePerYard: 100 },
   { label: "Red Mulch", value: "Red Mulch", pricePerYard: 100 },
-  { label: "Western Red Cedar", value: "Western Red Cedar", pricePerYard: 100 },
+  { label: "Western Red Cedar", value: "Western Red Cedar", pricePerYard: 160 },
   { label: "Playground Mulch", value: "Playground Mulch", pricePerYard: 100 },
 ];
 
@@ -199,6 +199,7 @@ function EstimateForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
   const [yards, setYards] = useState("");
   const [color, setColor] = useState("");
   const [notes, setNotes] = useState("");
+  const [promoCode, setPromoCode] = useState("");
   const [showCalc, setShowCalc] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -220,7 +221,7 @@ function EstimateForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "estimate", name, phone, email, address, yards, color, notes }),
+        body: JSON.stringify({ formType: "estimate", name, phone, email, address, yards, color, notes, promoCode: promoCode || undefined }),
       });
       if (!res.ok) throw new Error("Request failed");
       onSuccess();
@@ -287,6 +288,10 @@ function EstimateForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
           <label className="block text-sand font-semibold text-sm mb-1">Notes <span className="text-bark-light font-normal">(optional)</span></label>
           <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className={`${inputBase} resize-none`} placeholder="Access notes, specific areas, anything helpful." />
         </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Promo code <span className="text-bark-light font-normal">(optional)</span></label>
+          <input type="text" value={promoCode} onChange={(e) => setPromoCode(e.target.value.toUpperCase())} className={inputBase} placeholder="e.g. SPRING25" />
+        </div>
       </div>
 
       {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mt-4 text-sm">{error}</div>}
@@ -310,6 +315,7 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
   const [yards, setYards] = useState("");
   const [color, setColor] = useState("");
   const [notes, setNotes] = useState("");
+  const [promoCode, setPromoCode] = useState("");
   const [showCalc, setShowCalc] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -345,7 +351,7 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "know", name, phone, email, address, yards, color, total: totalCost, notes }),
+        body: JSON.stringify({ formType: "know", name, phone, email, address, yards, color, total: totalCost, notes, promoCode: promoCode || undefined }),
       });
       if (!res.ok) throw new Error("Request failed");
       onSuccess();
@@ -453,6 +459,10 @@ function KnowForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: () => 
           <label className="block text-sand font-semibold text-sm mb-1">Notes <span className="text-bark-light font-normal">(optional)</span></label>
           <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className={`${inputBase} resize-none`} placeholder="Access notes, which beds, anything else we should know." />
         </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Promo code <span className="text-bark-light font-normal">(optional)</span></label>
+          <input type="text" value={promoCode} onChange={(e) => setPromoCode(e.target.value.toUpperCase())} className={inputBase} placeholder="e.g. SPRING25" />
+        </div>
       </div>
 
       {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mt-4 text-sm">{error}</div>}
@@ -474,6 +484,7 @@ function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [message, setMessage] = useState("");
+  const [promoCode, setPromoCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -499,7 +510,7 @@ function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "question", name, phone, email, address, message }),
+        body: JSON.stringify({ formType: "question", name, phone, email, address, message, promoCode: promoCode || undefined }),
       });
       if (!res.ok) throw new Error("Request failed");
       onSuccess();
@@ -548,6 +559,10 @@ function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
           <label className="block text-sand font-semibold text-sm mb-1">Your question <span className="text-blossom">*</span></label>
           <textarea value={message} onChange={(e) => setMessage(e.target.value)} onBlur={() => blur("message")} rows={4} className={`${messageErr ? inputError : inputBase} resize-none`} placeholder="What would you like to know?" />
           {messageErr && <p className="text-red-500 text-xs mt-1">{messageErr}</p>}
+        </div>
+        <div>
+          <label className="block text-sand font-semibold text-sm mb-1">Promo code <span className="text-bark-light font-normal">(optional)</span></label>
+          <input type="text" value={promoCode} onChange={(e) => setPromoCode(e.target.value.toUpperCase())} className={inputBase} placeholder="e.g. SPRING25" />
         </div>
       </div>
 
