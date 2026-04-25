@@ -46,7 +46,7 @@ ${color ? `Color: ${color}` : "Color: Not specified"}
 ${notes ? `Notes: ${notes}` : ""}
 ─────────────────────────
 Mulch Company MN`;
-      smsBody = `New estimate request - Mulch Co MN\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\n${address ? `Address: ${address}\n` : ""}${yards ? `Yards: ${yards}\n` : ""}${color ? `Color: ${color}\n` : ""}${notes ? `Notes: ${notes}` : ""}`;
+      smsBody = `Mulch Company MN: Your website just got a new lead! Check your email for full details. Reply STOP to opt out.`;
     } else if (formType === "know") {
       subject = `New Install Request — Mulch Company MN`;
       textBody = `NEW INSTALL REQUEST
@@ -60,7 +60,7 @@ Color: ${color}
 ${notes ? `Notes: ${notes}` : ""}
 ─────────────────────────
 Mulch Company MN`;
-      smsBody = `New install request - Mulch Co MN\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\n${address ? `Address: ${address}\n` : ""}Yards: ${yards}\nColor: ${color}${notes ? `\nNotes: ${notes}` : ""}`;
+      smsBody = `Mulch Company MN: Your website just got a new lead! Check your email for full details. Reply STOP to opt out.`;
     } else if (formType === "question") {
       subject = `New General Inquiry — Mulch Company MN`;
       textBody = `NEW GENERAL INQUIRY
@@ -72,7 +72,7 @@ ${address ? `Address: ${address}` : ""}
 Message: ${message}
 ─────────────────────────
 Mulch Company MN`;
-      smsBody = `New question - Mulch Co MN\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\n${address ? `Address: ${address}\n` : ""}Msg: ${message}`;
+      smsBody = `Mulch Company MN: Your website just got a new lead! Check your email for full details. Reply STOP to opt out.`;
     } else {
       return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
     }
