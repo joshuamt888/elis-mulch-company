@@ -14,41 +14,13 @@ export const metadata: Metadata = {
 }
 
 const mulchColors = [
-  {
-    name: 'Black Mulch',
-    image: '/images/mulch-colors/black-mulch.png',
-    price: '$32/cubic yard',
-  },
-  {
-    name: 'Dark Brown Mulch',
-    image: '/images/mulch-colors/dark-brown-mulch.png',
-    price: '$32/cubic yard',
-  },
-  {
-    name: 'Gold Mulch',
-    image: '/images/mulch-colors/gold-mulch.png',
-    price: '$32/cubic yard',
-  },
-  {
-    name: 'Natural Mulch',
-    image: '/images/mulch-colors/natural-mulch.png',
-    price: '$22/cubic yard',
-  },
-  {
-    name: 'Red Mulch',
-    image: '/images/mulch-colors/red-mulch.png',
-    price: '$32/cubic yard',
-  },
-  {
-    name: 'Western Red Cedar Mulch',
-    image: '/images/mulch-colors/western-red-cedar-mulch.png',
-    price: '$65/cubic yard',
-  },
-  {
-    name: 'Playground Chips',
-    image: '/images/mulch-colors/playground-chips.png',
-    price: '$32/cubic yard',
-  },
+  { name: 'Black Mulch', image: '/images/mulch-colors/black-mulch.png' },
+  { name: 'Dark Brown Mulch', image: '/images/mulch-colors/dark-brown-mulch.png' },
+  { name: 'Gold Mulch', image: '/images/mulch-colors/gold-mulch.png' },
+  { name: 'Natural Mulch', image: '/images/mulch-colors/natural-mulch.png' },
+  { name: 'Red Mulch', image: '/images/mulch-colors/red-mulch.png' },
+  { name: 'Western Red Cedar Mulch', image: '/images/mulch-colors/western-red-cedar-mulch.png' },
+  { name: 'Playground Chips', image: '/images/mulch-colors/playground-chips.png' },
 ]
 
 export default function OurColorsPage() {
@@ -87,11 +59,10 @@ export default function OurColorsPage() {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
               </div>
-              <div className="p-4 flex-1 flex flex-col justify-between">
-                <p className="font-outfit font-bold text-bark text-sm leading-tight mb-1">
+              <div className="p-4">
+                <p className="font-outfit font-bold text-bark text-sm leading-tight">
                   {color.name}
                 </p>
-                <p className="text-blossom font-semibold text-sm">{color.price}</p>
               </div>
             </div>
           ))}
