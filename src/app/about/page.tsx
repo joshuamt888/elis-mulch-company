@@ -77,15 +77,11 @@ export default function AboutPage() {
               Our Story
             </h2>
             <p className="text-bark leading-relaxed text-lg">
-              Mulch Company was founded by two brothers — Eli and
-              Owen — right here in Chanhassen, Minnesota. What started as
-              helping neighbors with their yards turned into a full-service
-              mulch installation company serving the entire western Twin Cities metro.
-            </p>
-            <p className="text-bark leading-relaxed text-lg mt-4">
-              We&apos;re not a big box store. We&apos;re not a franchise.
-              We&apos;re your neighbors — and we take pride in making your yard
-              look incredible, season after season.
+              Mulch Company MN is a family-owned business based in Chanhassen,
+              founded by brothers Eli and Owen Sweeney. We deliver and install
+              mulch for homeowners and commercial properties across the western
+              Twin Cities metro. Our goal is simple — do the job right and make
+              the process easy from start to finish.
             </p>
           </div>
           <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden">
