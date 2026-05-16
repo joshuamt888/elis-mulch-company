@@ -576,8 +576,8 @@ function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
   );
 }
 
-// ─── Main Component — 3-button landing ───────────────────────────────────
-type Mode = null | "estimate" | "know" | "question";
+// ─── Main Component — 2-button landing ───────────────────────────────────
+type Mode = null | "estimate" | "know";
 
 export default function PriceMulchForm() {
   const [mode, setMode] = useState<Mode>(null);
@@ -589,7 +589,6 @@ export default function PriceMulchForm() {
 
   if (mode === "estimate") return <JobberEstimateForm onBack={() => setMode(null)} />;
   if (mode === "know") return <KnowForm onBack={() => setMode(null)} onSuccess={() => setSuccess(true)} />;
-  if (mode === "question") return <QuestionForm onBack={() => setMode(null)} onSuccess={() => setSuccess(true)} />;
 
   const buttons = [
     {
@@ -612,16 +611,6 @@ export default function PriceMulchForm() {
       ),
       label: "Price It Out",
       sub: "See your exact price instantly — then book",
-    },
-    {
-      mode: "question" as Mode,
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-      ),
-      label: "I Have a General Question",
-      sub: "Not sure yet — just reach out",
     },
   ];
 
