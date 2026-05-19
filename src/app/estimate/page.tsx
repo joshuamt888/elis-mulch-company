@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PriceMulchForm from "@/components/estimate/PriceMulchForm";
@@ -13,6 +14,18 @@ export const metadata: Metadata = {
 export default function EstimatePage() {
   return (
     <>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-B8WJQTDVKX"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-B8WJQTDVKX');
+        `}
+      </Script>
       <Header />
       <main className="bg-[#faf7f2] min-h-screen pt-24 pb-16">
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
