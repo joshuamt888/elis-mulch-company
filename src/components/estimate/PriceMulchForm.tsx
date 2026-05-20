@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import JobberEstimateForm from "./JobberEstimateForm";
 import Link from "next/link";
 import AddressAutocomplete from "./AddressAutocomplete";
@@ -47,7 +47,7 @@ interface Bed {
   width: string;
 }
 
-function YardCalculator({ onFill }: { onFill: (yards: string) => void }) {
+function YardCalculator({ onFill }: { onFill?: (yards: string) => void }) {
   const [beds, setBeds] = useState<Bed[]>([{ length: "", width: "" }]);
   const [depth, setDepth] = useState(2);
   const [result, setResult] = useState<{ sqft: number; yards: number } | null>(null);
@@ -77,7 +77,7 @@ function YardCalculator({ onFill }: { onFill: (yards: string) => void }) {
     if (totalSqft <= 0) return;
     const yards = Math.ceil((totalSqft * (depth / 12)) / 27);
     setResult({ sqft: Math.round(totalSqft), yards });
-    onFill(String(yards));
+    onFill?.(String(yards));
   };
 
   return (
@@ -154,7 +154,7 @@ function YardCalculator({ onFill }: { onFill: (yards: string) => void }) {
         onClick={calculate}
         className="w-full bg-blossom/10 hover:bg-blossom/20 text-bark font-semibold py-2.5 rounded-lg transition-colors text-sm"
       >
-        Calculate &amp; Fill In
+        Calculate
       </button>
 
       {result !== null && (
@@ -163,7 +163,7 @@ function YardCalculator({ onFill }: { onFill: (yards: string) => void }) {
             Total area: <strong className="text-sand">{result.sqft} sq ft</strong>
           </p>
           <p className="text-bark text-xs">
-            ≈ <strong className="text-sand">{result.yards} cubic yards</strong> — filled in above
+            You need approximately <strong className="text-sand">{result.yards} cubic yards</strong>
           </p>
         </div>
       )}
@@ -576,19 +576,63 @@ function QuestionForm({ onBack, onSuccess }: { onBack: () => void; onSuccess: ()
   );
 }
 
+// ─── Price It Yourself Form (Button 2) — Calculator + Jobber booking ─────
+function JobberPriceForm({ onBack }: { onBack: () => void }) {
+  useEffect(() => {
+    if (!document.querySelector('link[href*="work_request_embed.css"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://d3ey4dbjkt2f6s.cloudfront.net/assets/external/work_request_embed.css";
+      link.media = "screen";
+      document.head.appendChild(link);
+    }
+    const scriptId = "jobber-price-form-script";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://d3ey4dbjkt2f6s.cloudfront.net/assets/static_link/work_request_embed_snippet.js";
+      script.setAttribute("clienthub_id", "ba85d565-2eb6-413d-b8ee-fcaefbe58a8d-4657235");
+      script.setAttribute(
+        "form_url",
+        "https://clienthub.getjobber.com/client_hubs/ba85d565-2eb6-413d-b8ee-fcaefbe58a8d/public/work_request/embedded_work_request_form?form_id=4657235"
+      );
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  return (
+    <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-6 sm:p-8">
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={onBack} className="text-bark-light hover:text-sand transition-colors" aria-label="Go back">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h2 className="text-xl font-outfit font-bold text-sand">Price it out yourself!</h2>
+      </div>
+
+      <div className="mb-6">
+        <p className="text-bark text-sm font-medium mb-1">Not sure how many yards you need?</p>
+        <p className="text-bark-light text-xs mb-3">Enter your bed dimensions to calculate.</p>
+        <YardCalculator />
+      </div>
+
+      <hr className="border-sand/10 mb-6" />
+
+      <p className="text-bark text-sm font-medium mb-4">Ready to book? Fill out the form below:</p>
+      <div id="ba85d565-2eb6-413d-b8ee-fcaefbe58a8d-4657235" />
+    </div>
+  );
+}
+
 // ─── Main Component — 2-button landing ───────────────────────────────────
 type Mode = null | "estimate" | "know";
 
 export default function PriceMulchForm() {
   const [mode, setMode] = useState<Mode>(null);
-  const [success, setSuccess] = useState(false);
-
-  if (success) {
-    return <SuccessScreen onReset={() => { setMode(null); setSuccess(false); }} />;
-  }
 
   if (mode === "estimate") return <JobberEstimateForm onBack={() => setMode(null)} />;
-  if (mode === "know") return <KnowForm onBack={() => setMode(null)} onSuccess={() => setSuccess(true)} />;
+  if (mode === "know") return <JobberPriceForm onBack={() => setMode(null)} />;
 
   const buttons = [
     {
@@ -599,8 +643,8 @@ export default function PriceMulchForm() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       ),
-      label: "Come Measure My Site",
-      sub: "Free in-person estimate — we come to you",
+      label: "Free in person Estimate",
+      sub: "We come out, measure your beds, and give you an exact price",
     },
     {
       mode: "know" as Mode,
@@ -609,8 +653,8 @@ export default function PriceMulchForm() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
         </svg>
       ),
-      label: "Price It Out",
-      sub: "See your exact price instantly — then book",
+      label: "Price it out yourself!",
+      sub: "Use our calculator to estimate yards, then book instantly",
     },
   ];
 
