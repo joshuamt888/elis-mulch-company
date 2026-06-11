@@ -5,22 +5,20 @@ import { useEffect, useRef } from "react";
 interface Props {
   onBack: () => void;
   formId?: string;
-  clientHubId?: string;
   title?: string;
   description?: string;
 }
 
 const DEFAULT_FORM_ID = "4762282";
-const DEFAULT_CLIENTHUB_ID = "ba85d565-2eb6-413d-b8ee-fcaefbe58a8d";
+const CLIENTHUB_ID = "ba85d565-2eb6-413d-b8ee-fcaefbe58a8d";
 
 export default function JobberEstimateForm({
   onBack,
   formId = DEFAULT_FORM_ID,
-  clientHubId = DEFAULT_CLIENTHUB_ID,
   title = "Free In-Person Estimate",
   description = "We'll come out, measure your beds, and give you an exact price — no obligation.",
 }: Props) {
-  const mountId = `${clientHubId}-${formId}`;
+  const mountId = `${CLIENTHUB_ID}-${formId}`;
   const mounted = useRef(false);
 
   useEffect(() => {
@@ -46,11 +44,11 @@ export default function JobberEstimateForm({
       script.setAttribute("clienthub_id", mountId);
       script.setAttribute(
         "form_url",
-        `https://clienthub.getjobber.com/client_hubs/${clientHubId}/public/work_request/embedded_work_request_form?form_id=${formId}`
+        `https://clienthub.getjobber.com/client_hubs/${CLIENTHUB_ID}/public/work_request/embedded_work_request_form?form_id=${formId}`
       );
       document.body.appendChild(script);
     }
-  }, [mountId, formId, clientHubId]);
+  }, [mountId, formId]);
 
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-6 sm:p-8">

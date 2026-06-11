@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import JobberEstimateForm from "./JobberEstimateForm";
 import Link from "next/link";
 import AddressAutocomplete from "./AddressAutocomplete";
@@ -626,59 +626,35 @@ function JobberPriceForm({ onBack }: { onBack: () => void }) {
 }
 
 // ─── Main Component — 2-button landing ───────────────────────────────────
-const NEW_CLIENTHUB_ID = "7e4b1236-143f-44e6-8558-33fda4f03d11";
-
-type Mode = null | "photo-quote" | "in-person";
+type Mode = null | "estimate" | "know";
 
 export default function PriceMulchForm() {
   const [mode, setMode] = useState<Mode>(null);
 
-  if (mode === "photo-quote") {
-    return (
-      <JobberEstimateForm
-        onBack={() => setMode(null)}
-        clientHubId={NEW_CLIENTHUB_ID}
-        formId="4866430"
-        title="Submit Photos for a Quote"
-        description="Upload photos of your beds and we'll get back to you with a price by phone or text — no appointment needed."
-      />
-    );
-  }
+  if (mode === "estimate") return <JobberEstimateForm onBack={() => setMode(null)} />;
+  if (mode === "know") return <JobberPriceForm onBack={() => setMode(null)} />;
 
-  if (mode === "in-person") {
-    return (
-      <JobberEstimateForm
-        onBack={() => setMode(null)}
-        clientHubId={NEW_CLIENTHUB_ID}
-        formId="4866221"
-        title="Schedule a Free In-Person Estimate"
-        description="We come out, measure your beds, and give you an exact price on the spot. Plan to be home — we'll need to walk the property with you."
-      />
-    );
-  }
-
-  const buttons: { mode: Mode; icon: React.ReactNode; label: string; sub: string; badge?: string }[] = [
+  const buttons = [
     {
-      mode: "photo-quote",
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-      ),
-      label: "Get a Quote by Photos",
-      sub: "Submit photos and we'll call or text you back with a price — no appointment needed",
-    },
-    {
-      mode: "in-person",
+      mode: "estimate" as Mode,
       icon: (
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       ),
-      label: "Schedule a Free In-Person Estimate",
-      sub: "We come out, measure your beds, and give you an exact price — plan to be home",
+      label: "Free in person Estimate",
+      sub: "We come out, measure your beds, and give you an exact price",
+    },
+    {
+      mode: "know" as Mode,
+      icon: (
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        </svg>
+      ),
+      label: "Price it out yourself!",
+      sub: "Use our calculator to estimate yards, then book instantly",
     },
   ];
 
