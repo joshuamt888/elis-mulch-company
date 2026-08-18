@@ -142,6 +142,26 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Partners */}
+      <section className="bg-white py-16">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-sand mb-4">
+            Who We Work With
+          </h2>
+          <p className="text-bark mb-8">
+            We install mulch for Freshwater Landscaping and refer them landscaping leads in return.
+          </p>
+          <a
+            href="https://www.freshwaterlandscaping.com/services/mulch-installation.html"
+            target="_blank"
+            rel="noopener"
+            className="inline-block bg-soil rounded-xl px-8 py-4 text-sand font-semibold hover:bg-blossom hover:text-white transition-colors"
+          >
+            Freshwater Landscaping — Mulch Installation
+          </a>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-blossom py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
