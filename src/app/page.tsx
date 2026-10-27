@@ -4,7 +4,6 @@ import Hero from "@/components/garden/Hero";
 import Intro from "@/components/garden/Intro";
 import Seasons from "@/components/garden/Seasons";
 import Steps from "@/components/garden/Steps";
-import Services from "@/components/garden/Services";
 import BeforeAfter from "@/components/garden/BeforeAfter";
 import Favourites from "@/components/garden/Favourites";
 import Areas from "@/components/garden/Areas";
@@ -18,7 +17,6 @@ export default function Home() {
         <Intro />
         <Seasons />
         <Steps />
-        <Services />
         <BeforeAfter />
         <Favourites />
         <Areas />

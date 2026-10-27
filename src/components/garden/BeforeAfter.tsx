@@ -61,14 +61,14 @@ export default function BeforeAfter() {
           </h2>
         </div>
         <div className="ba-anim">
-          <svg className="ba-svg" viewBox="0 0 2400 1600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A bed of weathered grey mulch becomes a bed of fresh black mulch">
+          <svg className="ba-svg" viewBox="0 0 2400 1600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A patchy bed of weathered mulch becomes a bed of fresh dark brown mulch">
             <defs>
               <clipPath id="ba-clip">
                 <path id="ba-blob" d={B0} />
               </clipPath>
             </defs>
-            <image href="/images/garden/before.jpg" width="2400" height="1600" preserveAspectRatio="xMidYMid slice" />
-            <image href="/images/garden/after.jpg" width="2400" height="1600" preserveAspectRatio="xMidYMid slice" clipPath="url(#ba-clip)" />
+            <image href="/images/garden/before.webp" width="2400" height="1600" preserveAspectRatio="xMidYMid slice" />
+            <image href="/images/garden/after.webp" width="2400" height="1600" preserveAspectRatio="xMidYMid slice" clipPath="url(#ba-clip)" />
           </svg>
           <span className="tag tag-before">Before</span>
           <span className="tag tag-after">After</span>
@@ -82,15 +82,15 @@ export default function BeforeAfter() {
         </div>
         <div className="ba-static">
           <figure>
-            <img src="/images/garden/before.jpg" alt="Before: a bed of weathered, faded grey mulch" loading="lazy" />
+            <img src="/images/garden/before.webp" alt="Before: a patchy bed of old, faded mulch with weeds" loading="lazy" />
             <figcaption>Before</figcaption>
           </figure>
           <figure>
-            <img src="/images/garden/after.jpg" alt="After: the same bed covered in fresh black mulch" loading="lazy" />
+            <img src="/images/garden/after.webp" alt="After: the same bed covered in a fresh layer of dark brown mulch" loading="lazy" />
             <figcaption>After</figcaption>
           </figure>
         </div>
-        <p className="ba-note">Weathered mulch on one side, fresh black mulch on the other. Scroll to let it spread.</p>
+        <p className="ba-note">The same bed, weathered and then freshly mulched. Scroll to let it spread.</p>
       </div>
     </section>
   );

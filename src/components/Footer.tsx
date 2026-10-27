@@ -41,7 +41,9 @@ export default function Footer() {
     const wide = (root.current?.clientWidth ?? 0) >= 700;
     const s = auto ? 0.7 + Math.random() * 0.2 : wide ? 0.8 + Math.random() * 0.25 : 0.7 + Math.random() * 0.2;
     const h = auto ? 120 + Math.random() * 50 : wide ? 140 + Math.random() * 60 : 120 + Math.random() * 50;
-    setPlants((ps) => [...ps.slice(-(MAX - 1)), { id: nextId++, x, y, p: makePlant(seed, kind, h), s }]);
+    // A click grows its flower right where you clicked; near the top it is shortened so it still fits.
+    const hh = auto ? h : Math.max(50, Math.min(h, (y - 8) / s));
+    setPlants((ps) => [...ps.slice(-(MAX - 1)), { id: nextId++, x, y, p: makePlant(seed, kind, hh), s }]);
   };
 
   // A few are planted on their own the first time the footer shows up.
@@ -67,7 +69,7 @@ export default function Footer() {
     if ((e.target as HTMLElement).closest("a, button")) return;
     const el = root.current!;
     const r = el.getBoundingClientRect();
-    plant(e.clientX - r.left, el.clientHeight - 22 - lift());
+    plant(e.clientX - r.left, e.clientY - r.top);
   };
 
   return (
@@ -93,8 +95,8 @@ export default function Footer() {
             </a>
           </div>
           <p className="plant-hint">
-            <span className="fine-only">Click anywhere down here to plant something.</span>
-            <span className="touch-only">Tap anywhere down here to plant something.</span>
+            <span className="fine-only">Click anywhere down here and a flower grows right there.</span>
+            <span className="touch-only">Tap anywhere down here and a flower grows right there.</span>
           </p>
           <div className="foot-grid">
             <div>
