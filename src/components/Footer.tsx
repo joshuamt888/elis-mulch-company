@@ -1,140 +1,139 @@
-import Link from "next/link";
+"use client";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { reduced } from "@/components/garden/gsap";
+import { makePlant, type Kind, type Plant } from "@/components/garden/growth";
+import { PlantG, growPlant } from "@/components/garden/Flora";
 import Image from "next/image";
+import Link from "next/link";
+
+type Planted = { id: number; x: number; y: number; p: Plant; s: number };
+let nextId = 1;
+const MAX = 36;
+const lift = () => (typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches ? 64 : 0); // the phone call bar covers the bottom edge
+
+function Grow({ f }: { f: Planted }) {
+  const ref = useRef<SVGGElement>(null);
+  useLayoutEffect(() => {
+    if (reduced() || !ref.current) return;
+    const tl = growPlant(ref.current, 1.6);
+    return () => {
+      tl.kill();
+    };
+  }, []);
+  return (
+    <g ref={ref}>
+      <ellipse cx={f.x} cy={f.y + 1} rx={16 * f.s} ry={4 * f.s} fill="#6b5640" opacity={0.18} />
+      <g className="fsway" style={{ animationDelay: `${-(f.id % 7) * 0.6}s` }}>
+        <PlantG p={f.p} x={f.x} y={f.y} s={f.s} />
+      </g>
+    </g>
+  );
+}
 
 export default function Footer() {
-  const year = new Date().getFullYear();
+  const root = useRef<HTMLElement>(null);
+  const [plants, setPlants] = useState<Planted[]>([]);
+
+  const plant = (x: number, y: number, auto = false) => {
+    const seed = Math.floor(Math.random() * 1e6);
+    const kind: Kind = Math.random() < 0.8 ? "flower" : "fern";
+    // Everything goes in the soil strip under the text, sized to stay below it (wider screens get a little more height).
+    const wide = (root.current?.clientWidth ?? 0) >= 700;
+    const s = auto ? 0.7 + Math.random() * 0.2 : wide ? 0.8 + Math.random() * 0.25 : 0.7 + Math.random() * 0.2;
+    const h = auto ? 120 + Math.random() * 50 : wide ? 140 + Math.random() * 60 : 120 + Math.random() * 50;
+    setPlants((ps) => [...ps.slice(-(MAX - 1)), { id: nextId++, x, y, p: makePlant(seed, kind, h), s }]);
+  };
+
+  // A few are planted on their own the first time the footer shows up.
+  useEffect(() => {
+    const el = root.current!;
+    let done = false;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting || done) return;
+        done = true;
+        const w = el.clientWidth;
+        const h = el.clientHeight;
+        const xs = w < 700 ? [0.12, 0.5, 0.88] : [0.05, 0.15, 0.36, 0.64, 0.85, 0.95];
+        xs.forEach((fx, i) => setTimeout(() => plant(fx * w, h - 22 - lift(), true), reduced() ? 0 : i * 260));
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const onClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest("a, button")) return;
+    const el = root.current!;
+    const r = el.getBoundingClientRect();
+    plant(e.clientX - r.left, el.clientHeight - 22 - lift());
+  };
 
   return (
-    <footer className="bg-[#faf6f0] border-t border-stone-200 pt-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 3-column grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-          {/* Company Info */}
-          <div>
-            <div className="mb-3">
-              <Image src="/images/logos/logo-horizontal.png" alt="Mulch Company" width={220} height={70} className="w-auto h-14" />
+    <div className="gd">
+      <footer ref={root} className="foot" id="contact" onClick={onClick}>
+        <svg className="foot-bed" aria-hidden="true">
+          {plants.map((f) => (
+            <Grow key={f.id} f={f} />
+          ))}
+        </svg>
+        <div className="foot-inner">
+          <p className="eyebrow">Ready when you are</p>
+          <h2>
+            A hassle-free <em>yard</em>.
+          </h2>
+          <p className="foot-lede">Schedule your free in-person quote today.</p>
+          <div className="btns">
+            <Link className="btn btn-accent" href="/estimate">
+              Price mulch
+            </Link>
+            <a className="btn btn-ghost" href="tel:9523144797">
+              Call (952) 314-4797
+            </a>
+          </div>
+          <p className="plant-hint">
+            <span className="fine-only">Click anywhere down here to plant something.</span>
+            <span className="touch-only">Tap anywhere down here to plant something.</span>
+          </p>
+          <div className="foot-grid">
+            <div>
+              <strong>Where</strong>
+              Chanhassen, MN
+              <br />
+              serving the western Twin Cities metro
             </div>
-            <p className="text-[#3d2b1f] text-sm leading-relaxed">
-              Professional mulch installation serving Chanhassen and the western Twin Cities metro. Expert crews, clean work, hassle-free yards.
+            <div>
+              <strong>Talk</strong>
+              <a href="tel:9523144797">(952) 314-4797</a>
+              <br />
+              <a href="mailto:info@mulchcompanymn.com">info@mulchcompanymn.com</a>
+              <br />
+              Licensed &amp; insured
+            </div>
+            <div>
+              <strong>Look around</strong>
+              <Link href="/services/mulch-installation">Mulch Installation</Link>
+              <br />
+              <Link href="/tools/mulch-calculator">Mulch Calculator</Link> · <Link href="/tools/sod-calculator">Sod</Link> · <Link href="/tools/rock-calculator">Rock</Link>
+              <br />
+              <Link href="/about">About</Link> · <Link href="/our-colors">Our colors</Link>
+            </div>
+          </div>
+          <div className="foot-base">
+            <Image src="/images/logos/logo-horizontal.png" alt="Mulch Company" width={160} height={51} className="foot-logo" />
+            <p>
+              &copy; 2026 Mulch Company. All rights reserved. <Link href="/terms">Terms</Link> · <Link href="/privacy">Privacy</Link> · <Link href="/sitemap-page">Sitemap</Link>
+            </p>
+            <p className="concept">
+              Website &amp; SEO by{" "}
+              <a href="https://www.steadyscaling.com" target="_blank" rel="noopener noreferrer">
+                Steady Scaling
+              </a>
             </p>
           </div>
-
-          {/* Our Service */}
-          <div>
-            <h3 className="text-sand font-outfit font-semibold text-lg mb-3">Our Service</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/services/mulch-installation"
-                  className="text-[#3d2b1f] hover:text-blossom transition-colors text-sm"
-                >
-                  Professional Mulch Installation
-                </Link>
-              </li>
-            </ul>
-
-            <h3 className="text-sand font-outfit font-semibold text-lg mb-3 mt-6">Free Tools</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/tools/mulch-calculator" className="text-[#3d2b1f] hover:text-blossom transition-colors text-sm">
-                  Mulch Calculator
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/sod-calculator" className="text-[#3d2b1f] hover:text-blossom transition-colors text-sm">
-                  Sod Calculator
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/rock-calculator" className="text-[#3d2b1f] hover:text-blossom transition-colors text-sm">
-                  Rock/Stone Calculator
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="text-sand font-outfit font-semibold text-lg mb-3">Contact</h3>
-            <ul className="space-y-2 text-[#3d2b1f] text-sm">
-              <li>
-                <a href="tel:9523144797" className="hover:text-blossom transition-colors">
-                  (952) 314-4797
-                </a>
-              </li>
-              <li>
-                <a href="mailto:info@mulchcompanymn.com" className="hover:text-blossom transition-colors">
-                  info@mulchcompanymn.com
-                </a>
-              </li>
-              <li>Chanhassen, MN</li>
-              <li>Licensed &amp; Insured</li>
-            </ul>
-          </div>
         </div>
-
-        {/* Follow Us */}
-        <div className="border-t border-stone-200 pt-8 text-center">
-          <h4 className="text-sand font-outfit font-semibold text-sm mb-4">Follow Us</h4>
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <a href="#" aria-label="Facebook" className="text-[#3d2b1f] hover:text-blossom transition-colors">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-              </svg>
-            </a>
-            <a href="#" aria-label="Instagram" className="text-[#3d2b1f] hover:text-blossom transition-colors">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-              </svg>
-            </a>
-            <a href="#" aria-label="Google" className="text-[#3d2b1f] hover:text-blossom transition-colors">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
-              </svg>
-            </a>
-          </div>
-
-          {/* Copyright */}
-          <p className="text-[#3d2b1f] text-xs mb-2">
-            &copy; {year} Mulch Company. All rights reserved.{" "}
-            &middot;{" "}
-            <Link href="/terms" className="hover:text-blossom transition-colors">
-              Terms
-            </Link>{" "}
-            &middot;{" "}
-            <Link href="/privacy" className="hover:text-blossom transition-colors">
-              Privacy
-            </Link>{" "}
-            &middot;{" "}
-            <Link href="/sitemap" className="hover:text-blossom transition-colors">
-              Sitemap
-            </Link>
-          </p>
-
-        </div>
-      </div>
-
-      {/* Agency Credit */}
-      <div className="bg-[#f0ebe0] py-3">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-2">
-          <span className="text-[#3d2b1f]/50 text-xs">Website & SEO by</span>
-          <a
-            href="https://www.steadyscaling.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 hover:opacity-80 transition-opacity"
-          >
-            <Image
-              src="/images/logos/steady-scaling-logo.webp"
-              alt="Steady Scaling"
-              width={20}
-              height={20}
-              className="rounded-sm"
-            />
-            <span className="text-[#3d2b1f]/70 text-xs font-medium">Steady Scaling</span>
-          </a>
-        </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 }

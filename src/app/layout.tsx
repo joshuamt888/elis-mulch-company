@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Outfit, Figtree, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import MobileCallBar from "@/components/MobileCallBar";
 import "./globals.css";
+import "@/components/garden/garden.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
+
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
+const playfair = Playfair_Display({ subsets: ["latin"], style: ["italic", "normal"], variable: "--font-playfair", display: "swap" });
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -163,8 +167,9 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
@@ -187,7 +192,7 @@ export default function RootLayout({
           })(window, document, "clarity", "script", "w1hg4fl8c5");
         `}</Script>
       </head>
-      <body className={`${inter.variable} ${outfit.variable} antialiased`}>
+      <body className={`${inter.variable} ${outfit.variable} ${figtree.variable} ${playfair.variable} antialiased`}>
         {children}
         <MobileCallBar />
       </body>
