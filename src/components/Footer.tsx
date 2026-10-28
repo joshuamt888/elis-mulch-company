@@ -30,7 +30,7 @@ function Grow({ f }: { f: Planted }) {
   );
 }
 
-export default function Footer({ ctaTitle, ctaText, standalone = false }: { ctaTitle?: string; ctaText?: string; standalone?: boolean } = {}) {
+export default function Footer({ ctaTitle, ctaText, standalone = false, children }: { ctaTitle?: string; ctaText?: string; standalone?: boolean; children?: React.ReactNode } = {}) {
   const root = useRef<HTMLElement>(null);
   const [plants, setPlants] = useState<Planted[]>([]);
 
@@ -103,12 +103,16 @@ export default function Footer({ ctaTitle, ctaText, standalone = false }: { ctaT
         </svg>
         <div className="foot-inner">
           {!standalone && <p className="eyebrow">Ready when you are</p>}
+          {children ?? (
+            <>
           {ctaTitle ? <h2 className="long">{ctaTitle}</h2> : (
-            <h2>
-              A hassle-free <em>yard</em>.
-            </h2>
+                <h2>
+                  A hassle-free <em>yard</em>.
+                </h2>
+              )}
+              <p className="foot-lede">{ctaText ?? "Schedule your free in-person quote today."}</p>
+            </>
           )}
-          <p className="foot-lede">{ctaText ?? "Schedule your free in-person quote today."}</p>
           {!standalone && (
             <>
           <div className="btns">

@@ -137,13 +137,8 @@ export default function Hero({ standalone = false }: { standalone?: boolean } = 
         </h1>
         <p className="lede">Expert installation for homes and businesses. Cedar, hardwood, black mulch and more.</p>
         <div className="btns">
-          {!standalone && (
-            <a className="btn btn-accent" href="/estimate">
-              Price mulch
-            </a>
-          )}
-          <a className="btn btn-ghost" href="#seasons">
-            See the seasons
+          <a className="btn btn-accent" href={standalone ? "#expect" : "/estimate"}>
+            Price mulch
           </a>
         </div>
       </div>
