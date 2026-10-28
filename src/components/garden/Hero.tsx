@@ -131,7 +131,6 @@ export default function Hero() {
         ))}
       </svg>
       <div className="hero-copy pre">
-        <p className="eyebrow">Professional mulch installation &middot; Chanhassen, MN</p>
         <h1>
           <span className="sr-only">Professional Mulch Installation in Chanhassen, MN: </span>
           Fresh mulch,<br /> <em>done right</em>.
@@ -145,7 +144,6 @@ export default function Hero() {
             See the seasons
           </a>
         </div>
-        <p className="hero-trust">Fully Insured &middot; Free In-Person Quotes &middot; Locally Owned</p>
       </div>
     </section>
   );

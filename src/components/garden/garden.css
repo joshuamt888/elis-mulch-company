@@ -461,3 +461,5 @@ a.pm-row:hover strong { color: var(--accent); }
 .gd .hero .eyebrow { text-align: center; justify-content: center; text-wrap: balance; }
 .gd .hero .hero-trust { text-wrap: balance; max-width: 34ch; margin-inline: auto; }
 @media (max-width: 700px) { .gd .hero .eyebrow::before { display: none; } .gd .hero .eyebrow { font-size: 11px; letter-spacing: 0.16em; max-width: 26ch; } .gd .hero .hero-trust { font-size: 13px; } }
+.gd .hero-copy { padding-bottom: 18px; }
+@media (max-width: 700px) { .gd .hero-copy { padding-bottom: 10px; } }
