@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[36345,["/tier-4/_next/static/chunks/33074d3ff5d0cd2d.js","/tier-4/_next/static/chunks/c4d90098b4abc498.js"],"ViewportBoundary"]
+3:I[36345,["/tier-4/_next/static/chunks/33074d3ff5d0cd2d.js","/tier-4/_next/static/chunks/c4d90098b4abc498.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+0:{"buildId":"sCIoZ4uT_C3pox1TNlcfT","rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Mulch Company MN | New site preview"}],["$","meta","1",{"name":"robots","content":"noindex, nofollow, nocache"}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
