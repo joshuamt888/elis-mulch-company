@@ -312,3 +312,51 @@ html, body { overflow-x: clip; }
 .gd .areas-go { margin-left: auto; color: var(--accent); opacity: 0; transform: translateX(-8px); transition: opacity 0.25s, transform 0.25s; }
 @media (pointer: fine) { .gd .areas-row:hover { padding-left: 16px; color: var(--accent); } .gd .areas-row:hover .areas-go { opacity: 1; transform: none; } }
 @media (max-width: 640px) { .gd .areas-cols { gap: 0 14px; } .gd .areas-row { gap: 8px; padding: 14px 0; } .gd .areas-n { display: none; } .gd .areas-name { font-size: 1.05rem; } .gd .areas-tag { display: none; } .gd .areas-go { display: none; } }
+
+/* ---------- Price Mulch: contact page ---------- */
+.pm { --accent: #e0548a; --muted: #5d5b56; --line: rgba(28, 28, 28, 0.12); background: #f7f3ee; font-family: var(--font-figtree), "Helvetica Neue", Arial, sans-serif; color: #1c1c1c; min-height: 100vh; padding: 96px clamp(16px, 5vw, 80px) 90px; }
+.pm h1, .pm h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+.pm em { font-family: var(--font-playfair), Georgia, serif; font-style: italic; font-weight: 400; }
+.pm-hero { max-width: 1240px; margin: 0 auto; text-align: center; padding-top: 24px; }
+.pm-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
+.pm-eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.pm-hero h1 { font-size: clamp(2.8rem, 7vw, 6rem); margin-top: 0.3em; }
+.pm-sub { margin: 18px auto 0; max-width: 46ch; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.5; color: #3a3631; font-weight: 300; }
+.pm-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 44px auto 0; max-width: 1000px; }
+.pm-stat { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 22px 12px; display: flex; flex-direction: column; gap: 6px; align-items: center; transition: transform 0.3s, border-color 0.3s; }
+.pm-stat b { font-size: clamp(1.15rem, 2.3vw, 1.9rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+.pm-stat span { font-size: 13px; color: var(--muted); }
+@media (pointer: fine) { a.pm-stat:hover { transform: translateY(-4px); border-color: var(--accent); } }
+.pm-grid { max-width: 1240px; margin: 56px auto 0; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 28px; align-items: start; }
+.pm-side { display: grid; gap: 20px; position: sticky; top: 88px; }
+.pm-card { background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 30px; box-shadow: 0 18px 40px -28px rgba(60, 40, 20, 0.35); }
+.pm-card h2 { font-size: 1.6rem; }
+.pm-row { display: flex; gap: 16px; align-items: flex-start; padding: 18px 0; border-top: 1px solid var(--line); }
+.pm-card h2 + .pm-row { margin-top: 18px; }
+.pm-row svg { width: 26px; height: 26px; flex: none; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; margin-top: 2px; }
+.pm-row strong { display: block; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; }
+.pm-row em { display: block; font-family: inherit; font-style: normal; font-size: 14px; color: var(--muted); margin-top: 3px; }
+.pm-row em a { color: var(--accent); font-weight: 600; }
+a.pm-row:hover strong { color: var(--accent); }
+.pm-steps { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 18px; }
+.pm-steps li { display: flex; gap: 16px; }
+.pm-steps b { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 600; flex: none; }
+.pm-steps strong { display: block; font-size: 1.1rem; margin-bottom: 2px; }
+.pm-steps span { color: var(--muted); line-height: 1.5; font-size: 15px; }
+.pm-quote { margin: 0; }
+.pm-stars { display: flex; gap: 3px; }
+.pm-stars svg { width: 20px; height: 20px; fill: #f5a524; }
+.pm-quote blockquote { margin: 14px 0 0; font-size: 1.1rem; line-height: 1.55; color: #2b2723; }
+.pm-quote figcaption { margin-top: 14px; font-size: 14px; color: var(--muted); }
+.pm-quote figcaption a { color: var(--accent); font-weight: 600; }
+.pm-form { padding: clamp(22px, 3vw, 38px); font-family: var(--font-inter), system-ui, sans-serif; }
+.pm-form > h2 { font-family: var(--font-figtree), sans-serif; }
+.pm-form-sub { margin: 8px 0 24px; color: var(--muted); font-size: 15px; }
+@media (max-width: 900px) {
+  .pm { padding-top: 84px; }
+  .pm-stats { grid-template-columns: 1fr 1fr; }
+  .pm-grid { grid-template-columns: 1fr; gap: 20px; }
+  .pm-side { position: static; order: 2; }
+  .pm-main { order: 1; }
+  .pm-card { padding: 22px; border-radius: 22px; }
+}

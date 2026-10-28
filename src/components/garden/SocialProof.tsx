@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // All 13 reviews on the Google listing (pulled 2026-10-27), customer text only, never the owner's replies. Read at https://www.google.com/maps/search/?api=1&query=Mulch+Company+MN+Chanhassen
-const REVIEWS = [
+export const REVIEWS = [
  {
   "name": "Kathy Kraemer",
   "text": "Excellent work- thorough, detailed, and great customer service. We had them mulch multiple homes. I would hire them again."
@@ -56,7 +56,7 @@ const REVIEWS = [
  }
 ];
 
-const GBP = "https://www.google.com/maps/search/?api=1&query=Mulch+Company+MN+Chanhassen";
+export const GBP = "https://www.google.com/maps/search/?api=1&query=Mulch+Company+MN+Chanhassen";
 
 const Stars = () => (
   <div className="sp-stars" role="img" aria-label="5 out of 5 stars">
@@ -91,7 +91,7 @@ export default function SocialProof() {
           <span className="sp-big">5.0</span>
           <div>
             <Stars />
-            <p>{REVIEWS.length} reviews on Google</p>
+            <p>rating on Google</p>
           </div>
         </div>
         <Link className="sp-link" href={GBP} target="_blank" rel="noopener noreferrer"><G /> Read them on Google</Link>

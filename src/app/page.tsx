@@ -16,11 +16,11 @@ export default function Home() {
       <main className="gd">
         <Hero />
         <Intro />
-        <Seasons />
-        <Steps />
         <BeforeAfter />
         <SocialProof />
+        <Steps />
         <Favourites />
+        <Seasons />
         <Areas />
       </main>
       <Footer />
