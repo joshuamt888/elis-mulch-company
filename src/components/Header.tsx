@@ -4,8 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MobileMenu from "./MobileMenu";
+import { AREAS } from "@/lib/areas";
 
-const areas = ["Chanhassen", "Eden Prairie", "Chaska", "Shakopee", "Victoria", "Waconia", "Excelsior", "Minnetonka", "Shorewood", "Prior Lake", "Savage", "Carver"];
+const areas = AREAS.map((a) => a.name);
 
 const tools = [
   { name: "Mulch Calculator", href: "/tools/mulch-calculator" },
@@ -45,7 +46,7 @@ export default function Header() {
             <div className="relative">
               <button onClick={() => setOpen(open === "areas" ? null : "areas")} className={`flex items-center ${link}`} aria-expanded={open === "areas"}>Areas {chevron}</button>
               {open === "areas" && (
-                <div className={`${panel} max-h-80 overflow-y-auto`}>
+                <div className={`${panel} w-[27rem]! grid grid-cols-2 gap-x-1 max-h-[72vh] overflow-y-auto`}>
                   {areas.map((a) => (
                     <Link key={a} href={`/${a.toLowerCase().replace(/\s+/g, "-")}-mulch-delivery`} onClick={() => setOpen(null)} className={item}>{a}</Link>
                   ))}

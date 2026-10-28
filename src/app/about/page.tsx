@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AREAS } from "@/lib/areas";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -29,20 +30,7 @@ const values = [
   },
 ];
 
-const cities = [
-  "Chanhassen",
-  "Eden Prairie",
-  "Chaska",
-  "Shakopee",
-  "Victoria",
-  "Waconia",
-  "Excelsior",
-  "Minnetonka",
-  "Shorewood",
-  "Prior Lake",
-  "Savage",
-  "Carver",
-];
+const cities = AREAS.map((a) => a.name);
 
 export default function AboutPage() {
   return (

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { AREAS, areaHref } from "@/lib/areas";
 
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Excelsior, MN",
@@ -12,19 +13,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const nearbyAreas = [
-  { name: "Chanhassen", href: "/chanhassen-mulch-delivery" },
-  { name: "Eden Prairie", href: "/eden-prairie-mulch-delivery" },
-  { name: "Chaska", href: "/chaska-mulch-delivery" },
-  { name: "Shakopee", href: "/shakopee-mulch-delivery" },
-  { name: "Victoria", href: "/victoria-mulch-delivery" },
-  { name: "Waconia", href: "/waconia-mulch-delivery" },
-  { name: "Minnetonka", href: "/minnetonka-mulch-delivery" },
-  { name: "Shorewood", href: "/shorewood-mulch-delivery" },
-  { name: "Prior Lake", href: "/prior-lake-mulch-delivery" },
-  { name: "Savage", href: "/savage-mulch-delivery" },
-  { name: "Carver", href: "/carver-mulch-delivery" },
-];
+const nearbyAreas = AREAS.filter((a) => a.slug !== "excelsior").map((a) => ({ name: a.name, href: areaHref(a.slug) }));
 
 export default function ExcelsiorMulchDeliveryPage() {
   return (

@@ -3,6 +3,7 @@ import { Inter, Outfit, Figtree, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import MobileCallBar from "@/components/MobileCallBar";
 import "./globals.css";
+import { AREAS } from "@/lib/areas";
 import "@/components/garden/garden.css";
 
 const inter = Inter({
@@ -114,18 +115,7 @@ export default function RootLayout({
           longitude: -93.5308,
         },
         areaServed: [
-          { "@type": "Place", name: "Chanhassen, MN" },
-          { "@type": "Place", name: "Eden Prairie, MN" },
-          { "@type": "Place", name: "Chaska, MN" },
-          { "@type": "Place", name: "Shakopee, MN" },
-          { "@type": "Place", name: "Victoria, MN" },
-          { "@type": "Place", name: "Waconia, MN" },
-          { "@type": "Place", name: "Excelsior, MN" },
-          { "@type": "Place", name: "Minnetonka, MN" },
-          { "@type": "Place", name: "Shorewood, MN" },
-          { "@type": "Place", name: "Prior Lake, MN" },
-          { "@type": "Place", name: "Savage, MN" },
-          { "@type": "Place", name: "Carver, MN" },
+          ...AREAS.map((a) => ({ "@type": "Place", name: `${a.name}, MN` })),
           { "@type": "Place", name: "Minnesota" },
         ],
         contactPoint: {

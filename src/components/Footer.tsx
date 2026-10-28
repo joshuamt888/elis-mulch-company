@@ -124,7 +124,7 @@ export default function Footer() {
               <strong>Where</strong>
               Chanhassen, MN
               <br />
-              serving the western Twin Cities metro
+              serving the Twin Cities metro
             </div>
             <div>
               <strong>Talk</strong>
