@@ -47,11 +47,9 @@ export const metadata: Metadata = {
     description:
       "Professional mulch installation in Chanhassen & the western Twin Cities metro. Free in-person quotes. Locally owned.",
     siteName: "Mulch Company MN",
-    images: [{ url: "https://mulchcompanymn.com/images/og-logo.png", width: 1200, height: 630, alt: "Mulch Company MN" }],
   },
   twitter: {
-    card: "summary_large_image",
-    images: ["https://mulchcompanymn.com/images/og-logo.png"],
+    card: "summary",
     title: "Mulch Installation Chanhassen MN | Mulch Company MN",
     description:
       "Professional mulch installation in Chanhassen & the western Twin Cities metro. Free in-person quotes. Locally owned.",
