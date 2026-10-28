@@ -30,7 +30,7 @@ function Grow({ f }: { f: Planted }) {
   );
 }
 
-export default function Footer() {
+export default function Footer({ ctaTitle, ctaText }: { ctaTitle?: string; ctaText?: string } = {}) {
   const root = useRef<HTMLElement>(null);
   const [plants, setPlants] = useState<Planted[]>([]);
 
@@ -103,10 +103,12 @@ export default function Footer() {
         </svg>
         <div className="foot-inner">
           <p className="eyebrow">Ready when you are</p>
-          <h2>
-            A hassle-free <em>yard</em>.
-          </h2>
-          <p className="foot-lede">Schedule your free in-person quote today.</p>
+          {ctaTitle ? <h2 className="long">{ctaTitle}</h2> : (
+            <h2>
+              A hassle-free <em>yard</em>.
+            </h2>
+          )}
+          <p className="foot-lede">{ctaText ?? "Schedule your free in-person quote today."}</p>
           <div className="btns">
             <Link className="btn btn-accent" href="/estimate">
               Price mulch

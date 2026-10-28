@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/garden/PageHero";
 import Why from "@/components/garden/Why";
-import CtaBand from "@/components/garden/CtaBand";
 import MulchTypes from "@/components/garden/MulchTypes";
 import Favourites from "@/components/garden/Favourites";
 import SocialProof from "@/components/garden/SocialProof";
@@ -161,14 +160,8 @@ export default function MulchInstallationPage() {
         <SocialProof />
         <Faq items={allFaqs} title="Frequently Asked Questions" />
         <Areas />
-        <CtaBand
-          title="Let Us Handle the Hard Part"
-          text="Get a free in-person quote. We'll measure your beds, recommend the right mulch, and handle the full installation. No heavy lifting, no mess."
-          primary="Price Mulch"
-          secondary="Call Us Now"
-        />
       </main>
-      <Footer />
+      <Footer ctaTitle="Let Us Handle the Hard Part" ctaText="Get a free in-person quote. We'll measure your beds, recommend the right mulch, and handle the full installation. No heavy lifting, no mess." />
     </>
   );
 }

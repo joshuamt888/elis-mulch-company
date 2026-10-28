@@ -71,16 +71,8 @@ export default function CityView(p: CityProps) {
         <Faq items={faqs} title={`Mulch questions in ${p.name}`} />
         <Areas />
 
-        <section className="cv-cta">
-          <h2>{p.ctaH2}</h2>
-          <p>{p.ctaP}</p>
-          <div className="btns">
-            <Link href="/estimate" className="btn cv-cta-btn">Price Mulch</Link>
-            <a href="tel:9523144797" className="btn cv-cta-ghost">Call (952) 314-4797</a>
-          </div>
-        </section>
       </main>
-      <Footer />
+      <Footer ctaTitle={p.ctaH2} ctaText={p.ctaP} />
     </>
   );
 }

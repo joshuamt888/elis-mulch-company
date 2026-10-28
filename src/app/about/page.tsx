@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/garden/PageHero";
 import Why from "@/components/garden/Why";
-import CtaBand from "@/components/garden/CtaBand";
 import HowStatic from "@/components/garden/HowStatic";
 import Favourites from "@/components/garden/Favourites";
 import SocialProof from "@/components/garden/SocialProof";
@@ -70,9 +69,8 @@ export default function AboutPage() {
         <Favourites />
         <SocialProof />
         <Faq items={aboutFaqs} title="About Mulch Company" />
-        <CtaBand title="Ready to get started?" primary="Get a Free Estimate" secondary="Call Us Today" />
       </main>
-      <Footer />
+      <Footer ctaTitle="Ready to get started?" ctaText="Get a free estimate or call us today." />
     </>
   );
 }
