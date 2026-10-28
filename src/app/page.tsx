@@ -5,6 +5,7 @@ import Intro from "@/components/garden/Intro";
 import Seasons from "@/components/garden/Seasons";
 import Steps from "@/components/garden/Steps";
 import BeforeAfter from "@/components/garden/BeforeAfter";
+import SocialProof from "@/components/garden/SocialProof";
 import Favourites from "@/components/garden/Favourites";
 import Areas from "@/components/garden/Areas";
 
@@ -18,6 +19,7 @@ export default function Home() {
         <Seasons />
         <Steps />
         <BeforeAfter />
+        <SocialProof />
         <Favourites />
         <Areas />
       </main>
