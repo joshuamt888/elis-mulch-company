@@ -11,7 +11,7 @@ const STEPS = [
 const N = STEPS.length;
 
 /** Pinned, scroll-driven steps: the list stays put, the active step opens, and the framed photo changes as you scroll. Click a step to jump to it. */
-export default function Steps() {
+export default function Steps({ standalone = false }: { standalone?: boolean } = {}) {
   const outer = useRef<HTMLElement>(null);
   const st = useRef<ScrollTrigger | null>(null);
   const [active, setActive] = useState(0);
@@ -62,7 +62,7 @@ export default function Steps() {
                 </li>
               ))}
             </ol>
-            <p className="hiw-cta"><Link className="btn btn-accent" href="/estimate">Price mulch</Link></p>
+            {!standalone && <p className="hiw-cta"><Link className="btn btn-accent" href="/estimate">Price mulch</Link></p>}
           </div>
         </div>
       </div>

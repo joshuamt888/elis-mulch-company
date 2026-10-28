@@ -30,7 +30,7 @@ function Grow({ f }: { f: Planted }) {
   );
 }
 
-export default function Footer({ ctaTitle, ctaText }: { ctaTitle?: string; ctaText?: string } = {}) {
+export default function Footer({ ctaTitle, ctaText, standalone = false }: { ctaTitle?: string; ctaText?: string; standalone?: boolean } = {}) {
   const root = useRef<HTMLElement>(null);
   const [plants, setPlants] = useState<Planted[]>([]);
 
@@ -102,13 +102,15 @@ export default function Footer({ ctaTitle, ctaText }: { ctaTitle?: string; ctaTe
           ))}
         </svg>
         <div className="foot-inner">
-          <p className="eyebrow">Ready when you are</p>
+          {!standalone && <p className="eyebrow">Ready when you are</p>}
           {ctaTitle ? <h2 className="long">{ctaTitle}</h2> : (
             <h2>
               A hassle-free <em>yard</em>.
             </h2>
           )}
           <p className="foot-lede">{ctaText ?? "Schedule your free in-person quote today."}</p>
+          {!standalone && (
+            <>
           <div className="btns">
             <Link className="btn btn-accent" href="/estimate">
               Price mulch
@@ -153,6 +155,8 @@ export default function Footer({ ctaTitle, ctaText }: { ctaTitle?: string; ctaTe
               </a>
             </p>
           </div>
+            </>
+          )}
         </div>
       </footer>
     </div>

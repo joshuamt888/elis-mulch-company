@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { gsap, useGSAP, SplitText, MOTION } from "@/components/garden/gsap";
 
-export default function Intro() {
+export default function Intro({ standalone = false }: { standalone?: boolean } = {}) {
   const root = useRef<HTMLElement>(null);
   useGSAP(
     () => {
@@ -26,9 +26,11 @@ export default function Intro() {
           We visit your property, quote it in person, and our crew installs fresh mulch on schedule: even coverage, clean edges, zero mess. You never lift a finger. Scroll on and
           walk through the mulch year.
         </p>
-        <a className="text-link" href="/estimate">
-          Price your mulch
-        </a>
+        {!standalone && (
+          <a className="text-link" href="/estimate">
+            Price your mulch
+          </a>
+        )}
       </div>
     </section>
   );

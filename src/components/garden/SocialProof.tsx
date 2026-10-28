@@ -79,7 +79,7 @@ const half = Math.ceil(REVIEWS.length / 2);
 const ROWS = [REVIEWS.slice(0, half), REVIEWS.slice(half)];
 
 /** Social proof: the real Google rating, then every review in two rows drifting opposite ways (still, and readable, with reduced motion). */
-export default function SocialProof() {
+export default function SocialProof({ standalone = false }: { standalone?: boolean } = {}) {
   return (
     <section className="sp" id="reviews" aria-label="Customer reviews">
       <div className="sp-head">
@@ -93,7 +93,7 @@ export default function SocialProof() {
             <p>rating on Google</p>
           </div>
         </div>
-        <Link className="sp-link" href={GBP} target="_blank" rel="noopener noreferrer"><G /> Read them on Google</Link>
+        {!standalone && <Link className="sp-link" href={GBP} target="_blank" rel="noopener noreferrer"><G /> Read them on Google</Link>}
       </div>
       <div className="sp-rows">
         {ROWS.map((row, r) => (

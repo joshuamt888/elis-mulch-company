@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function MobileCallBar() {
+  const path = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -15,7 +17,7 @@ export default function MobileCallBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (!visible) return null;
+  if (!visible || path?.startsWith("/tier-4")) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-stone-200 p-3">

@@ -26,7 +26,7 @@ const GARDEN = (() => {
     .sort((a, b) => Number(b.back) - Number(a.back));
 })();
 
-export default function Hero() {
+export default function Hero({ standalone = false }: { standalone?: boolean } = {}) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -137,9 +137,11 @@ export default function Hero() {
         </h1>
         <p className="lede">Expert installation for homes and businesses. Cedar, hardwood, black mulch and more.</p>
         <div className="btns">
-          <a className="btn btn-accent" href="/estimate">
-            Price mulch
-          </a>
+          {!standalone && (
+            <a className="btn btn-accent" href="/estimate">
+              Price mulch
+            </a>
+          )}
           <a className="btn btn-ghost" href="#seasons">
             See the seasons
           </a>
