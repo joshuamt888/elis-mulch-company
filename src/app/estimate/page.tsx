@@ -5,6 +5,10 @@ import Footer from "@/components/Footer";
 import PriceMulchForm from "@/components/estimate/PriceMulchForm";
 import Link from "next/link";
 import { AREAS } from "@/lib/areas";
+import Faq from "@/components/garden/Faq";
+import SocialProof from "@/components/garden/SocialProof";
+import { JsonLd } from "@/components/garden/JsonLd";
+import { crumbsLd, estimateFaqs, faqLd } from "@/lib/faq";
 import { REVIEWS, GBP } from "@/components/garden/SocialProof";
 
 const Stars = () => (
@@ -16,7 +20,7 @@ const Stars = () => (
 export const metadata: Metadata = {
   title: "Price Mulch | Mulch Company MN",
   description:
-    "Get a free in-person mulch estimate, request installation, or ask a question. Mulch Company MN is based in Chanhassen and serves the Twin Cities metro. Call (952) 314-4797.",
+    "Get a free in-person mulch estimate, request installation, or ask a question. Mulch Company MN serves Chanhassen and the western Twin Cities metro.",
   alternates: { canonical: "/estimate" },
 };
 
@@ -35,12 +39,13 @@ export default function EstimatePage() {
           gtag('config', 'G-B8WJQTDVKX');
         `}
       </Script>
+      <JsonLd data={[faqLd(estimateFaqs), crumbsLd([{ name: "Home", path: "/" }, { name: "Price Mulch", path: "/estimate" }])]} />
       <Header />
       <main className="pm">
         <section className="pm-hero">
           <p className="pm-eyebrow">Price mulch</p>
           <h1>
-            Let&apos;s price your <em>yard.</em>
+            <span className="sr-only">Price Mulch: </span>Let&apos;s price your <em>yard.</em>
           </h1>
           <p className="pm-sub">Tell us what you need. We visit, measure and quote it in person, free. Call, email, or fill in the form.</p>
           <div className="pm-stats">
@@ -97,6 +102,10 @@ export default function EstimatePage() {
             </div>
           </div>
         </section>
+        <div className="gd">
+          <SocialProof />
+          <Faq items={estimateFaqs} title="Quote questions" />
+        </div>
       </main>
       <Footer />
     </>

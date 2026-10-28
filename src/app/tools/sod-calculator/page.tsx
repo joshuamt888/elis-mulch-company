@@ -1,6 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { crumbsLd, faqLd, toolFaqs } from "@/lib/faq";
+import { JsonLd } from "@/components/garden/JsonLd";
+import Faq from "@/components/garden/Faq";
+import SocialProof from "@/components/garden/SocialProof";
+import ToolGuide from "@/components/garden/ToolGuide";
+import MulchTypes from "@/components/garden/MulchTypes";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -40,6 +46,7 @@ export default function SodCalculator() {
 
   return (
     <>
+      <JsonLd data={[faqLd(toolFaqs("sod")), crumbsLd([{ name: "Home", path: "/" }, { name: "Sod Calculator", path: "/tools/sod-calculator" }])]} />
       <Header />
       <main className="bg-[#faf7f2] min-h-screen pt-24 pb-16">
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
@@ -234,6 +241,12 @@ export default function SodCalculator() {
           </div>
         </div>
       </main>
+      <div className="gd">
+        <ToolGuide tool="sod" />
+        <MulchTypes />
+        <SocialProof />
+        <Faq items={toolFaqs("sod")} title="Calculator questions" />
+      </div>
       <Footer />
     </>
   );

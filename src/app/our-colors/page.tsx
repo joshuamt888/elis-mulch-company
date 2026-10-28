@@ -1,4 +1,9 @@
 import type { Metadata } from 'next'
+import { crumbsLd, faqLd, colorsFaqs } from "@/lib/faq";
+import { JsonLd } from "@/components/garden/JsonLd";
+import Faq from "@/components/garden/Faq";
+import SocialProof from "@/components/garden/SocialProof";
+import HowStatic from "@/components/garden/HowStatic";
 import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/Header'
@@ -26,6 +31,7 @@ const mulchColors = [
 export default function OurColorsPage() {
   return (
     <>
+      <JsonLd data={[faqLd(colorsFaqs), crumbsLd([{ name: "Home", path: "/" }, { name: "Our Colors", path: "/our-colors" }])]} />
       <Header />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
@@ -94,6 +100,11 @@ export default function OurColorsPage() {
 
       </main>
 
+      <div className="gd">
+        <HowStatic />
+        <SocialProof />
+        <Faq items={colorsFaqs} title="Mulch color questions" />
+      </div>
       <Footer />
     </>
   )

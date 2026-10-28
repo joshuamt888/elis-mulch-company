@@ -1,4 +1,11 @@
 import type { Metadata } from "next";
+import { crumbsLd, faqLd, serviceFaqs, serviceLd } from "@/lib/faq";
+import { JsonLd } from "@/components/garden/JsonLd";
+import Faq from "@/components/garden/Faq";
+import SocialProof from "@/components/garden/SocialProof";
+import MulchTypes from "@/components/garden/MulchTypes";
+import Favourites from "@/components/garden/Favourites";
+import Areas from "@/components/garden/Areas";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -96,6 +103,7 @@ const faqs = [
 export default function MulchInstallationPage() {
   return (
     <>
+      <JsonLd data={[faqLd(serviceFaqs), crumbsLd([{ name: "Home", path: "/" }, { name: "Mulch Installation", path: "/services/mulch-installation" }]), serviceLd("Professional mulch installation", "/services/mulch-installation")]} />
       <Header />
 
       {/* Hero Section */}
@@ -318,6 +326,13 @@ export default function MulchInstallationPage() {
         </div>
       </section>
 
+      <div className="gd">
+        <MulchTypes />
+        <Favourites />
+        <SocialProof />
+        <Faq items={serviceFaqs} title="Mulch installation questions" />
+        <Areas />
+      </div>
       <Footer />
     </>
   );

@@ -145,6 +145,7 @@ export default function Hero() {
             See the seasons
           </a>
         </div>
+        <p className="hero-trust">Fully Insured &middot; Free In-Person Quotes &middot; Locally Owned</p>
       </div>
     </section>
   );

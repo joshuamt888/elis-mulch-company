@@ -1,4 +1,10 @@
 import type { Metadata } from "next";
+import { crumbsLd, faqLd, aboutFaqs } from "@/lib/faq";
+import { JsonLd } from "@/components/garden/JsonLd";
+import Faq from "@/components/garden/Faq";
+import SocialProof from "@/components/garden/SocialProof";
+import HowStatic from "@/components/garden/HowStatic";
+import Favourites from "@/components/garden/Favourites";
 import { AREAS } from "@/lib/areas";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,6 +41,7 @@ const cities = AREAS.map((a) => a.name);
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={[faqLd(aboutFaqs), crumbsLd([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])]} />
       <Header />
 
       {/* Hero */}
@@ -173,6 +180,12 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <div className="gd">
+        <HowStatic />
+        <Favourites />
+        <SocialProof />
+        <Faq items={aboutFaqs} title="About Mulch Company" />
+      </div>
       <Footer />
     </>
   );
