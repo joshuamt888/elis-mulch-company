@@ -55,7 +55,6 @@ export default function BeforeAfter() {
     <section ref={root} className="ba" id="transformation" aria-label="Before and after">
       <div className="ba-sticky">
         <div className="ba-head">
-          <p className="eyebrow">Before &amp; after</p>
           <h2>
             Same bed, <em>fresh start</em>.
           </h2>

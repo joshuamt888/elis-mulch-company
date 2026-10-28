@@ -77,9 +77,8 @@ export default function Favourites() {
   return (
     <section ref={root} className="favs" id="favourites">
       <div className="favs-head">
-        <p className="eyebrow">Pinned up</p>
         <h2>
-          A mulch for every <em>yard</em>.
+          Mulch for every <em>yard</em>.
         </h2>
         <p className="favs-sub">We install all the major types. Your quote includes a recommendation for your landscape.</p>
       </div>

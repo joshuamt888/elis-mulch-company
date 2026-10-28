@@ -83,7 +83,6 @@ export default function SocialProof() {
   return (
     <section className="sp" id="reviews" aria-label="Customer reviews">
       <div className="sp-head">
-        <p className="eyebrow">What neighbors say</p>
         <h2>
           Every review is <em>five stars.</em>
         </h2>

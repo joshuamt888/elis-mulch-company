@@ -25,8 +25,8 @@ export default function Home() {
         <Steps />
         <Favourites />
         <Seasons />
-        <Faq items={homeFaqs} title="Mulch questions, answered" />
         <Areas />
+        <Faq items={homeFaqs} title="Mulch questions, answered" />
       </main>
       <Footer />
     </>

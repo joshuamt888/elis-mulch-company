@@ -218,7 +218,6 @@ export default function Seasons() {
         {SEASONS.map((s, i) => (
           <article key={s.name} className="season" style={{ "--sbg": s.bg, "--sink": s.ink } as React.CSSProperties}>
             <div className="season-text">
-              <p className="eyebrow">Mulch through the year · {i + 1}/4</p>
               <h2 className="season-name">
                 <em>{s.name}</em>
               </h2>

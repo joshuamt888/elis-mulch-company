@@ -115,10 +115,6 @@ export default function Footer() {
               Call (952) 314-4797
             </a>
           </div>
-          <p className="plant-hint">
-            <span className="fine-only">It grows on its own. Click anywhere down here to grow more.</span>
-            <span className="touch-only">It grows on its own. Tap anywhere down here to grow more.</span>
-          </p>
           <div className="foot-grid">
             <div>
               <strong>Where</strong>

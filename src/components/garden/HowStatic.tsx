@@ -10,7 +10,6 @@ const STEPS = [
 export default function HowStatic() {
   return (
     <section className="hws" id="how-it-works">
-      <p className="eyebrow">How it works</p>
       <h2>
         Three steps, <em>zero mess.</em>
       </h2>

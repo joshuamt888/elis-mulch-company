@@ -46,7 +46,6 @@ export default function Steps() {
             </div>
           </div>
           <div className="hiw-copy">
-            <p className="eyebrow">How it works</p>
             <h2>
               Three steps, <em>zero mess.</em>
             </h2>
