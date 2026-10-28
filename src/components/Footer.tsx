@@ -8,7 +8,7 @@ import Link from "next/link";
 
 type Planted = { id: number; x: number; y: number; p: Plant; s: number };
 let nextId = 1;
-const MAX = 36;
+const MAX = 60;
 const lift = () => (typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches ? 64 : 0); // the phone call bar covers the bottom edge
 
 function Grow({ f }: { f: Planted }) {
@@ -46,23 +46,44 @@ export default function Footer() {
     setPlants((ps) => [...ps.slice(-(MAX - 1)), { id: nextId++, x, y, p: makePlant(seed, kind, hh), s }]);
   };
 
-  // A few are planted on their own the first time the footer shows up.
+  // The garden grows itself: a full row sprouts as the footer comes into view, then a flower every so often while you are there.
   useEffect(() => {
     const el = root.current!;
-    let done = false;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    let drip: ReturnType<typeof setInterval> | undefined;
+    let started = false;
+    const base = () => el.clientHeight - 22 - lift();
+    const sow = () => {
+      const w = el.clientWidth;
+      const n = w < 700 ? 8 : 16;
+      for (let i = 0; i < n; i++) {
+        const fx = (i + 0.5) / n + (Math.random() - 0.5) * (0.6 / n);
+        timers.push(setTimeout(() => plant(fx * w, base() - Math.random() * 10, true), reduced() ? 0 : i * 170));
+      }
+    };
     const io = new IntersectionObserver(
       ([e]) => {
-        if (!e.isIntersecting || done) return;
-        done = true;
-        const w = el.clientWidth;
-        const h = el.clientHeight;
-        const xs = w < 700 ? [0.12, 0.5, 0.88] : [0.05, 0.15, 0.36, 0.64, 0.85, 0.95];
-        xs.forEach((fx, i) => setTimeout(() => plant(fx * w, h - 22 - lift(), true), reduced() ? 0 : i * 260));
+        if (e.isIntersecting && !started) {
+          started = true;
+          sow();
+        }
+        if (e.isIntersecting && !drip && !reduced()) {
+          // keep a few more coming, in random spots, until the bed is nicely full
+          drip = setInterval(() => setPlants((ps) => { if (ps.length < 26) plant(Math.random() * el.clientWidth, base() - Math.random() * 12, true); return ps; }), 1800);
+        }
+        if (!e.isIntersecting && drip) {
+          clearInterval(drip);
+          drip = undefined;
+        }
       },
-      { threshold: 0.3 }
+      { threshold: 0.05, rootMargin: "0px 0px 220px 0px" }
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      timers.forEach(clearTimeout);
+      if (drip) clearInterval(drip);
+    };
   }, []);
 
   const onClick = (e: React.MouseEvent) => {
@@ -95,8 +116,8 @@ export default function Footer() {
             </a>
           </div>
           <p className="plant-hint">
-            <span className="fine-only">Click anywhere down here and a flower grows right there.</span>
-            <span className="touch-only">Tap anywhere down here and a flower grows right there.</span>
+            <span className="fine-only">It grows on its own. Click anywhere down here to grow more.</span>
+            <span className="touch-only">It grows on its own. Tap anywhere down here to grow more.</span>
           </p>
           <div className="foot-grid">
             <div>
