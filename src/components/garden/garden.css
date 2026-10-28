@@ -445,21 +445,4 @@ a.pm-row:hover strong { color: var(--accent); }
 .gd .tg h2 { font-size: clamp(2rem, 4vw, 3.2rem); margin: 0.3em 0 0.5em; }
 .gd .tg p:not(.eyebrow) { margin-top: 1em; font-size: 1.2rem; line-height: 1.65; color: #3a3631; }
 
-/* hero centered: the copy sits in the exact middle of the screen over one tall arch photo, flowers growing around it */
-.gd .hero-arch { top: 92px; bottom: 0; height: auto; width: min(1000px, 92vw); }
-.gd .hero-arch::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(14, 10, 6, 0.5), rgba(14, 10, 6, 0.64)); }
-.gd .hero-copy { inset: 0; padding: 0 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; }
-.gd .hero h1 { font-size: clamp(2.7rem, 6.4vw, 6rem); line-height: 0.98; text-shadow: 0 2px 28px rgba(0, 0, 0, 0.35); margin: 0.2em 0 0.22em; }
-.gd .hero h1 em { color: #fff; }
-.gd .hero .lede { color: rgba(255, 255, 255, 0.94); text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35); }
-.gd .hero .eyebrow { color: #fff; }
-.gd .hero .btn-ghost { box-shadow: inset 0 0 0 1.5px #fff; color: #fff; }
-@media (pointer: fine) { .gd .hero .btn-ghost:hover { background: rgba(255, 255, 255, 0.16); } }
-.gd .hero .hero-trust { color: rgba(255, 255, 255, 0.88); text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4); }
-@media (max-width: 700px) { .gd .hero-arch { top: 84px; width: 90vw; } .gd .hero h1 { font-size: clamp(2.5rem, 12vw, 3.4rem); } }
 
-.gd .hero .eyebrow { text-align: center; justify-content: center; text-wrap: balance; }
-.gd .hero .hero-trust { text-wrap: balance; max-width: 34ch; margin-inline: auto; }
-@media (max-width: 700px) { .gd .hero .eyebrow::before { display: none; } .gd .hero .eyebrow { font-size: 11px; letter-spacing: 0.16em; max-width: 26ch; } .gd .hero .hero-trust { font-size: 13px; } }
-.gd .hero-copy { padding-bottom: 18px; }
-@media (max-width: 700px) { .gd .hero-copy { padding-bottom: 10px; } }

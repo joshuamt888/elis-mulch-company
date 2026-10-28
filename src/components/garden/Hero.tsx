@@ -133,7 +133,7 @@ export default function Hero() {
       <div className="hero-copy pre">
         <h1>
           <span className="sr-only">Professional Mulch Installation in Chanhassen, MN: </span>
-          Fresh mulch,<br /> <em>done right</em>.
+          Fresh mulch, <em>done right</em>.
         </h1>
         <p className="lede">Expert installation for homes and businesses. Cedar, hardwood, black mulch and more.</p>
         <div className="btns">
