@@ -12,7 +12,7 @@ const A = {
   cost: `It depends on the size of your beds, how deep you want the layer, and the type of mulch. That is why we quote in person: we visit your property, measure, and give you an exact price, free. You can also use our free mulch calculator to see how much you need.`,
   amount: `One cubic yard of mulch covers about 108 square feet at 3 inches deep. Multiply your bed's length by its width, then use our free mulch calculator to get cubic yards for 1 to 4 inches. Three inches is the standard depth for most flower beds.`,
   depth: `Three inches is standard for most flower beds. Go thicker for weed control, or thinner for a quick refresh. Our mulch calculator shows the cubic yards for 1, 2, 3 and 4 inches.`,
-  types: `We install hardwood, cedar, black, brown, red and playground mulch, and our colors page also shows dark brown, gold and natural. Your quote includes a recommendation for your landscape.`,
+  types: `We install hardwood mulch, cedar mulch, black mulch, brown mulch, red mulch and playground mulch, and our colors page also shows dark brown, gold and natural. Your quote includes a recommendation for your landscape.`,
   when: `Spring, once the ground has thawed and the beds are cleaned up, is the most popular time to mulch in Minnesota. Many homeowners also add a fresh layer in fall before the freeze. Call ${PHONE} and we will schedule your install week.`,
   quote: `Yes. Every quote is free and in person. We visit your property, assess your beds, and give you accurate pricing, with no online guesswork.`,
   time: `Many yards are finished in a single day, depending on size. Our crew arrives on your scheduled week, installs fresh mulch with even coverage and clean edges, and leaves the beds tidy.`,
@@ -47,6 +47,7 @@ export function cityFaqs(name: string, slug: string): QA[] {
 export const homeFaqs: QA[] = [
   { question: "What does Mulch Company do?", answer: "Mulch Company is a locally owned mulch installation company based in Chanhassen, MN. We visit your property, quote it in person, and our crew installs fresh mulch with even coverage and clean edges. You never lift a finger." },
   { question: "Which cities do you serve?", answer: `We serve ${AREAS.length} Twin Cities cities: ${CITIES}. Each has its own page with local details.` },
+  { question: "Why do Chanhassen homeowners trust Mulch Company?", answer: "We are locally owned and based in Chanhassen. You can request your installation online in minutes, we visit your property for an in-person quote so the pricing is accurate, and our crew installs with even coverage, clean edges and zero mess. We are fully insured, and the quote is free." },
   { question: "How much does mulch installation cost?", answer: A.cost },
   { question: "How much mulch do I need?", answer: A.amount },
   { question: "How thick should mulch be?", answer: A.depth },

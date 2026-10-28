@@ -134,7 +134,7 @@ export default function Hero() {
         <p className="eyebrow">Professional mulch installation &middot; Chanhassen, MN</p>
         <h1>
           <span className="sr-only">Professional Mulch Installation in Chanhassen, MN: </span>
-          Fresh mulch, <em>done right</em>.
+          Fresh mulch,<br /> <em>done right</em>.
         </h1>
         <p className="lede">Expert installation for homes and businesses. Cedar, hardwood, black mulch and more.</p>
         <div className="btns">
