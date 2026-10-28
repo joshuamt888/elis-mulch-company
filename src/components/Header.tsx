@@ -4,9 +4,21 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MobileMenu from "./MobileMenu";
-import { AREAS } from "@/lib/areas";
 
-const areas = AREAS.map((a) => a.name);
+const areas = [
+  "Chanhassen",
+  "Eden Prairie",
+  "Chaska",
+  "Shakopee",
+  "Victoria",
+  "Waconia",
+  "Excelsior",
+  "Minnetonka",
+  "Shorewood",
+  "Prior Lake",
+  "Savage",
+  "Carver",
+];
 
 const tools = [
   { name: "Mulch Calculator", href: "/tools/mulch-calculator" },
@@ -14,62 +26,120 @@ const tools = [
   { name: "Rock/Stone Calculator", href: "/tools/rock-calculator" },
 ];
 
-const link = "text-[18px] font-semibold text-[#1c1c1c] hover:text-blossom transition-colors";
-
 export default function Header() {
-  const [open, setOpen] = useState<null | "areas" | "tools">(null);
-  const ref = useRef<HTMLElement>(null);
+  const [areasOpen, setAreasOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
+  const areasRef = useRef<HTMLDivElement>(null);
+  const toolsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const out = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(null); };
-    document.addEventListener("mousedown", out);
-    return () => document.removeEventListener("mousedown", out);
+    function handleClickOutside(e: MouseEvent) {
+      if (areasRef.current && !areasRef.current.contains(e.target as Node)) {
+        setAreasOpen(false);
+      }
+      if (toolsRef.current && !toolsRef.current.contains(e.target as Node)) {
+        setToolsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const chevron = (
-    <svg aria-hidden viewBox="0 0 12 12" className="w-3.5 h-3.5 ml-1.5"><path d="M2 4.2 6 8l4-3.8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
   );
-  const panel = "absolute top-full mt-3 left-0 w-64 rounded-2xl bg-white border border-black/10 shadow-xl py-2";
-  const item = "block px-5 py-3 text-[19px] text-[#1c1c1c] hover:text-blossom hover:bg-[#f7f3ee] transition-colors";
 
   return (
-    <header ref={ref} className="fixed top-0 left-0 right-0 z-50 bg-[rgba(247,243,238,0.88)] backdrop-blur-md border-b border-[rgba(28,28,28,0.12)] [transform:translateZ(0)]">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200 [transform:translateZ(0)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 py-2">
+          {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Image src="/images/logos/logo-horizontal.png" alt="Mulch Company" width={220} height={70} className="h-12 w-auto" priority />
+            <Image src="/images/logos/logo-horizontal.png" alt="Mulch Company" width={220} height={70} className="h-12 w-auto" />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
-            <Link href="/services/mulch-installation" className={link}>Mulch Installation</Link>
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-6">
+            <Link
+              href="/services/mulch-installation"
+              className="text-[#3d2b1f] hover:text-sand transition-colors font-medium"
+            >
+              Mulch Installation
+            </Link>
 
-            <div className="relative">
-              <button onClick={() => setOpen(open === "areas" ? null : "areas")} className={`flex items-center ${link}`} aria-expanded={open === "areas"}>Areas {chevron}</button>
-              {open === "areas" && (
-                <div className={`${panel} w-[27rem]! grid grid-cols-2 gap-x-1 max-h-[72vh] overflow-y-auto`}>
-                  {areas.map((a) => (
-                    <Link key={a} href={`/${a.toLowerCase().replace(/\s+/g, "-")}-mulch-delivery`} onClick={() => setOpen(null)} className={item}>{a}</Link>
+            {/* Areas Dropdown */}
+            <div ref={areasRef} className="relative">
+              <button
+                onClick={() => { setAreasOpen(!areasOpen); setToolsOpen(false); }}
+                className="flex items-center text-[#3d2b1f] hover:text-sand transition-colors font-medium"
+              >
+                Areas {chevron}
+              </button>
+              {areasOpen && (
+                <div className="absolute top-full mt-2 left-0 w-56 bg-white border border-stone-200 rounded-lg shadow-xl py-2 max-h-80 overflow-y-auto">
+                  {areas.map((area) => (
+                    <Link
+                      key={area}
+                      href={`/${area.toLowerCase().replace(/\s+/g, "-")}-mulch-delivery`}
+                      onClick={() => setAreasOpen(false)}
+                      className="block px-4 py-2.5 text-[#3d2b1f] hover:text-sand hover:bg-stone-100 transition-colors text-sm font-medium"
+                    >
+                      {area}
+                    </Link>
                   ))}
                 </div>
               )}
             </div>
 
-            <div className="relative">
-              <button onClick={() => setOpen(open === "tools" ? null : "tools")} className={`flex items-center ${link}`} aria-expanded={open === "tools"}>Free Tools {chevron}</button>
-              {open === "tools" && (
-                <div className={panel}>
-                  {tools.map((t) => (
-                    <Link key={t.href} href={t.href} onClick={() => setOpen(null)} className={item}>{t.name}</Link>
+            {/* Tools Dropdown */}
+            <div ref={toolsRef} className="relative">
+              <button
+                onClick={() => { setToolsOpen(!toolsOpen); setAreasOpen(false); }}
+                className="flex items-center text-[#3d2b1f] hover:text-sand transition-colors font-medium"
+              >
+                Free Tools {chevron}
+              </button>
+              {toolsOpen && (
+                <div className="absolute top-full mt-2 left-0 w-56 bg-white border border-stone-200 rounded-lg shadow-xl py-2">
+                  {tools.map((tool) => (
+                    <Link
+                      key={tool.href}
+                      href={tool.href}
+                      onClick={() => setToolsOpen(false)}
+                      className="block px-4 py-2.5 text-[#3d2b1f] hover:text-sand hover:bg-stone-100 transition-colors text-sm font-medium"
+                    >
+                      {tool.name}
+                    </Link>
                   ))}
                 </div>
               )}
             </div>
 
-            <Link href="/about" className={link}>About</Link>
-            <a href="tel:9523144797" className={link}>(952) 314-4797</a>
-            <Link href="/estimate" className="bg-blossom hover:bg-blossom-dark text-white text-[18px] font-semibold px-6 py-3 rounded-full transition-colors">Price Mulch</Link>
+            <Link
+              href="/about"
+              className="text-[#3d2b1f] hover:text-sand transition-colors font-medium"
+            >
+              About
+            </Link>
+
+            <a
+              href="tel:9523144797"
+              className="text-[#3d2b1f] hover:text-sand transition-colors font-medium"
+            >
+              (952) 314-4797
+            </a>
+
+            <Link
+              href="/estimate"
+              className="bg-blossom hover:bg-blossom-dark text-white font-semibold px-5 py-2.5 rounded-lg transition-colors"
+            >
+              Price Mulch
+            </Link>
           </nav>
 
+          {/* Mobile Menu */}
           <MobileMenu />
         </div>
       </div>

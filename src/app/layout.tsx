@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, Figtree, Playfair_Display } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import Script from "next/script";
 import MobileCallBar from "@/components/MobileCallBar";
 import "./globals.css";
-import { AREAS } from "@/lib/areas";
-import "@/components/garden/garden.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
-
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
-const playfair = Playfair_Display({ subsets: ["latin"], style: ["italic", "normal"], variable: "--font-playfair", display: "swap" });
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -115,7 +110,18 @@ export default function RootLayout({
           longitude: -93.5308,
         },
         areaServed: [
-          ...AREAS.map((a) => ({ "@type": "Place", name: `${a.name}, MN` })),
+          { "@type": "Place", name: "Chanhassen, MN" },
+          { "@type": "Place", name: "Eden Prairie, MN" },
+          { "@type": "Place", name: "Chaska, MN" },
+          { "@type": "Place", name: "Shakopee, MN" },
+          { "@type": "Place", name: "Victoria, MN" },
+          { "@type": "Place", name: "Waconia, MN" },
+          { "@type": "Place", name: "Excelsior, MN" },
+          { "@type": "Place", name: "Minnetonka, MN" },
+          { "@type": "Place", name: "Shorewood, MN" },
+          { "@type": "Place", name: "Prior Lake, MN" },
+          { "@type": "Place", name: "Savage, MN" },
+          { "@type": "Place", name: "Carver, MN" },
           { "@type": "Place", name: "Minnesota" },
         ],
         contactPoint: {
@@ -157,9 +163,8 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
@@ -182,7 +187,7 @@ export default function RootLayout({
           })(window, document, "clarity", "script", "w1hg4fl8c5");
         `}</Script>
       </head>
-      <body className={`${inter.variable} ${outfit.variable} ${figtree.variable} ${playfair.variable} antialiased`}>
+      <body className={`${inter.variable} ${outfit.variable} antialiased`}>
         {children}
         <MobileCallBar />
       </body>

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { AREAS, areaHref } from "@/lib/areas";
 
 const tools = [
   { name: "Mulch Calculator", href: "/tools/mulch-calculator" },
@@ -10,7 +9,20 @@ const tools = [
   { name: "Rock/Stone Calculator", href: "/tools/rock-calculator" },
 ];
 
-const areas = AREAS.map((a) => ({ name: a.name, href: areaHref(a.slug) }));
+const areas = [
+  { name: "Chanhassen", href: "/chanhassen-mulch-delivery" },
+  { name: "Eden Prairie", href: "/eden-prairie-mulch-delivery" },
+  { name: "Chaska", href: "/chaska-mulch-delivery" },
+  { name: "Shakopee", href: "/shakopee-mulch-delivery" },
+  { name: "Victoria", href: "/victoria-mulch-delivery" },
+  { name: "Waconia", href: "/waconia-mulch-delivery" },
+  { name: "Excelsior", href: "/excelsior-mulch-delivery" },
+  { name: "Minnetonka", href: "/minnetonka-mulch-delivery" },
+  { name: "Shorewood", href: "/shorewood-mulch-delivery" },
+  { name: "Prior Lake", href: "/prior-lake-mulch-delivery" },
+  { name: "Savage", href: "/savage-mulch-delivery" },
+  { name: "Carver", href: "/carver-mulch-delivery" },
+];
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +36,7 @@ export default function MobileMenu() {
   };
 
   return (
-    <div className="lg:hidden">
+    <div className="md:hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="text-sand p-2 hover:text-blossom transition-colors"

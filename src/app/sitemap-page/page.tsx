@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { AREAS, areaHref } from "@/lib/areas";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -28,7 +27,20 @@ const sections = [
   },
   {
     heading: "Service Areas",
-    links: AREAS.map((a) => ({ label: a.name, href: areaHref(a.slug) })),
+    links: [
+      { label: "Chanhassen", href: "/chanhassen-mulch-delivery" },
+      { label: "Eden Prairie", href: "/eden-prairie-mulch-delivery" },
+      { label: "Chaska", href: "/chaska-mulch-delivery" },
+      { label: "Shakopee", href: "/shakopee-mulch-delivery" },
+      { label: "Victoria", href: "/victoria-mulch-delivery" },
+      { label: "Waconia", href: "/waconia-mulch-delivery" },
+      { label: "Excelsior", href: "/excelsior-mulch-delivery" },
+      { label: "Minnetonka", href: "/minnetonka-mulch-delivery" },
+      { label: "Shorewood", href: "/shorewood-mulch-delivery" },
+      { label: "Prior Lake", href: "/prior-lake-mulch-delivery" },
+      { label: "Savage", href: "/savage-mulch-delivery" },
+      { label: "Carver", href: "/carver-mulch-delivery" },
+    ],
   },
 ];
 
