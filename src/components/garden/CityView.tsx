@@ -47,7 +47,6 @@ export default function CityView(p: CityProps) {
 
         <section className="cv-intro">
           <div className="cv-intro-main">
-            <p className="eyebrow">{p.name}, MN</p>
             <h2>{p.serviceH2}</h2>
             <p className="cv-lede">{p.serviceP}</p>
             <p><Link className="text-link" href="/services/mulch-installation">About mulch installation</Link></p>

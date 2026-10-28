@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { crumbsLd, faqLd, aboutFaqs } from "@/lib/faq";
-import { JsonLd } from "@/components/garden/JsonLd";
-import Faq from "@/components/garden/Faq";
-import SocialProof from "@/components/garden/SocialProof";
-import HowStatic from "@/components/garden/HowStatic";
-import Favourites from "@/components/garden/Favourites";
-import { AREAS } from "@/lib/areas";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageHero from "@/components/garden/PageHero";
+import Why from "@/components/garden/Why";
+import CtaBand from "@/components/garden/CtaBand";
+import HowStatic from "@/components/garden/HowStatic";
+import Favourites from "@/components/garden/Favourites";
+import SocialProof from "@/components/garden/SocialProof";
+import Faq from "@/components/garden/Faq";
+import { JsonLd } from "@/components/garden/JsonLd";
+import { AREAS, areaHref } from "@/lib/areas";
+import { aboutFaqs, crumbsLd, faqLd } from "@/lib/faq";
 
 export const metadata: Metadata = {
   title: "About Mulch Company MN | Chanhassen MN",
@@ -19,173 +22,56 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  {
-    title: "Local First",
-    description:
-      "We live here, we work here, we care about this community.",
-  },
-  {
-    title: "No Shortcuts",
-    description:
-      "Every yard gets our full attention — proper depth, clean edges, zero mess.",
-  },
-  {
-    title: "Fair Pricing",
-    description:
-      "Honest quotes, no hidden fees, competitive with the big guys.",
-  },
+  { title: "Local First", desc: "We live here, we work here, we care about this community." },
+  { title: "No Shortcuts", desc: "Every yard gets our full attention — proper depth, clean edges, zero mess." },
+  { title: "Fair Pricing", desc: "Honest quotes, no hidden fees, competitive with the big guys." },
 ];
-
-const cities = AREAS.map((a) => a.name);
 
 export default function AboutPage() {
   return (
     <>
       <JsonLd data={[faqLd(aboutFaqs), crumbsLd([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])]} />
       <Header />
+      <main className="gd">
+        <PageHero h1="About Mulch Company" sub="Locally owned. Community driven. Mulch obsessed." image="/images/hero/hero-5.webp" alt="Front yard shrubs with fresh mulch" />
 
-      {/* Hero */}
-      <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center text-center text-white">
-        <Image
-          src="/images/hero/hero-5.webp"
-          alt="Front yard shrubs with fresh mulch"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            About Mulch Company
-          </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto text-white/90">
-            Locally owned. Community driven. Mulch obsessed.
-          </p>
-        </div>
-      </section>
-
-      {/* Our Story */}
-      <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+        <section className="pg-story">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-sand mb-6">
-              Our Story
-            </h2>
-            <p className="text-bark leading-relaxed text-lg">
-              Mulch Company MN is a family-owned business based in Chanhassen,
-              founded by brothers Eli and Owen Sweeney. We deliver and install
-              mulch for homeowners and commercial properties across the western
-              Twin Cities metro. Our goal is simple — do the job right and make
-              the process easy from start to finish.
+            <h2>Our Story</h2>
+            <p>
+              Mulch Company MN is a family-owned business based in Chanhassen, founded by brothers Eli and Owen Sweeney. We deliver and install mulch for homeowners and commercial properties across the western Twin Cities metro. Our goal is simple — do the job right and make the process easy from start to finish.
             </p>
           </div>
-          <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden">
-            <Image
-              src="/images/hero/hero-3.webp"
-              alt="Hands spreading mulch in a garden bed"
-              fill
-              className="object-cover"
-            />
+          <div className="pg-photo">
+            <Image src="/images/hero/hero-3.webp" alt="Hands spreading mulch in a garden bed" fill className="object-cover" />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Values */}
-      <section className="bg-soil py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-sand text-center mb-12">
-            What We Stand For
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {values.map((value) => (
-              <div
-                key={value.title}
-                className="bg-white rounded-2xl p-8 shadow-sm"
-              >
-                <h3 className="text-xl font-bold text-sand mb-3">
-                  {value.title}
-                </h3>
-                <p className="text-bark leading-relaxed">
-                  {value.description}
-                </p>
-              </div>
+        <Why title="What We Stand For" items={values} cols={3} />
+
+        <section className="pg-chips">
+          <h2>Where We Work</h2>
+          <div className="pg-chip-row">
+            {AREAS.map((a) => (
+              <Link key={a.slug} href={areaHref(a.slug)} className="chip">{a.name}</Link>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Service Area */}
-      <section className="bg-white py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-sand mb-8">
-            Where We Work
-          </h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            {cities.map((city) => {
-              const slug = city.toLowerCase().replace(/\s+/g, "-");
-              return (
-                <Link
-                  key={city}
-                  href={`/${slug}-mulch-delivery`}
-                  className="px-5 py-2 rounded-full bg-soil text-sand font-medium hover:bg-blossom hover:text-white transition-colors"
-                >
-                  {city}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Partners */}
-      <section className="bg-white py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-sand mb-4">
-            Who We Work With
-          </h2>
-          <p className="text-bark mb-8">
-            We install mulch for Freshwater Landscaping and refer them landscaping leads in return.
-          </p>
-          <a
-            href="https://www.freshwaterlandscaping.com/services/mulch-installation.html"
-            target="_blank"
-            rel="noopener"
-            className="inline-block bg-soil rounded-xl px-8 py-4 text-sand font-semibold hover:bg-blossom hover:text-white transition-colors"
-          >
+        <section className="pg-chips pg-partner">
+          <h2>Who We Work With</h2>
+          <p>We install mulch for Freshwater Landscaping and refer them landscaping leads in return.</p>
+          <a href="https://www.freshwaterlandscaping.com/services/mulch-installation.html" target="_blank" rel="noopener" className="chip pg-partner-link">
             Freshwater Landscaping — Mulch Installation
           </a>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section className="bg-blossom py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to get started?
-          </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/estimate"
-              className="px-8 py-3 bg-white text-bark font-semibold rounded-lg hover:bg-soil transition-colors"
-            >
-              Get a Free Estimate
-            </Link>
-            <a
-              href="tel:+19523144797"
-              className="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
-            >
-              Call Us Today
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <div className="gd">
         <HowStatic />
         <Favourites />
         <SocialProof />
         <Faq items={aboutFaqs} title="About Mulch Company" />
-      </div>
+        <CtaBand title="Ready to get started?" primary="Get a Free Estimate" secondary="Call Us Today" />
+      </main>
       <Footer />
     </>
   );

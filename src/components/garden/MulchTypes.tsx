@@ -12,7 +12,6 @@ const TYPES = [
 export default function MulchTypes({ city }: { city?: string }) {
   return (
     <section className="mt" id="mulch-types">
-      <p className="eyebrow">Mulch types</p>
       <h2>
         Mulch Types <em>We Install</em>
       </h2>

@@ -43,7 +43,6 @@ export default function EstimatePage() {
       <Header />
       <main className="pm">
         <section className="pm-hero">
-          <p className="pm-eyebrow">Price mulch</p>
           <h1>
             <span className="sr-only">Price Mulch: </span>Let&apos;s price your <em>yard.</em>
           </h1>

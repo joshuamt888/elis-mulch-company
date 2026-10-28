@@ -29,7 +29,6 @@ export default function ToolGuide({ tool }: { tool: "mulch" | "sod" | "rock" }) 
   const g = G[tool];
   return (
     <section className="tg">
-      <p className="eyebrow">The quick guide</p>
       <h2>{g.h}</h2>
       {g.p.map((t) => (<p key={t}>{t}</p>))}
     </section>
