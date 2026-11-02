@@ -481,3 +481,151 @@ a.pm-row:hover strong { color: var(--accent); }
 .gd .foot-lede { max-width: 52ch; }
 
 .t4-logo { position: absolute; top: 14px; left: clamp(16px, 5vw, 56px); z-index: 20; }
+
+/* City pages: tighter rhythm, flat numbered "why" row, one photo band */
+.gd.cv .cv-intro { padding: clamp(44px, 5.5vw, 80px) var(--gut); }
+.gd.cv .why { padding: clamp(28px, 4vw, 56px) var(--gut) clamp(40px, 5vw, 72px); }
+.gd.cv .favs { padding: clamp(44px, 5.5vw, 80px) var(--gut); }
+.gd.cv .favs-more { text-align: center; margin-top: 28px; font-weight: 600; }
+.gd.cv .favs-more a { color: var(--accent); }
+.gd.cv .hws { padding: clamp(40px, 5vw, 72px) var(--gut); }
+.gd.cv .faq { padding: clamp(40px, 5vw, 72px) var(--gut); }
+.gd.cv .areas { padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(56px, 7vw, 96px); }
+.gd .why-grid { gap: clamp(20px, 3vw, 44px); margin-top: 36px; }
+.gd .why-card { background: none; border: 0; border-radius: 0; padding: 18px 0 0; }
+.gd .why-n { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; color: var(--accent); }
+.gd .why-card h3 { margin-top: 10px; }
+.gd .cv-band { position: relative; height: clamp(220px, 34vw, 420px); margin: clamp(16px, 3vw, 40px) auto; max-width: 1360px; width: calc(100% - 2 * var(--gut)); border-radius: 28px; overflow: hidden; }
+
+/* Home page: small words ~1.5x (labels ~1.3x); the hero is left alone. Fluid so phones don't blow up. */
+.gd.home .intro .text-link { font-size: clamp(19.7px, 2.06vw, 26.4px); }
+.gd.home .ba .ba-note { font-size: clamp(15.7px, 1.64vw, 21.0px); }
+.gd.home .ba figcaption { font-size: clamp(14.6px, 1.32vw, 16.9px); }
+.gd.home .ba .tag { font-size: clamp(13.4px, 1.22vw, 15.6px); }
+.gd.home .sp p { font-size: clamp(18.8px, 1.97vw, 25.2px); }
+.gd.home .sp .sp-link { font-size: clamp(16.8px, 1.76vw, 22.5px); }
+.gd.home .sp blockquote { font-size: clamp(20.1px, 2.10vw, 26.9px); }
+.gd.home .sp strong { font-size: clamp(16.8px, 1.76vw, 22.5px); }
+.gd.home .hiw p { font-size: clamp(20.6px, 2.16vw, 27.6px); }
+.gd.home .hiw .hiw-cap { font-size: clamp(14.6px, 1.32vw, 16.9px); }
+.gd.home .favs .favs-sub { font-size: clamp(17.9px, 1.88vw, 24.0px); }
+.gd.home .favs figcaption strong { font-size: clamp(19.0px, 1.73vw, 22.1px); }
+.gd.home .favs figcaption em { font-size: clamp(15.1px, 1.37vw, 17.6px); }
+.gd.home .seasons .season-line { font-size: clamp(18.8px, 1.97vw, 25.2px); }
+.gd.home .seasons figcaption { font-size: clamp(13.4px, 1.22vw, 15.6px); }
+.gd.home .areas .areas-sub { font-size: clamp(21.5px, 2.25vw, 28.8px); }
+.gd.home .areas .areas-row { font-size: clamp(17.9px, 1.88vw, 24.0px); }
+.gd.home .areas .areas-go { font-size: clamp(17.9px, 1.88vw, 24.0px); }
+.gd.home .areas .areas-n { font-size: clamp(13.4px, 1.22vw, 15.6px); }
+.gd.home .areas .areas-tag { font-size: clamp(12.3px, 1.12vw, 14.3px); }
+.gd.home .faq p { font-size: clamp(20.1px, 2.10vw, 26.9px); }
+.gd.home .faq summary { font-size: clamp(17.9px, 1.88vw, 24.0px); }
+.gd.home .faq .eyebrow { font-size: clamp(13.4px, 1.22vw, 15.6px); }
+
+/* No small pink-dot labels anywhere */
+.gd .eyebrow, .gd .ph-eyebrow { display: none; }
+
+/* Big numerals */
+.gd .why-n { font-size: clamp(2.2rem, 3.4vw, 3.2rem); font-weight: 600; letter-spacing: 0; line-height: 1; }
+.gd .hws-card span { font-size: clamp(1.6rem, 2.4vw, 2.2rem); letter-spacing: 0; line-height: 1; }
+
+/* Mulch installation page: editorial rows, flat numbered steps, plain before/after, bigger words */
+.gd.cv .pg-intro, .gd.cv .pg-process, .gd.cv .pg-ba { padding-top: clamp(40px, 5vw, 72px); }
+.gd .pg-intro-p { max-width: 62ch; margin: 18px auto 0; font-size: clamp(1.2rem, 1.9vw, 1.6rem); line-height: 1.5; color: #3a3631; font-weight: 300; }
+.gd .pg-rows { display: grid; gap: clamp(36px, 5vw, 72px); margin-top: clamp(32px, 4vw, 56px); text-align: left; }
+.gd .pg-row { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 80px); align-items: center; }
+.gd .pg-row.rev { grid-template-columns: 1fr 1.1fr; }
+.gd .pg-row.rev .pg-photo { order: 2; }
+.gd .pg-row-t h3 { font-size: clamp(1.9rem, 3.4vw, 3rem); line-height: 1.05; letter-spacing: -0.02em; }
+.gd .pg-row-t p { margin-top: 16px; font-size: clamp(1.15rem, 1.7vw, 1.45rem); line-height: 1.55; color: #3a3631; font-weight: 300; max-width: 42ch; }
+@media (max-width: 860px) { .gd .pg-row, .gd .pg-row.rev { grid-template-columns: 1fr; } .gd .pg-row.rev .pg-photo { order: 0; } }
+.gd.cv .why-card h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); }
+.gd.cv .why-card p { font-size: clamp(1.05rem, 1.5vw, 1.25rem); }
+.gd .pg-steps .why-card h3 { margin-top: 10px; }
+.gd .pg-ba-fig { background: none; border: 0; box-shadow: none; border-radius: 0; max-width: 1100px; }
+.gd .pg-ba-img { border-radius: 28px; overflow: hidden; aspect-ratio: 16 / 7; }
+.gd .pg-ba-fig figcaption { padding: 22px 4px 0; text-align: center; font-size: clamp(1.1rem, 1.6vw, 1.35rem); max-width: 64ch; margin: 0 auto; }
+.gd .pg-btn-row { margin: clamp(8px, 2vw, 24px) 0 0; }
+
+/* ===== Pass 2: Our Colors, calculators, Estimate, About, footer, FAQ, chips ===== */
+.gd.cv .colors { max-width: 1240px; margin: 0 auto; padding: clamp(40px, 5vw, 72px) var(--gut); }
+.gd .colors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2vw, 28px); }
+.gd .colors-card { margin: 0; text-align: center; }
+.gd .colors-img { position: relative; aspect-ratio: 1; border-radius: 28px; background: #1a1714; overflow: hidden; }
+.gd .colors-img img { padding: 8%; }
+.gd .colors-card figcaption { margin-top: 14px; font-size: clamp(1.15rem, 1.7vw, 1.5rem); font-weight: 600; letter-spacing: -0.015em; }
+@media (max-width: 900px) { .gd .colors-grid { grid-template-columns: 1fr 1fr; } }
+
+.gd.tool .calc-wrap { max-width: 860px; margin: 0 auto; padding: clamp(40px, 5vw, 72px) var(--gut) 0; }
+.gd.tool .calc-card { background: #fff; border: 1px solid var(--line); border-radius: 32px; padding: clamp(24px, 4vw, 48px); box-shadow: 0 24px 50px -30px rgba(60, 40, 20, 0.4); margin-bottom: clamp(36px, 5vw, 64px); }
+.gd.tool .calc-card label { font-size: clamp(1.2rem, 1.8vw, 1.5rem); font-weight: 600; color: var(--ink); }
+.gd.tool .calc-card p { font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.5; color: var(--muted); }
+.gd.tool .calc-card input, .gd.tool .calc-card select { font-size: 1.4rem; padding-top: 18px; padding-bottom: 18px; border-radius: 18px; }
+.gd.tool .calc-card button { font-size: 1.3rem; border-radius: 999px; padding-top: 20px; padding-bottom: 20px; }
+.gd.tool .calc-card [class*="text-5xl"], .gd.tool .calc-card [class*="text-6xl"] { font-size: clamp(4rem, 9vw, 7rem); line-height: 1; }
+.gd.tool .calc-card [class*="from-blossom"] p:not([class*="text-5xl"]):not([class*="text-xl"]) { color: rgba(255, 255, 255, 0.85); font-size: 1.1rem; }
+.gd.tool .calc-tips { margin-bottom: clamp(36px, 5vw, 64px); }
+.gd.tool .calc-tips h2 { font-size: clamp(2rem, 3.6vw, 3rem); display: block; letter-spacing: -0.02em; }
+.gd.tool .calc-tips h2 svg { display: none; }
+.gd.tool .calc-tips .space-y-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 44px); margin-top: 28px; }
+.gd.tool .calc-tips .flex.gap-3 { display: block; }
+.gd.tool .calc-tips p { font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.55; color: var(--muted); margin-top: 10px; }
+.gd.tool .calc-tips p strong { color: var(--ink); display: block; font-size: clamp(1.2rem, 1.8vw, 1.5rem); margin-bottom: 4px; }
+@media (max-width: 760px) { .gd.tool .calc-tips .space-y-3 { grid-template-columns: 1fr; } }
+.gd.tool .calc-wrap h3 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: -0.02em; margin-bottom: 20px; }
+.gd.tool .calc-other { display: block; background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 22px 26px; transition: border-color 0.25s, transform 0.25s; }
+.gd.tool .calc-other:hover { border-color: var(--accent); transform: translateY(-3px); }
+.gd.tool .calc-other p:first-child { font-size: 1.35rem; font-weight: 600; }
+.gd.tool .calc-other p + p { font-size: 1.05rem; color: var(--muted); }
+.gd.tool .calc-other svg { width: 28px; height: 28px; }
+
+/* Estimate: flat, big, no tile boxes (the form stays a card) */
+.pm-stats { gap: clamp(8px, 2vw, 28px); margin-top: 36px; }
+.pm-stat { background: none; border: 0; border-radius: 0; padding: 8px 12px; }
+.pm-stat b { font-size: clamp(1.6rem, 3.4vw, 3rem); }
+.pm-stat span { font-size: clamp(1rem, 1.3vw, 1.2rem); }
+.pm-sub { font-size: clamp(1.25rem, 1.9vw, 1.6rem); max-width: 52ch; }
+.pm-side .pm-card:not(.pm-quote) { background: none; border: 0; box-shadow: none; padding: 0; border-radius: 0; }
+.pm-side .pm-card h2 { font-size: clamp(2rem, 3.2vw, 2.8rem); }
+.pm-row strong { font-size: clamp(1.25rem, 1.8vw, 1.55rem); }
+.pm-row em { font-size: clamp(1rem, 1.3vw, 1.15rem); }
+.pm-row svg { width: 30px; height: 30px; }
+.pm-steps { gap: 26px; }
+.pm-steps li { gap: 18px; }
+.pm-steps b { width: auto; height: auto; background: none; color: var(--accent); font-size: clamp(2.2rem, 3.4vw, 3rem); line-height: 1; border-radius: 0; display: block; }
+.pm-steps strong { font-size: clamp(1.25rem, 1.8vw, 1.55rem); }
+.pm-steps span { font-size: clamp(1.05rem, 1.4vw, 1.2rem); }
+.pm-quote { background: none; border: 0; box-shadow: none; padding: 0; }
+.pm-quote blockquote { font-size: clamp(1.2rem, 1.7vw, 1.45rem); }
+.pm-quote figcaption { font-size: 1.05rem; }
+.pm-form-sub { font-size: 1.1rem; }
+
+/* About */
+.gd .pg-chips h2 { font-size: clamp(2.2rem, 4.4vw, 3.6rem); }
+.gd .pg-partner p { font-size: clamp(1.2rem, 1.7vw, 1.5rem); }
+.gd .chip { font-size: clamp(1.05rem, 1.4vw, 1.2rem); padding: 12px 22px; }
+.gd .pg-photo { aspect-ratio: 5 / 4; }
+
+/* FAQ: bigger everywhere */
+.gd .faq-item h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); }
+.gd .faq-item p { font-size: clamp(1.15rem, 1.6vw, 1.35rem); max-width: 68ch; }
+
+/* Footer: bigger words */
+.gd .foot-grid { font-size: clamp(1.2rem, 1.7vw, 1.45rem); }
+.gd .foot-grid strong { font-size: 18px; }
+.gd .foot-base { font-size: clamp(1.05rem, 1.4vw, 1.2rem); }
+.gd .foot-lede { font-size: clamp(1.25rem, 1.8vw, 1.5rem); }
+
+.gd .tg p { font-size: clamp(1.15rem, 1.6vw, 1.35rem); line-height: 1.6; }
+.gd .tg h2 { font-size: clamp(2.2rem, 4vw, 3.4rem); }
+.gd .hws-card p { font-size: clamp(1.05rem, 1.4vw, 1.2rem); }
+.gd .hws-card h3 { font-size: clamp(1.4rem, 2vw, 1.7rem); }
+
+.gd .pg-story .pg-partner-line { margin-top: 24px; font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--muted); }
+
+.gd .areas-n { font-size: clamp(1.1rem, 1.5vw, 1.4rem) !important; font-weight: 600; letter-spacing: 0; }
+.gd .areas-tag { font-size: 13px !important; }
+
+.gd .pg-story .pg-partner-line { line-height: 1.5 !important; font-size: clamp(1.1rem, 1.5vw, 1.3rem) !important; }
+
+.gd .pg-partner-line .text-link { display: inline !important; padding: 0 !important; margin: 0 !important; line-height: inherit !important; }

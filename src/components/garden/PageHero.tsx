@@ -7,7 +7,6 @@ export default function PageHero({ h1, sub, image, alt, eyebrow }: { h1: string;
       <Image src={image} alt={alt} fill className="object-cover" priority />
       <div className="cv-hero-shade" aria-hidden />
       <div className="cv-hero-in">
-        {eyebrow && <p className="ph-eyebrow">{eyebrow}</p>}
         <h1>{h1}</h1>
         {sub && <p>{sub}</p>}
         <div className="btns">

@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/garden/PageHero";
 import Why from "@/components/garden/Why";
-import MulchTypes from "@/components/garden/MulchTypes";
 import Favourites from "@/components/garden/Favourites";
 import SocialProof from "@/components/garden/SocialProof";
 import Areas from "@/components/garden/Areas";
@@ -89,7 +88,7 @@ export default function MulchInstallationPage() {
     <>
       <JsonLd data={[faqLd(allFaqs), crumbsLd([{ name: "Home", path: "/" }, { name: "Mulch Installation", path: "/services/mulch-installation" }]), serviceLd("Professional mulch installation", "/services/mulch-installation")]} />
       <Header />
-      <main className="gd">
+      <main className="gd cv">
         <PageHero
           h1="Professional Mulch Installation in Minnesota"
           sub="Expert installation, clean results — we handle everything so you never have to think about it."
@@ -102,21 +101,21 @@ export default function MulchInstallationPage() {
           <p className="pg-intro-p">
             We handle everything — in-person quote, expert installation, and clean-up. Cedar, hardwood, black, red, and playground mulch available. One call and your yard is done.
           </p>
-          <div className="pg-two">
-            <article className="hws-card">
-              <div className="pg-card-img"><Image src="/images/hero/hero-2.webp" alt="Aerial view of garden bed with brown mulch and stepping stones" fill className="object-cover" /></div>
-              <div>
+          <div className="pg-rows">
+            <div className="pg-row">
+              <div className="pg-photo"><Image src="/images/hero/hero-2.webp" alt="Aerial view of garden bed with brown mulch and stepping stones" fill sizes="(max-width: 900px) 100vw, 600px" className="object-cover" /></div>
+              <div className="pg-row-t">
                 <h3>Even, Professional Coverage</h3>
                 <p>Our crews spread mulch to a consistent 2-3 inch depth across all your beds, creating a uniform appearance that enhances your entire landscape. No thin spots, no piles — just clean, level coverage.</p>
               </div>
-            </article>
-            <article className="hws-card">
-              <div className="pg-card-img"><Image src="/images/hero/hero-9.webp" alt="Colonial home with fresh red mulch in flower beds" fill className="object-cover" /></div>
-              <div>
+            </div>
+            <div className="pg-row rev">
+              <div className="pg-photo"><Image src="/images/hero/hero-9.webp" alt="Colonial home with fresh red mulch in flower beds" fill sizes="(max-width: 900px) 100vw, 600px" className="object-cover" /></div>
+              <div className="pg-row-t">
                 <h3>Instant Curb Appeal</h3>
                 <p>Fresh mulch is one of the fastest ways to transform your home&apos;s exterior. Crisp bed edges and rich color make your landscaping look brand new — without the weeks of labor it would take to do it yourself.</p>
               </div>
-            </article>
+            </div>
           </div>
         </section>
 
@@ -138,7 +137,7 @@ export default function MulchInstallationPage() {
           <div className="pg-steps">
             {processSteps.map((st) => (
               <article key={st.number} className="why-card">
-                <span className="pg-n">{st.number}</span>
+                <span className="why-n">{String(st.number).padStart(2, "0")}</span>
                 <h3>{st.title}</h3>
                 <p>{st.description}</p>
               </article>
@@ -155,8 +154,7 @@ export default function MulchInstallationPage() {
           </figure>
         </section>
 
-        <MulchTypes />
-        <Favourites />
+        <Favourites city="Minnesota" />
         <SocialProof />
         <Faq items={allFaqs} title="Frequently Asked Questions" />
         <Areas />

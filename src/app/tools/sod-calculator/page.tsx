@@ -6,8 +6,8 @@ import { JsonLd } from "@/components/garden/JsonLd";
 import Faq from "@/components/garden/Faq";
 import SocialProof from "@/components/garden/SocialProof";
 import ToolGuide from "@/components/garden/ToolGuide";
-import MulchTypes from "@/components/garden/MulchTypes";
 import Link from "next/link";
+import PageHero from "@/components/garden/PageHero";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -48,26 +48,12 @@ export default function SodCalculator() {
     <>
       <JsonLd data={[faqLd(toolFaqs("sod")), crumbsLd([{ name: "Home", path: "/" }, { name: "Sod Calculator", path: "/tools/sod-calculator" }])]} />
       <Header />
-      <main className="bg-[#faf7f2] min-h-screen pt-24 pb-16">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6">
-
-          {/* Hero */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-blossom/10 rounded-2xl mb-4">
-              <svg className="w-8 h-8 text-bark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6z" />
-              </svg>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-outfit font-bold text-sand mb-3">
-              Sod Calculator
-            </h1>
-            <p className="text-bark text-lg max-w-md mx-auto">
-              Figure out how much sod you need for a new lawn or patching — waste included.
-            </p>
-          </div>
+      <main className="gd tool cv">
+        <PageHero h1="Sod Calculator" sub="Figure out how much sod you need for a new lawn or patching — waste included." image="/images/hero/hero-2.webp" alt="Sod Calculator" />
+        <div className="calc-wrap">
 
           {/* Calculator Card */}
-          <div className="bg-white rounded-2xl shadow-lg border border-sand/10 p-6 sm:p-8 mb-10">
+          <div className="calc-card">
             <div className="space-y-6">
               {/* Square Footage */}
               <div>
@@ -166,7 +152,7 @@ export default function SodCalculator() {
           </div>
 
           {/* Tips Section */}
-          <div className="bg-white rounded-2xl shadow-sm border border-sand/10 p-6 sm:p-8 mb-10">
+          <div className="calc-tips">
             <h2 className="text-xl font-outfit font-bold text-sand mb-4 flex items-center gap-2">
               <svg className="w-5 h-5 text-bark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -175,25 +161,19 @@ export default function SodCalculator() {
             </h2>
             <div className="space-y-3">
               <div className="flex gap-3">
-                <div className="w-6 h-6 bg-blossom/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-bark text-xs font-bold">1</span>
-                </div>
+                <span className="why-n">01</span>
                 <p className="text-bark text-sm">
                   <strong className="text-sand">Measure your yard:</strong> Walk the length and width in big steps (about 3 feet each). Multiply them to get square feet.
                 </p>
               </div>
               <div className="flex gap-3">
-                <div className="w-6 h-6 bg-blossom/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-bark text-xs font-bold">2</span>
-                </div>
+                <span className="why-n">02</span>
                 <p className="text-bark text-sm">
                   <strong className="text-sand">Sod is sold by the pallet</strong> — one pallet typically covers about 450 square feet, but it varies by supplier.
                 </p>
               </div>
               <div className="flex gap-3">
-                <div className="w-6 h-6 bg-blossom/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-bark text-xs font-bold">3</span>
-                </div>
+                <span className="why-n">03</span>
                 <p className="text-bark text-sm">
                   <strong className="text-sand">Install sod the same day</strong> it&apos;s delivered. It&apos;s a living product and dries out fast, especially in summer.
                 </p>
@@ -205,9 +185,7 @@ export default function SodCalculator() {
           <div className="mb-8">
             <h3 className="text-lg font-outfit font-bold text-sand mb-4 text-center">Try Our Other Calculators</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Link
-                href="/tools/mulch-calculator"
-                className="bg-white rounded-xl border border-sand/10 shadow-sm p-5 hover:border-blossom/30 hover:shadow-md transition-all group"
+              <Link href="/tools/mulch-calculator" className="calc-other"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-blossom/10 rounded-lg flex items-center justify-center">
@@ -221,9 +199,7 @@ export default function SodCalculator() {
                   </div>
                 </div>
               </Link>
-              <Link
-                href="/tools/rock-calculator"
-                className="bg-white rounded-xl border border-sand/10 shadow-sm p-5 hover:border-blossom/30 hover:shadow-md transition-all group"
+              <Link href="/tools/rock-calculator" className="calc-other"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-blossom/10 rounded-lg flex items-center justify-center">
@@ -241,9 +217,8 @@ export default function SodCalculator() {
           </div>
         </div>
       </main>
-      <div className="gd">
+      <div className="gd cv">
         <ToolGuide tool="sod" />
-        <MulchTypes />
         <SocialProof />
         <Faq items={toolFaqs("sod")} title="Calculator questions" />
       </div>

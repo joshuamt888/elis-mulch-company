@@ -5,7 +5,6 @@ export default function Faq({ items, title = "Questions we hear", eyebrow = "FAQ
   return (
     <section className="faq" aria-label="Frequently asked questions">
       <div className="faq-in">
-        <p className="eyebrow">{eyebrow}</p>
         <h2>{title}</h2>
         <div className="faq-list">
           {items.map((f) => (

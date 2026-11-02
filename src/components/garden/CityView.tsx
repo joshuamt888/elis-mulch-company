@@ -3,7 +3,6 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Why from "@/components/garden/Why";
-import MulchTypes from "@/components/garden/MulchTypes";
 import HowStatic from "@/components/garden/HowStatic";
 import SocialProof from "@/components/garden/SocialProof";
 import Favourites from "@/components/garden/Favourites";
@@ -21,11 +20,13 @@ export default function CityView(p: CityProps) {
   const facts = CITY_FACTS[p.slug];
   const faqs = cityFaqs(p.name, p.slug);
   const path = `/${p.slug}-mulch-delivery`;
+  // A second photo that is never the hero, so the band is not a repeat of the top of the page.
+  const band = `/images/hero/hero-${((Number(p.hero.match(/hero-(\d)/)?.[1] ?? 1) + 3) % 9) + 1}.webp`;
   return (
     <>
       <JsonLd data={[faqLd(faqs), crumbsLd([{ name: "Home", path: "/" }, { name: p.name, path }]), serviceLd(`Mulch installation in ${p.name}, MN`, path, p.name)]} />
       <Header />
-      <main className="gd">
+      <main className="gd cv">
         <section className="cv-hero">
           <Image src={p.hero} alt={`Professional mulch installation in ${p.name}, MN`} fill className="object-cover" priority />
           <div className="cv-hero-shade" aria-hidden />
@@ -64,9 +65,11 @@ export default function CityView(p: CityProps) {
         </section>
 
         <Why title={p.whyH2} items={p.why} />
-        <MulchTypes city={p.name} />
-        <Favourites />
+        <Favourites city={p.name} />
         <HowStatic />
+        <section className="cv-band" aria-hidden>
+          <Image src={band} alt="" fill sizes="100vw" className="object-cover" />
+        </section>
         <SocialProof />
         <Faq items={faqs} title={`Mulch questions in ${p.name}`} />
         <Areas />

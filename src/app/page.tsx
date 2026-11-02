@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <JsonLd data={faqLd(homeFaqs)} />
       <Header />
-      <main className="gd">
+      <main className="gd home">
         <Hero />
         <Intro />
         <BeforeAfter />

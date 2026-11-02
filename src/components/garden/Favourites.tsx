@@ -1,5 +1,6 @@
 "use client";
 import { useRef } from "react";
+import Link from "next/link";
 import { gsap, useGSAP, ScrollTrigger, MOTION } from "@/components/garden/gsap";
 import { makePlant } from "@/components/garden/growth";
 import { PlantG } from "@/components/garden/Flora";
@@ -21,7 +22,7 @@ const PRESSED = [
   { p: makePlant(913, "flower", 160), cls: "pf pf3" },
 ];
 
-export default function Favourites() {
+export default function Favourites({ city }: { city?: string } = {}) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -80,7 +81,7 @@ export default function Favourites() {
         <h2>
           Mulch for every <em>yard</em>.
         </h2>
-        <p className="favs-sub">We install all the major types. Your quote includes a recommendation for your landscape.</p>
+        <p className="favs-sub">{city ? `We install all major mulch types in ${city}: hardwood, cedar, black, brown, red and playground mulch. ` : "We install all the major types. "}Your quote includes a recommendation for your landscape.</p>
       </div>
       <div className="board">
         {PRESSED.map((f, i) => (
@@ -106,6 +107,7 @@ export default function Favourites() {
           </div>
         ))}
       </div>
+      {city && <p className="favs-more"><Link href="/our-colors">See every color we offer &rarr;</Link></p>}
     </section>
   );
 }

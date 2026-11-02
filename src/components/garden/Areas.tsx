@@ -8,7 +8,6 @@ const COLS = [AREAS.slice(0, HALF), AREAS.slice(HALF)];
 export default function Areas() {
   return (
     <section className="areas" id="areas">
-      <p className="eyebrow">Where we mulch</p>
       <h2>
         Serving the <em>Twin Cities.</em>
       </h2>
