@@ -94,8 +94,9 @@ Mulch Company MN`;
       throw sesErr;
     }
 
-    // ─── Send SMS via SNS (non-blocking — don't fail the form if SMS fails) ──
-    snsClient.send(
+    // ─── Send SMS via SNS. Awaited: an un-awaited send gets cut off when the serverless function returns.
+    // A failed text is still caught below and never fails the form. ──
+    await snsClient.send(
       new PublishCommand({
         PhoneNumber: notifyPhone,
         Message: smsBody,
