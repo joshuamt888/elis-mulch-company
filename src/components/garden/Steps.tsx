@@ -8,10 +8,11 @@ const STEPS = [
   { n: "02", t: "Schedule your install", d: "We confirm your install week and set everything up.", img: "/images/garden/step-2.webp", alt: "A fresh mound of dark mulch beside a wheelbarrow and shovels" },
   { n: "03", t: "We handle the rest", d: "Our crew installs fresh mulch on schedule. You never lift a finger.", img: "/images/garden/step-3.webp", alt: "A finished garden bed with crisp edges and fresh dark mulch" },
 ];
-const N = STEPS.length;
 
 /** Pinned, scroll-driven steps: the list stays put, the active step opens, and the framed photo changes as you scroll. Click a step to jump to it. */
-export default function Steps({ standalone = false }: { standalone?: boolean } = {}) {
+type Step = (typeof STEPS)[number];
+export default function Steps({ standalone = false, steps = STEPS, title }: { standalone?: boolean; steps?: Step[]; title?: React.ReactNode } = {}) {
+  const N = steps.length;
   const outer = useRef<HTMLElement>(null);
   const st = useRef<ScrollTrigger | null>(null);
   const [active, setActive] = useState(0);
@@ -37,7 +38,7 @@ export default function Steps({ standalone = false }: { standalone?: boolean } =
           <div className="hiw-photo-col">
             <div className="hiw-frame">
               <div className="hiw-photo">
-                {STEPS.map((s, i) => (
+                {steps.map((s, i) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img key={s.n} src={s.img} alt={s.alt} loading="lazy" className={i === active ? "on" : ""} />
                 ))}
@@ -46,11 +47,9 @@ export default function Steps({ standalone = false }: { standalone?: boolean } =
             </div>
           </div>
           <div className="hiw-copy">
-            <h2>
-              Three steps, <em>zero mess.</em>
-            </h2>
+            <h2>{title ?? <>Three steps, <em>zero mess.</em></>}</h2>
             <ol className="hiw-steps">
-              {STEPS.map((s, i) => (
+              {steps.map((s, i) => (
                 <li key={s.n} className={`hiw-step${i === active ? " on" : ""}`} onClick={() => go(i)}>
                   <div className="hiw-row">
                     <span className="hiw-n">{s.n}</span>

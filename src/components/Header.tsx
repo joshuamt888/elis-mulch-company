@@ -42,6 +42,7 @@ export default function Header() {
 
           <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             <Link href="/services/mulch-installation" className={link}>Mulch Installation</Link>
+            <Link href="/gallery" className={link}>Gallery</Link>
 
             <div className="relative">
               <button onClick={() => setOpen(open === "areas" ? null : "areas")} className={`flex items-center ${link}`} aria-expanded={open === "areas"}>Areas {chevron}</button>
@@ -66,7 +67,7 @@ export default function Header() {
             </div>
 
             <Link href="/about" className={link}>About</Link>
-            <a href="tel:9523144797" className={link}>(952) 314-4797</a>
+            <a href="tel:9523144797" className={`${link} hidden xl:inline`}>(952) 314-4797</a>
             <Link href="/estimate" className="bg-blossom hover:bg-blossom-dark text-white text-[18px] font-semibold px-6 py-3 rounded-full transition-colors">Price Mulch</Link>
           </nav>
 

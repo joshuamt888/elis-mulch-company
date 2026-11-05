@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Shorewood, MN",
   description:
-    "Mulch delivery in Shorewood, MN for homes near Lake Minnetonka. Eli's Mulch Company serves long-term homeowners who invest in their properties. Free quotes.",
+    "Mulch installation and delivery near Shorewood, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/shorewood-mulch-delivery" },
   robots: { index: true, follow: true },
 };

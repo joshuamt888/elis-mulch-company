@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Waconia, MN",
   description:
-    "Bulk mulch delivery in Waconia, MN for lake-lifestyle homeowners. Eli's Mulch delivers mulch, rock & soil to outdoor-focused properties. Locally owned. Free quotes.",
+    "Mulch installation and delivery near Waconia, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/waconia-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "waconia",
   "name": "Waconia",
-  "hero": "/images/hero/hero-3.webp",
+  "hero": "/images/work/driveway-island-mulch-bed.webp",
   "h1": "Professional Mulch Installation in Waconia, MN",
   "heroP": "Professional mulch installation for Waconia homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Waconia",

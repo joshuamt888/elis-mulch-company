@@ -143,7 +143,7 @@ export default function Footer({ ctaTitle, ctaText, standalone = false, children
               <br />
               <Link href="/tools/mulch-calculator">Mulch Calculator</Link> · <Link href="/tools/sod-calculator">Sod</Link> · <Link href="/tools/rock-calculator">Rock</Link>
               <br />
-              <Link href="/about">About</Link> · <Link href="/our-colors">Our colors</Link>
+              <Link href="/about">About</Link> · <Link href="/our-colors">Our colors</Link> · <Link href="/gallery">Gallery</Link>
             </div>
           </div>
           <div className="foot-base">

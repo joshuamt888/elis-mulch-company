@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Carver, MN",
   description:
-    "Mulch delivery in Carver, MN by Eli's Mulch Company. Bulk mulch, rock & soil delivered to residential and rural properties. Locally owned. Free in-person quotes.",
+    "Mulch installation and delivery near Carver, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/carver-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "carver",
   "name": "Carver",
-  "hero": "/images/hero/hero-3.webp",
+  "hero": "/images/work/driveway-island-mulch-bed.webp",
   "h1": "Professional Mulch Installation in Carver, MN",
   "heroP": "Professional mulch installation for Carver homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Carver",

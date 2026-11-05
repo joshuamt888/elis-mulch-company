@@ -35,6 +35,9 @@ export function cityFaqs(name: string, slug: string): QA[] {
     { question: `Do you offer free mulch quotes in ${name}?`, answer: A.quote },
     { question: `How long does a mulch installation take?`, answer: A.time },
     { question: `Is Mulch Company insured?`, answer: A.insured },
+    { question: `Is there mulch delivery in ${name}?`, answer: `Our crew brings the mulch and spreads it for you across ${name}, so you do not haul or shovel anything. Your free in-person quote covers the mulch and the install.` },
+    { question: `Who installs mulch near me in ${name}?`, answer: `Mulch Company is a locally owned crew based in Chanhassen that installs mulch in ${name} and ${AREAS.length - 1} other Twin Cities cities. Call ${PHONE} for a free in-person quote.` },
+    { question: `Do you install black, cedar, red and brown mulch in ${name}?`, answer: A.types },
     { question: `How do I book mulch installation in ${name}?`, answer: A.book },
   ];
   if (f) {

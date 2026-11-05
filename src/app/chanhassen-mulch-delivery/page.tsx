@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Chanhassen, MN",
   description:
-    "Eli's Mulch Company delivers bulk mulch, rock, and soil to Chanhassen homes. Manicured west metro yards deserve quality materials. Locally owned. Free in-person quotes.",
+    "Mulch installation and delivery near Chanhassen, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/chanhassen-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "chanhassen",
   "name": "Chanhassen",
-  "hero": "/images/hero/hero-9.webp",
+  "hero": "/images/work/staircase-bed-black-mulch.webp",
   "h1": "Professional Mulch Installation in Chanhassen, MN",
   "heroP": "Professional mulch installation for Chanhassen homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Chanhassen",

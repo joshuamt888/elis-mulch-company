@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import Hero from "@/components/garden/Hero";
-import Intro from "@/components/garden/Intro";
-import BeforeAfter from "@/components/garden/BeforeAfter";
+import ScrollWords from "@/components/garden/ScrollWords";
+import BeforeAfterScroll from "@/components/garden/BeforeAfterScroll";
 import SocialProof from "@/components/garden/SocialProof";
 import Steps from "@/components/garden/Steps";
 import Favourites from "@/components/garden/Favourites";
@@ -25,8 +25,8 @@ export default function Tier4() {
       </div>
       <main className="gd">
         <Hero standalone />
-        <Intro standalone />
-        <BeforeAfter />
+        <ScrollWords text="The fastest way to make your yard look *loved.*" />
+        <BeforeAfterScroll />
         <SocialProof standalone />
         <Steps standalone />
         <Favourites />
@@ -37,10 +37,10 @@ export default function Tier4() {
           title="What to expect."
           sub="More city pages, real answers to real questions, and markup Google can read. Here is what changes for search."
           rows={[
-            { label: "Pages on the site", from: 19, to: 29 },
+            { label: "Pages on the site", from: 19, to: 30 },
             { label: "City pages", from: 12, to: 22 },
-            { label: "Words on a typical city page", from: 250, to: 1900 },
-            { label: "Questions answered on a city page", from: 0, to: 12 },
+            { label: "Words on a typical city page", from: 250, to: 2100 },
+            { label: "Questions answered on a city page", from: 0, to: 15 },
             { label: "Pages with FAQ answers Google can show", from: 0, to: 26 },
           ]}
           chart={{ title: "What a comparable build did", start: 3, end: 104, unit: "ranking keywords", caption: "A local service site built the same way, with 22 city pages, went from 3 to 104 ranking keywords in 3 months (Semrush)." }}

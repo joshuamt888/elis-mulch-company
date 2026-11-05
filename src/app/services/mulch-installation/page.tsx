@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/garden/PageHero";
-import Why from "@/components/garden/Why";
+import BeforeAfterScroll from "@/components/garden/BeforeAfterScroll";
+import ScrollWords from "@/components/garden/ScrollWords";
+import MulchWords from "@/components/garden/MulchWords";
+import Steps from "@/components/garden/Steps";
 import Favourites from "@/components/garden/Favourites";
 import SocialProof from "@/components/garden/SocialProof";
 import Areas from "@/components/garden/Areas";
@@ -25,31 +26,11 @@ export const metadata: Metadata = {
   },
 };
 
-const processSteps = [
-  {
-    number: "1",
-    title: "Assess",
-    description:
-      "We measure your beds, calculate the cubic yards needed, and recommend the best mulch type for your landscape.",
-  },
-  {
-    number: "2",
-    title: "Prepare",
-    description:
-      "We edge your beds for a clean border and remove old, decomposed mulch if needed to ensure proper depth and drainage.",
-  },
-  {
-    number: "3",
-    title: "Install",
-    description:
-      "Our crew spreads mulch evenly to the ideal 2-3 inch depth, keeping it pulled back from tree trunks and plant stems.",
-  },
-  {
-    number: "4",
-    title: "Clean Up",
-    description:
-      "We blow off walkways, driveways, and patios so your property looks spotless when we leave. No mess, no hassle.",
-  },
+const INSTALL_STEPS = [
+  { n: "01", t: "Free in-person quote", d: "We walk your property, measure every bed, work out the cubic yards and give you an exact price on the spot.", img: "/images/work/rock-border-bed-lawn.webp", alt: "A bed bordered by rock beside a lawn before mulching" },
+  { n: "02", t: "Edge and prep", d: "Crisp bed edges, and old decomposed mulch pulled back where needed so depth and drainage are right.", img: "/images/work/fresh-mulch-mounds-trees.webp", alt: "Fresh mounds of mulch staged around trees" },
+  { n: "03", t: "Spread to depth", d: "Mulch goes down level at 2-3 inches and stays clear of trunks and stems. No thin spots, no piles.", img: "/images/work/red-mulch-stepping-stones.webp", alt: "Freshly spread red mulch around stepping stones" },
+  { n: "04", t: "Blown clean", d: "Walkways, driveway and patio are blown off before we go. You come home to a finished yard.", img: "/images/work/black-mulch-stone-house-walkway.webp", alt: "Fresh black mulch beside a clean stone walkway at a house" },
 ];
 
 const faqs = [
@@ -92,69 +73,18 @@ export default function MulchInstallationPage() {
         <PageHero
           h1="Professional Mulch Installation in Minnesota"
           sub="Expert installation, clean results — we handle everything so you never have to think about it."
-          image="/images/hero/hero-3.webp"
+          image="/images/work/driveway-island-mulch-bed.webp"
           alt="Hands spreading wood chip mulch around the base of a tree"
         />
 
-        <section className="pg-intro">
-          <h2>Professional Installation, Done Right</h2>
-          <p className="pg-intro-p">
-            We handle everything — in-person quote, expert installation, and clean-up. Cedar, hardwood, black, red, and playground mulch available. One call and your yard is done.
-          </p>
-          <div className="pg-rows">
-            <div className="pg-row">
-              <div className="pg-photo"><Image src="/images/hero/hero-2.webp" alt="Aerial view of garden bed with brown mulch and stepping stones" fill sizes="(max-width: 900px) 100vw, 600px" className="object-cover" /></div>
-              <div className="pg-row-t">
-                <h3>Even, Professional Coverage</h3>
-                <p>Our crews spread mulch to a consistent 2-3 inch depth across all your beds, creating a uniform appearance that enhances your entire landscape. No thin spots, no piles — just clean, level coverage.</p>
-              </div>
-            </div>
-            <div className="pg-row rev">
-              <div className="pg-photo"><Image src="/images/hero/hero-9.webp" alt="Colonial home with fresh red mulch in flower beds" fill sizes="(max-width: 900px) 100vw, 600px" className="object-cover" /></div>
-              <div className="pg-row-t">
-                <h3>Instant Curb Appeal</h3>
-                <p>Fresh mulch is one of the fastest ways to transform your home&apos;s exterior. Crisp bed edges and rich color make your landscaping look brand new — without the weeks of labor it would take to do it yourself.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ScrollWords text="The fastest way to make your yard look *loved.*" />
 
-        <Why
-          title="Why Choose Mulch Company MN"
-          intro="We don't list prices online because every property is different — and you deserve an accurate number, not a guess. Here's what you get when you work with us."
-          items={[
-            { title: "Free In-Person Quote", desc: "We visit your property, measure your beds, and give you an exact price on the spot." },
-            { title: "Expert Crews", desc: "Trained installers who know proper depth, clean edges, and how to make it look great." },
-            { title: "Fair Pricing", desc: "Honest quotes based on your actual property. No hidden fees, no surprises." },
-            { title: "Zero Mess", desc: "We blow off all walkways and driveways when we're done. Your yard looks spotless." },
-          ]}
-        />
-        <p className="pg-btn-row"><Link href="/estimate" className="btn btn-accent">Get Your Free In-Person Quote</Link></p>
+        <Steps title={<>How an install goes, <em>start to spotless.</em></>} steps={INSTALL_STEPS} />
 
-        <section className="pg-process">
-          <h2>Our Installation Process</h2>
-          <p className="pg-intro-p">From assessment to clean-up, we handle every step so your landscape looks its best without you lifting a finger.</p>
-          <div className="pg-steps">
-            {processSteps.map((st) => (
-              <article key={st.number} className="why-card">
-                <span className="why-n">{String(st.number).padStart(2, "0")}</span>
-                <h3>{st.title}</h3>
-                <p>{st.description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="pg-ba">
-          <h2>Before &amp; After</h2>
-          <p className="pg-intro-p">See the difference professional mulch installation makes. Old, faded mulch replaced with fresh, vibrant coverage that transforms the entire look of a property.</p>
-          <figure className="pg-ba-fig">
-            <div className="pg-ba-img"><Image src="/images/hero/hero-8.webp" alt="Before and after comparison of old versus fresh mulch installation" fill className="object-cover" /></div>
-            <figcaption>A typical mulch refresh: tired, thinning mulch replaced with 3 inches of fresh double-shredded hardwood. Clean edges, proper depth, and a finished look that lasts all season.</figcaption>
-          </figure>
-        </section>
+        <BeforeAfterScroll />
 
         <Favourites city="Minnesota" />
+        <MulchWords />
         <SocialProof />
         <Faq items={allFaqs} title="Frequently Asked Questions" />
         <Areas />

@@ -31,7 +31,7 @@ export default function AboutPage() {
       <JsonLd data={[faqLd(aboutFaqs), crumbsLd([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])]} />
       <Header />
       <main className="gd cv">
-        <PageHero h1="About Mulch Company" sub="Locally owned. Community driven. Mulch obsessed." image="/images/hero/hero-5.webp" alt="Front yard shrubs with fresh mulch" />
+        <PageHero h1="About Mulch Company" sub="Locally owned. Community driven. Mulch obsessed." image="/images/work/blue-spruce-rock-bed.webp" alt="Rock-lined garden bed with a blue spruce and fresh mulch beside a home" />
 
         <section className="pg-story">
           <div>
@@ -45,7 +45,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="pg-photo">
-            <Image src="/images/hero/hero-3.webp" alt="Hands spreading mulch in a garden bed" fill className="object-cover" />
+            <Image src="/images/work/driveway-island-mulch-bed.webp" alt="Rock-edged mulch bed in a driveway island with new plantings" fill className="object-cover" />
           </div>
         </section>
 

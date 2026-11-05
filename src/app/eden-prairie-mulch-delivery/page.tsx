@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Eden Prairie, MN",
   description:
-    "Eli's Mulch delivers premium bulk mulch and landscaping materials to Eden Prairie properties. Serving west metro suburbs. Locally owned. Free in-person quotes.",
+    "Mulch installation and delivery near Eden Prairie, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/eden-prairie-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "eden-prairie",
   "name": "Eden Prairie",
-  "hero": "/images/hero/hero-5.webp",
+  "hero": "/images/work/blue-spruce-rock-bed.webp",
   "h1": "Professional Mulch Installation in Eden Prairie, MN",
   "heroP": "Professional mulch installation for Eden Prairie homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Eden Prairie",

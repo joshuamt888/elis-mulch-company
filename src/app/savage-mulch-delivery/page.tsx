@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Savage, MN",
   description:
-    "Bulk mulch and soil delivery to Savage, MN by Eli's Mulch Company. Serving south metro residential yards and garden beds. Locally owned. Free in-person quotes.",
+    "Mulch installation and delivery near Savage, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/savage-mulch-delivery" },
   robots: { index: true, follow: true },
 };

@@ -4,9 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 const slides = [
-  { src: "/images/hero/hero-5.webp", alt: "Front yard shrubs with fresh mulch" },
+  { src: "/images/work/blue-spruce-rock-bed.webp", alt: "Front yard shrubs with fresh mulch" },
   { src: "/images/hero/hero-7.webp", alt: "Wheelbarrow with cedar mulch" },
-  { src: "/images/hero/hero-9.webp", alt: "Colonial home with mulched landscape" },
+  { src: "/images/work/staircase-bed-black-mulch.webp", alt: "Colonial home with mulched landscape" },
   { src: "/images/hero/hero-2.webp", alt: "Aerial view of garden bed with mulch" },
 ];
 

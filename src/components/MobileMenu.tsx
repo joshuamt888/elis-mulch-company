@@ -52,6 +52,14 @@ export default function MobileMenu() {
               Mulch Installation
             </Link>
 
+            <Link
+              href="/gallery"
+              onClick={closeMenu}
+              className="block px-4 py-2 text-[#3d2b1f] hover:text-sand hover:bg-stone-100 transition-colors font-medium"
+            >
+              Gallery
+            </Link>
+
             {/* Areas Accordion */}
             <div>
               <button

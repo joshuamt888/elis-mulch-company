@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Shakopee, MN",
   description:
-    "Eli's Mulch delivers bulk mulch, rock & soil across Shakopee — new construction and established homes. Locally owned and operated. Free in-person quotes.",
+    "Mulch installation and delivery near Shakopee, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/shakopee-mulch-delivery" },
   robots: { index: true, follow: true },
 };

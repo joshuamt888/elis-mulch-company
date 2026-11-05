@@ -1,10 +1,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/garden/Hero";
-import Intro from "@/components/garden/Intro";
+import ScrollWords from "@/components/garden/ScrollWords";
 import Seasons from "@/components/garden/Seasons";
 import Steps from "@/components/garden/Steps";
-import BeforeAfter from "@/components/garden/BeforeAfter";
+import BeforeAfterScroll from "@/components/garden/BeforeAfterScroll";
 import SocialProof from "@/components/garden/SocialProof";
 import Favourites from "@/components/garden/Favourites";
 import Areas from "@/components/garden/Areas";
@@ -19,8 +19,8 @@ export default function Home() {
       <Header />
       <main className="gd home">
         <Hero />
-        <Intro />
-        <BeforeAfter />
+        <ScrollWords text="The fastest way to make your yard look *loved.*" />
+        <BeforeAfterScroll />
         <SocialProof />
         <Steps />
         <Favourites />

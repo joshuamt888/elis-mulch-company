@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Chaska, MN",
   description:
-    "Mulch delivery in Chaska, MN — Eli's serves both historic and newer homes across the city. Bulk mulch, rock & soil. Locally owned. Free in-person quotes.",
+    "Mulch installation and delivery near Chaska, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/chaska-mulch-delivery" },
   robots: { index: true, follow: true },
 };

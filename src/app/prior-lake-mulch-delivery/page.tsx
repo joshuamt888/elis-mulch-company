@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Prior Lake, MN",
   description:
-    "Mulch delivery in Prior Lake, MN for waterfront and suburban properties. Eli's Mulch Company delivers bulk mulch, rock & soil. Locally owned. Free in-person quotes.",
+    "Mulch installation and delivery near Prior Lake, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/prior-lake-mulch-delivery" },
   robots: { index: true, follow: true },
 };

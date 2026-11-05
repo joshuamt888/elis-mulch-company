@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Victoria, MN",
   description:
-    "Eli's Mulch Company delivers bulk mulch and landscaping materials to Victoria's large-lot properties. Serving natural surroundings well. Locally owned. Free in-person quotes.",
+    "Mulch installation and delivery near Victoria, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/victoria-mulch-delivery" },
   robots: { index: true, follow: true },
 };

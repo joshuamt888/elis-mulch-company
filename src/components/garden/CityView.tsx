@@ -1,9 +1,12 @@
+import BeforeAfterScroll from "@/components/garden/BeforeAfterScroll";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Why from "@/components/garden/Why";
-import HowStatic from "@/components/garden/HowStatic";
+import ScrollWords from "@/components/garden/ScrollWords";
+import CityHistory from "@/components/garden/CityHistory";
+import MulchWords from "@/components/garden/MulchWords";
+import Steps from "@/components/garden/Steps";
 import SocialProof from "@/components/garden/SocialProof";
 import Favourites from "@/components/garden/Favourites";
 import Faq from "@/components/garden/Faq";
@@ -21,7 +24,6 @@ export default function CityView(p: CityProps) {
   const faqs = cityFaqs(p.name, p.slug);
   const path = `/${p.slug}-mulch-delivery`;
   // A second photo that is never the hero, so the band is not a repeat of the top of the page.
-  const band = `/images/hero/hero-${((Number(p.hero.match(/hero-(\d)/)?.[1] ?? 1) + 3) % 9) + 1}.webp`;
   return (
     <>
       <JsonLd data={[faqLd(faqs), crumbsLd([{ name: "Home", path: "/" }, { name: p.name, path }]), serviceLd(`Mulch installation in ${p.name}, MN`, path, p.name)]} />
@@ -46,6 +48,8 @@ export default function CityView(p: CityProps) {
           </div>
         </section>
 
+        <ScrollWords text="The fastest way to make your yard look *loved.*" />
+
         <section className="cv-intro">
           <div className="cv-intro-main">
             <h2>{p.serviceH2}</h2>
@@ -64,13 +68,12 @@ export default function CityView(p: CityProps) {
           )}
         </section>
 
-        <Why title={p.whyH2} items={p.why} />
         <Favourites city={p.name} />
-        <HowStatic />
-        <section className="cv-band" aria-hidden>
-          <Image src={band} alt="" fill sizes="100vw" className="object-cover" />
-        </section>
+        <MulchWords city={p.name} />
+        <Steps />
+        <BeforeAfterScroll />
         <SocialProof />
+        <CityHistory slug={p.slug} name={p.name} />
         <Faq items={faqs} title={`Mulch questions in ${p.name}`} />
         <Areas />
 

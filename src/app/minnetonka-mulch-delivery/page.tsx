@@ -4,7 +4,7 @@ import CityView from "@/components/garden/CityView";
 export const metadata: Metadata = {
   title: "Professional Mulch Installation Minnetonka, MN",
   description:
-    "Eli's Mulch delivers bulk mulch and rock to Minnetonka's established, tree-filled yards. West metro coverage. Locally owned and operated. Free in-person quotes.",
+    "Mulch installation and delivery near Minnetonka, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.",
   alternates: { canonical: "https://mulchcompanymn.com/minnetonka-mulch-delivery" },
   robots: { index: true, follow: true },
 };
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "minnetonka",
   "name": "Minnetonka",
-  "hero": "/images/hero/hero-5.webp",
+  "hero": "/images/work/blue-spruce-rock-bed.webp",
   "h1": "Professional Mulch Installation in Minnetonka, MN",
   "heroP": "Professional mulch installation for Minnetonka homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Minnetonka",

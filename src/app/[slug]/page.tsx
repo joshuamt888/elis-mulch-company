@@ -9,7 +9,7 @@ const slugOf = (s: string) => s.replace(/-mulch-delivery$/, "");
 export function generateStaticParams() {
   return Object.keys(NEW_CITIES).map((c) => ({ slug: `${c}-mulch-delivery` }));
 }
-const HEROES = ["hero-1", "hero-2", "hero-3", "hero-5", "hero-7", "hero-9"];
+const HEROES = ["hero/hero-1", "hero/hero-2", "work/driveway-island-mulch-bed", "work/blue-spruce-rock-bed", "hero/hero-7", "work/staircase-bed-black-mulch"];
 const find = (param: string) => {
   const key = slugOf(param);
   const area = AREAS.find((a) => a.slug === key);
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!c) return {};
   return {
     title: `Professional Mulch Installation ${c.area.name}, MN`,
-    description: `Professional mulch installation in ${c.area.name}, MN. Locally owned Mulch Company, free in-person quotes. Call (952) 314-4797.`,
+    description: `Mulch installation and delivery near ${c.area.name}, MN. Black, cedar, red and brown mulch spread by our own crew. Free in-person quote, call (952) 314-4797.`,
     alternates: { canonical: `https://mulchcompanymn.com${areaHref(c.area.slug)}` },
     robots: { index: true, follow: true },
   };
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     <CityView
       slug={c.area.slug}
       name={city}
-      hero={`/images/hero/${c.hero}.webp`}
+      hero={`/images/${c.hero}.webp`}
       h1={`Professional Mulch Installation in ${city}, MN`}
       heroP={`Professional mulch installation for ${city} homes and businesses. Locally owned, free in-person quotes.`}
       serviceH2={`Mulch Installation in ${city}`}
