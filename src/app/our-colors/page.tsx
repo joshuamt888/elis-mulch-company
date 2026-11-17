@@ -37,7 +37,7 @@ export default function OurColorsPage() {
       <Header />
 
       <main className="gd cv">
-        <PageHero h1="Our Colors" sub="Choose the perfect mulch color for your yard. Let us know your pick when you request a quote." image="/images/hero/hero-1.webp" alt="A pile of fresh black mulch on a driveway" />
+        <PageHero h1="Our Colors" sub="Choose the perfect mulch color for your yard. Let us know your pick when you request a quote." image="/images/work/dahlias-dark-mulch.webp" alt="Pink and red dahlias in a bed of fresh dark brown mulch" />
         <section className="colors">
           <div className="colors-grid">
             {mulchColors.map((color) => (

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { heroPos } from "@/lib/work";
 
 export default function PageHero({ h1, sub, image, alt, eyebrow }: { h1: string; sub?: string; image: string; alt: string; eyebrow?: string }) {
   return (
     <section className="cv-hero ph">
-      <Image src={image} alt={alt} fill className="object-cover" priority />
+      <Image src={image} alt={alt} fill sizes="100vw" className="object-cover" style={{ objectPosition: heroPos(image) }} priority />
       <div className="cv-hero-shade" aria-hidden />
       <div className="cv-hero-in">
         <h1>{h1}</h1>

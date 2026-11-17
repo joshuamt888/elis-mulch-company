@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "victoria",
   "name": "Victoria",
-  "hero": "/images/hero/hero-1.webp",
+  "hero": "/images/work/stepping-stone-path-woods.webp",
   "h1": "Professional Mulch Installation in Victoria, MN",
   "heroP": "Professional mulch installation for Victoria homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Victoria",

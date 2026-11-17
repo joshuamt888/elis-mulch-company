@@ -9,11 +9,16 @@ const slugOf = (s: string) => s.replace(/-mulch-delivery$/, "");
 export function generateStaticParams() {
   return Object.keys(NEW_CITIES).map((c) => ({ slug: `${c}-mulch-delivery` }));
 }
-const HEROES = ["hero/hero-1", "hero/hero-2", "work/driveway-island-mulch-bed", "work/blue-spruce-rock-bed", "hero/hero-7", "work/staircase-bed-black-mulch"];
+// Eli's real photos, one per city, picked so bordering cities never share a hero (2026-11-17).
+const HEROES: Record<string, string> = {
+  plymouth: "black-mulch-edging-evergreens", "maple-grove": "arborvitae-row-fence", wayzata: "black-mulch-stone-house-entry",
+  edina: "arborvitae-row-fence", bloomington: "terraced-rock-beds-steps", burnsville: "red-mulch-stepping-stones",
+  lakeville: "black-mulch-edging-evergreens", "apple-valley": "rock-lined-bed-black-mulch", eagan: "dahlias-dark-mulch", richfield: "staircase-bed-black-mulch",
+};
 const find = (param: string) => {
   const key = slugOf(param);
   const area = AREAS.find((a) => a.slug === key);
-  return area && NEW_CITIES[key] ? { area, hero: HEROES[Object.keys(NEW_CITIES).indexOf(key) % HEROES.length] } : null;
+  return area && NEW_CITIES[key] ? { area, hero: HEROES[key] ?? "blue-spruce-rock-bed" } : null;
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -35,7 +40,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     <CityView
       slug={c.area.slug}
       name={city}
-      hero={`/images/${c.hero}.webp`}
+      hero={`/images/work/${c.hero}.webp`}
       h1={`Professional Mulch Installation in ${city}, MN`}
       heroP={`Professional mulch installation for ${city} homes and businesses. Locally owned, free in-person quotes.`}
       serviceH2={`Mulch Installation in ${city}`}

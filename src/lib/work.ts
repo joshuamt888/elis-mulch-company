@@ -87,3 +87,13 @@ export const WORK: WorkPhoto[] = [
 export const workSrc = (file: string) => `/images/work/${file}.webp`;
 export const WORK_W = 1200;
 export const WORK_H = 1600;
+
+// Where the subject sits in each portrait photo, so wide heroes crop to the bed, not the sky (checked 2026-11-17).
+const HERO_Y: Record<string, number> = {
+  "arborvitae-row-fence": 64, "arborvitae-row-mulch-edging": 64, "black-mulch-edging-evergreens": 60,
+  "black-mulch-stone-house-entry": 58, "black-mulch-stone-house-walkway": 58, "blue-spruce-garden-boulders": 62,
+  "blue-spruce-rock-bed": 62, "dahlias-dark-mulch": 45, "driveway-island-mulch-bed": 58, "red-mulch-stepping-stones": 62,
+  "rock-lined-bed-black-mulch": 55, "staircase-bed-black-mulch": 55, "stepping-stone-path-woods": 60, "terraced-rock-beds-steps": 55,
+};
+/** object-position for a hero image path; non-work images stay centred. */
+export const heroPos = (src: string) => `50% ${HERO_Y[src.match(/work\/([^/.]+)\./)?.[1] ?? ""] ?? 50}%`;

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "prior-lake",
   "name": "Prior Lake",
-  "hero": "/images/hero/hero-7.webp",
+  "hero": "/images/work/stepping-stone-path-woods.webp",
   "h1": "Professional Mulch Installation in Prior Lake, MN",
   "heroP": "Professional mulch installation for Prior Lake homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Prior Lake",

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "chaska",
   "name": "Chaska",
-  "hero": "/images/hero/hero-2.webp",
+  "hero": "/images/work/terraced-rock-beds-steps.webp",
   "h1": "Professional Mulch Installation in Chaska, MN",
   "heroP": "Professional mulch installation for Chaska homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Chaska",

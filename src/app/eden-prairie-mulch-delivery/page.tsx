@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "eden-prairie",
   "name": "Eden Prairie",
-  "hero": "/images/work/blue-spruce-rock-bed.webp",
+  "hero": "/images/work/rock-lined-bed-black-mulch.webp",
   "h1": "Professional Mulch Installation in Eden Prairie, MN",
   "heroP": "Professional mulch installation for Eden Prairie homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Eden Prairie",

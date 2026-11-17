@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "waconia",
   "name": "Waconia",
-  "hero": "/images/work/driveway-island-mulch-bed.webp",
+  "hero": "/images/work/blue-spruce-garden-boulders.webp",
   "h1": "Professional Mulch Installation in Waconia, MN",
   "heroP": "Professional mulch installation for Waconia homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Waconia",

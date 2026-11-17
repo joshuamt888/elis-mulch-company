@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "shakopee",
   "name": "Shakopee",
-  "hero": "/images/hero/hero-7.webp",
+  "hero": "/images/work/black-mulch-stone-house-walkway.webp",
   "h1": "Professional Mulch Installation in Shakopee, MN",
   "heroP": "Professional mulch installation for Shakopee homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Shakopee",

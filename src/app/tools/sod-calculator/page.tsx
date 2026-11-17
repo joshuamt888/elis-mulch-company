@@ -49,7 +49,7 @@ export default function SodCalculator() {
       <JsonLd data={[faqLd(toolFaqs("sod")), crumbsLd([{ name: "Home", path: "/" }, { name: "Sod Calculator", path: "/tools/sod-calculator" }])]} />
       <Header />
       <main className="gd tool cv">
-        <PageHero h1="Sod Calculator" sub="Figure out how much sod you need for a new lawn or patching — waste included." image="/images/hero/hero-2.webp" alt="Sod Calculator" />
+        <PageHero h1="Sod Calculator" sub="Figure out how much sod you need for a new lawn or patching — waste included." image="/images/work/arborvitae-row-mulch-edging.webp" alt="Green lawn edged against a mulched row of arborvitae" />
         <div className="calc-wrap">
 
           {/* Calculator Card */}

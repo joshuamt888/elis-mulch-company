@@ -44,7 +44,7 @@ export default function MulchCalculator() {
       <JsonLd data={[faqLd(toolFaqs("mulch")), crumbsLd([{ name: "Home", path: "/" }, { name: "Mulch Calculator", path: "/tools/mulch-calculator" }])]} />
       <Header />
       <main className="gd tool cv">
-        <PageHero h1="Mulch Calculator" sub="Find out exactly how much mulch you need — no guesswork, no wasted trips." image="/images/hero/hero-1.webp" alt="Mulch Calculator" />
+        <PageHero h1="Mulch Calculator" sub="Find out exactly how much mulch you need — no guesswork, no wasted trips." image="/images/work/black-mulch-edging-evergreens.webp" alt="A long bed of fresh dark mulch with crisp edging along evergreens" />
         <div className="calc-wrap">
 
           {/* Calculator Card */}

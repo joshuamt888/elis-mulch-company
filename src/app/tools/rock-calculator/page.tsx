@@ -44,7 +44,7 @@ export default function RockCalculator() {
       <JsonLd data={[faqLd(toolFaqs("rock")), crumbsLd([{ name: "Home", path: "/" }, { name: "Rock Calculator", path: "/tools/rock-calculator" }])]} />
       <Header />
       <main className="gd tool cv">
-        <PageHero h1="Rock &amp; Stone Calculator" sub="Find out how many tons of rock or gravel you need — no overbuying, no shortages." image="/images/hero/hero-7.webp" alt="Rock &amp; Stone Calculator" />
+        <PageHero h1="Rock &amp; Stone Calculator" sub="Find out how many tons of rock or gravel you need — no overbuying, no shortages." image="/images/work/rock-lined-bed-black-mulch.webp" alt="Garden bed lined with natural boulders and fresh black mulch" />
         <div className="calc-wrap">
 
           {/* Calculator Card */}

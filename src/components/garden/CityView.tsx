@@ -1,5 +1,6 @@
 import BeforeAfterSlider from "@/components/garden/BeforeAfterSlider";
 import Image from "next/image";
+import { heroPos } from "@/lib/work";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -23,14 +24,13 @@ export default function CityView(p: CityProps) {
   const facts = CITY_FACTS[p.slug];
   const faqs = cityFaqs(p.name, p.slug);
   const path = `/${p.slug}-mulch-delivery`;
-  // A second photo that is never the hero, so the band is not a repeat of the top of the page.
   return (
     <>
       <JsonLd data={[faqLd(faqs), crumbsLd([{ name: "Home", path: "/" }, { name: p.name, path }]), serviceLd(`Mulch installation in ${p.name}, MN`, path, p.name)]} />
       <Header />
       <main className="gd cv">
         <section className="cv-hero">
-          <Image src={p.hero} alt={`Professional mulch installation in ${p.name}, MN`} fill className="object-cover" priority />
+          <Image src={p.hero} alt={`Professional mulch installation in ${p.name}, MN`} fill sizes="100vw" className="object-cover" style={{ objectPosition: heroPos(p.hero) }} priority />
           <div className="cv-hero-shade" aria-hidden />
           <div className="cv-hero-in">
             <h1>{p.h1}</h1>

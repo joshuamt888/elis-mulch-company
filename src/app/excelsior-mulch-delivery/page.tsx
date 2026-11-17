@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "excelsior",
   "name": "Excelsior",
-  "hero": "/images/work/staircase-bed-black-mulch.webp",
+  "hero": "/images/work/red-mulch-stepping-stones.webp",
   "h1": "Professional Mulch Installation in Excelsior, MN",
   "heroP": "Professional mulch installation for Excelsior homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Excelsior",

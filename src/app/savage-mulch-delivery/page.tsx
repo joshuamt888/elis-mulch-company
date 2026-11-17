@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const data = {
   "slug": "savage",
   "name": "Savage",
-  "hero": "/images/hero/hero-1.webp",
+  "hero": "/images/work/driveway-island-mulch-bed.webp",
   "h1": "Professional Mulch Installation in Savage, MN",
   "heroP": "Professional mulch installation for Savage homes and businesses. Locally owned, free in-person quotes.",
   "serviceH2": "Mulch Installation in Savage",
