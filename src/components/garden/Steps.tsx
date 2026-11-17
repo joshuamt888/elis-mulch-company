@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { ScrollTrigger } from "@/components/garden/gsap";
+import { useState } from "react";
 
 const STEPS = [
   { n: "01", t: "Schedule a quote", d: "We visit your property and assess your needs in person. No guesswork.", img: "/images/garden/step-1.webp", alt: "A tape measure and a clipboard resting beside a garden bed" },
@@ -9,30 +8,14 @@ const STEPS = [
   { n: "03", t: "We handle the rest", d: "Our crew installs fresh mulch on schedule. You never lift a finger.", img: "/images/garden/step-3.webp", alt: "A finished garden bed with crisp edges and fresh dark mulch" },
 ];
 
-/** Pinned, scroll-driven steps: the list stays put, the active step opens, and the framed photo changes as you scroll. Click a step to jump to it. */
+/** The steps, flowing with the page (no pin, Eli 2026-11-16). Every step is readable; tapping one shows its photo. */
 type Step = (typeof STEPS)[number];
 export default function Steps({ standalone = false, steps = STEPS, title }: { standalone?: boolean; steps?: Step[]; title?: React.ReactNode } = {}) {
   const N = steps.length;
-  const outer = useRef<HTMLElement>(null);
-  const st = useRef<ScrollTrigger | null>(null);
   const [active, setActive] = useState(0);
 
-  useEffect(() => {
-    st.current = ScrollTrigger.create({
-      trigger: outer.current, start: "top top", end: "bottom bottom",
-      onUpdate: (s) => setActive(Math.min(N - 1, Math.floor(s.progress * N))),
-    });
-    return () => st.current?.kill();
-  }, []);
-
-  const go = (i: number) => {
-    const t = st.current;
-    if (!t) return setActive(i);
-    window.scrollTo({ top: t.start + ((i + 0.5) / N) * (t.end - t.start), behavior: "smooth" });
-  };
-
   return (
-    <section ref={outer} className="hiw" id="how-it-works" style={{ height: `${N * 70 + 100}vh` }}>
+    <section className="hiw" id="how-it-works">
       <div className="hiw-sticky">
         <div className="hiw-grid">
           <div className="hiw-photo-col">
@@ -50,14 +33,14 @@ export default function Steps({ standalone = false, steps = STEPS, title }: { st
             <h2>{title ?? <>Three steps, <em>zero mess.</em></>}</h2>
             <ol className="hiw-steps">
               {steps.map((s, i) => (
-                <li key={s.n} className={`hiw-step${i === active ? " on" : ""}`} onClick={() => go(i)}>
-                  <div className="hiw-row">
+                <li key={s.n} className={`hiw-step${i === active ? " on" : ""}`}>
+                  <button type="button" className="hiw-row" aria-pressed={i === active} onClick={() => setActive(i)} onMouseEnter={() => setActive(i)}>
                     <span className="hiw-n">{s.n}</span>
                     <div>
                       <h3 className="hiw-t">{s.t}</h3>
                       <div className="hiw-d"><div><p>{s.d}</p></div></div>
                     </div>
-                  </div>
+                  </button>
                 </li>
               ))}
             </ol>

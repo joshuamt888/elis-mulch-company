@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/garden/PageHero";
-import BeforeAfterScroll from "@/components/garden/BeforeAfterScroll";
+import BeforeAfterSlider from "@/components/garden/BeforeAfterSlider";
 import ScrollWords from "@/components/garden/ScrollWords";
 import MulchWords from "@/components/garden/MulchWords";
 import Steps from "@/components/garden/Steps";
@@ -81,7 +81,7 @@ export default function MulchInstallationPage() {
 
         <Steps title={<>How an install goes, <em>start to spotless.</em></>} steps={INSTALL_STEPS} />
 
-        <BeforeAfterScroll />
+        <BeforeAfterSlider />
 
         <Favourites city="Minnesota" />
         <MulchWords />

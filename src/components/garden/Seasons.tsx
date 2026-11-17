@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP, MOTION } from "@/components/garden/gsap";
 
 const SEASONS = [
@@ -54,53 +54,28 @@ const COLORS = [
   ["#ffffff", "#f4f8fb", "#dfe8ee"],
 ];
 
+const N = SEASONS.length;
+
+/**
+ * The year in four stops. A click-through (arrows, the season names, or a sideways swipe), not a pinned
+ * scroll (Eli, 2026-11-16). The falling layer (petals, sun motes, leaves, snow) follows the season on show.
+ */
 export default function Seasons() {
   const root = useRef<HTMLElement>(null);
+  const [cur, setCur] = useState(0);
+  const curRef = useRef(0);
+  useEffect(() => { curRef.current = cur; }, [cur]);
+  const swipe = useRef<{ x: number; y: number } | null>(null);
+  const go = (i: number) => setCur(((i % N) + N) % N);
 
   useGSAP(
     () => {
       const el = root.current!;
       const mm = gsap.matchMedia();
       mm.add(MOTION, () => {
-        el.classList.add("is-anim");
-        const arts = Array.from(el.querySelectorAll<HTMLElement>(".season"));
-        const bar = el.querySelector<HTMLElement>(".season-bar")!;
-        const labels = Array.from(el.querySelectorAll<HTMLElement>(".season-index span"));
-        let prog = 0;
-
-        gsap.set(el, { "--bg": SEASONS[0].bg, "--ink": SEASONS[0].ink });
-        arts.forEach((a, i) => i && gsap.set(a, { autoAlpha: 0 }));
-        const tl = gsap.timeline({
-          defaults: { ease: "power2.inOut" },
-          scrollTrigger: {
-            trigger: el,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.6,
-            onUpdate: (self) => {
-              prog = self.progress;
-              const k = Math.min(3, Math.round(prog * 4 - 0.45));
-              labels.forEach((l, i) => l.classList.toggle("on", i === Math.max(0, k)));
-            },
-          },
-        });
-        for (let k = 1; k < 4; k++) {
-          const at = k - 0.3;
-          const prev = arts[k - 1];
-          const next = arts[k];
-          tl.to(prev, { autoAlpha: 0, duration: 0.35 }, at)
-            .to(prev.querySelector(".season-name"), { yPercent: -35, duration: 0.35 }, at)
-            .to(el, { "--bg": SEASONS[k].bg, "--ink": SEASONS[k].ink, duration: 0.5 }, at)
-            .to(bar, { xPercent: k * 100, duration: 0.5 }, at)
-            .to(next, { autoAlpha: 1, duration: 0.35 }, at + 0.2)
-            .fromTo(next.querySelector(".season-name"), { yPercent: 45 }, { yPercent: 0, duration: 0.45 }, at + 0.2)
-            .fromTo(next.querySelector("img"), { scale: 1.15 }, { scale: 1, duration: 0.6 }, at + 0.15);
-        }
-        tl.to({}, { duration: 0.3 }, 3.7);
-
         // Falling layer: petals, sun motes, leaves, snow, blended by scroll position.
         const canvas = el.querySelector("canvas")!;
-        const sticky = el.querySelector<HTMLElement>(".seasons-sticky")!;
+        const sticky = el.querySelector<HTMLElement>(".seasons-stage")!;
         const ctx = canvas.getContext("2d")!;
         let w = 0, h = 0, dpr = 1;
         const size = () => {
@@ -172,8 +147,7 @@ export default function Seasons() {
 
         const tick = (_t: number, dtMs: number) => {
           const dt = Math.min(3, dtMs / 16.67);
-          const sf = Math.max(0, Math.min(3, prog * 4 - 0.45));
-          const cur = Math.round(sf); // the season whose label is lit
+          const cur = curRef.current; // the season on show
           if (ps.length < cap && Math.random() < rates[cur] * dt) spawn(cur);
           ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
           ctx.clearRect(0, 0, w, h);
@@ -183,8 +157,7 @@ export default function Seasons() {
             p.x += (p.vx + Math.sin(p.life * 0.03 + p.ph) * (p.k === 1 ? 0.1 : 0.5)) * dt;
             p.y += p.vy * dt;
             p.r += p.vr * dt;
-            // Once scrolling has moved on from a particle's season, it fades out in ~1/3 s instead of
-            // drifting into the next one (fast scrolls used to leave fall leaves falling on the snow).
+            // Once you step to another season, the old season's particles fade out in ~1/3 s.
             if (p.k !== cur) p.a -= 0.05 * dt;
             if (p.a <= 0 || p.y > h + 30 || p.life > p.max || p.x > w + 60) {
               ps.splice(i, 1);
@@ -205,44 +178,65 @@ export default function Seasons() {
           io.disconnect();
           ro.disconnect();
           gsap.ticker.remove(tick);
-          el.classList.remove("is-anim");
         };
       });
     },
     { scope: root }
   );
 
+  const s = SEASONS[cur];
   return (
-    <section ref={root} className="seasons" id="seasons" aria-label="Mulch through the year">
-      <div className="seasons-sticky">
-        {SEASONS.map((s, i) => (
-          <article key={s.name} className="season" style={{ "--sbg": s.bg, "--sink": s.ink } as React.CSSProperties}>
+    <section ref={root} className="seasons" id="seasons" aria-roledescription="carousel" aria-label="Mulch through the year" style={{ background: s.bg, color: s.ink }}>
+      <div className="seasons-head">
+        <h2>
+          How your yard changes, <em>season by season.</em>
+        </h2>
+      </div>
+      <div
+        className="seasons-stage"
+        onPointerDown={(e) => { if (e.pointerType !== "mouse") swipe.current = { x: e.clientX, y: e.clientY }; }}
+        onPointerUp={(e) => {
+          const st = swipe.current;
+          swipe.current = null;
+          if (!st) return;
+          const dx = e.clientX - st.x;
+          if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(e.clientY - st.y) * 1.5) go(cur + (dx < 0 ? 1 : -1));
+        }}
+        onPointerCancel={() => (swipe.current = null)}
+      >
+        {SEASONS.map((x, i) => (
+          <article key={x.name} className={i === cur ? "season on" : "season"} aria-hidden={i !== cur} aria-roledescription="slide" aria-label={`${i + 1} of ${N}: ${x.name}`}>
             <div className="season-text">
-              <h2 className="season-name">
-                <em>{s.name}</em>
-              </h2>
-              <p className="season-mood">{s.mood}</p>
-              <p className="season-line">{s.line}</p>
+              <h3 className="season-name">
+                <em>{x.name}</em>
+              </h3>
+              <p className="season-mood">{x.mood}</p>
+              <p className="season-line">{x.line}</p>
             </div>
             <figure className="season-photo">
               <div className="season-frame">
-                <img src={s.img} alt={s.alt} loading="lazy" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={x.img} alt={x.alt} loading="lazy" draggable={false} />
               </div>
-              <figcaption>{s.cap}</figcaption>
+              <figcaption>{x.cap}</figcaption>
             </figure>
           </article>
         ))}
         <canvas className="seasons-canvas" aria-hidden="true" />
-        <div className="season-index" aria-hidden="true">
+      </div>
+      <div className="season-nav">
+        <button type="button" className="bas-btn" aria-label="Previous season" onClick={() => go(cur - 1)}>&larr;</button>
+        <div className="season-index">
           <div className="season-track">
-            <i className="season-bar" />
+            <i className="season-bar" style={{ transform: `translateX(${cur * 100}%)` }} />
           </div>
-          {SEASONS.map((s, i) => (
-            <span key={s.name} className={i === 0 ? "on" : ""}>
-              {s.name}
-            </span>
+          {SEASONS.map((x, i) => (
+            <button key={x.name} type="button" className={i === cur ? "on" : ""} aria-pressed={i === cur} onClick={() => go(i)}>
+              {x.name}
+            </button>
           ))}
         </div>
+        <button type="button" className="bas-btn" aria-label="Next season" onClick={() => go(cur + 1)}>&rarr;</button>
       </div>
     </section>
   );

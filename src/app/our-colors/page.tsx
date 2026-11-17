@@ -4,7 +4,7 @@ import { JsonLd } from "@/components/garden/JsonLd";
 import Faq from "@/components/garden/Faq";
 import SocialProof from "@/components/garden/SocialProof";
 import PageHero from "@/components/garden/PageHero";
-import BeforeAfterScroll from "@/components/garden/BeforeAfterScroll";
+import BeforeAfterSlider from "@/components/garden/BeforeAfterSlider";
 import HowStatic from "@/components/garden/HowStatic";
 import Image from 'next/image'
 import Link from 'next/link'
@@ -51,7 +51,7 @@ export default function OurColorsPage() {
           </div>
         </section>
         <HowStatic />
-        <BeforeAfterScroll />
+        <BeforeAfterSlider />
         <SocialProof />
         <Faq items={colorsFaqs} title="Mulch color questions" />
       </main>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import Hero from "@/components/garden/Hero";
 import ScrollWords from "@/components/garden/ScrollWords";
-import BeforeAfterScroll from "@/components/garden/BeforeAfterScroll";
+import BeforeAfterSlider from "@/components/garden/BeforeAfterSlider";
 import SocialProof from "@/components/garden/SocialProof";
 import Steps from "@/components/garden/Steps";
 import Favourites from "@/components/garden/Favourites";
@@ -26,7 +26,7 @@ export default function Tier4() {
       <main className="gd">
         <Hero standalone />
         <ScrollWords text="The fastest way to make your yard look *loved.*" />
-        <BeforeAfterScroll />
+        <BeforeAfterSlider />
         <SocialProof standalone />
         <Steps standalone />
         <Favourites />

@@ -1,4 +1,4 @@
-import BeforeAfterScroll from "@/components/garden/BeforeAfterScroll";
+import BeforeAfterSlider from "@/components/garden/BeforeAfterSlider";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -71,7 +71,7 @@ export default function CityView(p: CityProps) {
         <Favourites city={p.name} />
         <MulchWords city={p.name} />
         <Steps />
-        <BeforeAfterScroll />
+        <BeforeAfterSlider />
         <SocialProof />
         <CityHistory slug={p.slug} name={p.name} />
         <Faq items={faqs} title={`Mulch questions in ${p.name}`} />

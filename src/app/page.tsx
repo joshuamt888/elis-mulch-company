@@ -4,7 +4,7 @@ import Hero from "@/components/garden/Hero";
 import ScrollWords from "@/components/garden/ScrollWords";
 import Seasons from "@/components/garden/Seasons";
 import Steps from "@/components/garden/Steps";
-import BeforeAfterScroll from "@/components/garden/BeforeAfterScroll";
+import BeforeAfterSlider from "@/components/garden/BeforeAfterSlider";
 import SocialProof from "@/components/garden/SocialProof";
 import Favourites from "@/components/garden/Favourites";
 import Areas from "@/components/garden/Areas";
@@ -20,11 +20,11 @@ export default function Home() {
       <main className="gd home">
         <Hero />
         <ScrollWords text="The fastest way to make your yard look *loved.*" />
-        <BeforeAfterScroll />
+        <BeforeAfterSlider />
         <SocialProof />
         <Steps />
-        <Favourites />
         <Seasons />
+        <Favourites />
         <Areas />
         <Faq items={homeFaqs} title="Mulch questions, answered" />
       </main>
