@@ -1,8 +1,14 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { WORK, workSrc } from "@/lib/work";
 import { gsap, useGSAP, SplitText, MOTION } from "@/components/garden/gsap";
 import { makePlant, rng, type Kind } from "@/components/garden/growth";
 import { PlantG, growPlant } from "@/components/garden/Flora";
+
+// Eli's own jobs in the arch (Eli, 2026-11-16: "Put our portfolio photos on the main screen").
+const PICKS = ["blue-spruce-rock-bed", "black-mulch-edging-evergreens", "stepping-stone-path-woods", "staircase-bed-black-mulch", "arborvitae-row-mulch-edging", "driveway-island-mulch-bed", "red-mulch-stepping-stones"]
+  .map((f) => WORK.find((w) => w.file === f)!);
 
 const W = 1440;
 const H = 460;
@@ -28,6 +34,14 @@ const GARDEN = (() => {
 
 export default function Hero({ standalone = false }: { standalone?: boolean } = {}) {
   const root = useRef<HTMLElement>(null);
+  const [step, setStep] = useState(0);
+  const cur = step % PICKS.length;
+  const mounted = Math.min(PICKS.length, step + 2); // each photo loads one slide before it shows
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => setStep((n) => n + 1), 5000);
+    return () => clearInterval(t);
+  }, []);
 
   useGSAP(
     () => {
@@ -122,7 +136,9 @@ export default function Hero({ standalone = false }: { standalone?: boolean } = 
     <section ref={root} className="hero" id="top">
       <div className="hero-arch pre-arch">
         <div className="hero-photo">
-          <img src="/images/hero/hero-2.webp" alt="Aerial view of a curving landscape bed of fresh mulch with shrubs, grasses and a stepping-stone path" fetchPriority="high" />
+          {PICKS.slice(0, mounted).map((p, k) => (
+            <Image key={p.file} src={workSrc(p.file)} alt={p.alt} fill priority={k === 0} sizes="(max-width: 700px) 92vw, 68vw" className={k === cur ? "on" : undefined} aria-hidden={k !== cur} />
+          ))}
         </div>
       </div>
       <svg className="hero-garden pre" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMax slice" aria-hidden="true">
